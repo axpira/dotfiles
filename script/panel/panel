@@ -1,0 +1,111 @@
+#! /bin/bash
+
+export PANEL_BASE_PATH=$(dirname $0)
+
+. $PANEL_BASE_PATH/profile
+
+if xdo id -a "$PANEL_WM_NAME" > /dev/null ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+xtitle -sf 'TITLE%s\n' > "$PANEL_FIFO" &
+#clock -sf 'S%a %H:%M' > "$PANEL_FIFO" &
+#$HOME/.config/script/keyboard.sh status &
+
+#while true; do
+#    echo -e "TIME\uf017 $(date +'%H:%M')" > "$PANEL_FIFO"
+#    echo -e "DATE\uf073 $(date +'%A, %B %d %Y')" > "$PANEL_FIFO"
+#    sleep 55
+#done &
+
+#echo -e "BACKLIGHT\uf185 $($HOME/.config/script/backlight.sh)%" > "$PANEL_FIFO" &
+#inotifywait -m -e modify /sys/class/backlight/intel_backlight/brightness |
+#    while read -r; do
+#        echo -e "BACKLIGHT\uf185 $(backlight.sh)%" > "$PANEL_FIFO"
+#    done &
+#echo "/sys/class/backlight/intel_backlight/brightness" | \
+#    entr sh -c 'echo -e "BACKLIGHT\uf185 $($HOME/.config/script/backlight.sh)%" > $PANEL_FIFO' &
+
+#while true; do
+#    echo -e "BATTERY $($HOME/.config/script/battery.sh)%" > $PANEL_FIFO
+#    sleep 10
+#done &
+# while true; do
+#     echo -e "WEATHER\uf2c7 $(curl wttr.in?format=4)" > "$PANEL_FIFO"
+#     sleep 3600
+# done &
+
+#echo "/sys/class/power_supply/BAT0/charge_now" | \
+#echo "/sys/class/power_supply/BAT0/uevent" | \
+#    entr sh -c 'echo -e "BATTERY $($HOME/.config/script/battery.sh)%" > $PANEL_FIFO' &
+#    #entr sh -c 'echo -e "BATTERY$(acpi | cut -d\  -f4,5)" > $PANEL_FIFO' &
+
+#upower -m "/org/freedesktop/UPower/devices/battery_BAT0" |
+#	echo -e "BATTERY $($HOME/.config/script/battery.sh)%" > $PANEL_FIFO &
+
+#echo "/sys/class/power_supply/BAT0/uevent" | entr 
+#    while read -r line; do
+#        logger "$line"
+#        #batState=$(upower -i $BAT | grep "state" | cut -d: -f2 | tr -d " ")
+#        #batPercent=$(upower -i $BAT | grep "percentage" | cut -d: -f2 | tr -d " ")
+#        #batPercent=${batPercent%?}
+#        #if [ $batPercent -gt 90 ]; then
+#        #    batIcon="\uf240"
+#        #elif [ $batPercent -gt 75 ]; then
+#        #    batIcon="\uf241"
+#        #elif [ $batPercent -gt 50 ]; then
+#        #    batIcon="\uf242"
+#        #elif [ $batPercent -gt 25 ]; then
+#        #    batIcon="\uf243"
+#        #else
+#        #    batIcon="\uf244"
+#        #fi
+        
+#        #if [ "$batState" == "charging" ]; then
+#        #    batStateIcon="  \uf1e6  "
+#        #    batTime="  "
+#        #else
+#        #    batStateIcon="  "
+#        #    batTime="  $(upower -i $BAT | grep "time to empty" | cut -d: -f2 | tr -d " ")  " 
+#        #fi
+#        #echo -e "BATTERY$batStateIcon$batPercent%$batTime$batIcon" > "$PANEL_FIFO" &
+#        ##logger $(upower -m /org/freedesktop/UPower/devices/battery_BAT0)
+#        ##sleep 5
+#        #logger "
+#    done &
+
+
+#fcolor="%{B$RED_COLOR} %{F$BLUE_COLOR} %{+o} %{+u}"
+#fcolor="%{+o} %{+u}"
+bspc subscribe report > "$PANEL_FIFO" &
+
+. $PANEL_BASE_PATH/panel_colors
+
+#        -f "$PANEL_FONT_2" \
+$PANEL_BASE_PATH/panel_bar \
+    < "$PANEL_FIFO" \
+    | lemonbar \
+        -a 40 \
+        -u 2 \
+        -n "$PANEL_WM_NAME" \
+        -g x$PANEL_HEIGHT \
+        -f "$PANEL_FONT_1" \
+        -F "$COLOR_DEFAULT_FG" \
+        -B "$COLOR_DEFAULT_BG" \
+        | sh &
+
+wid=$(xdo id -m -a "$PANEL_WM_NAME")
+xdo above -t "$(xdo id -N Bspwm -n root | sort | head -n 1)" "$wid"
+
+##stalonetray -i 20 --geometry 10x1+350+0 -bg "$COLOR_DEFAULT_BG" --window-layer top --kludges force_icons_size &
+##stalonetray -i 28 --geometry 10x1+500+0 -bg "$COLOR_DEFAULT_BG" --kludges force_icons_size &
+#stalonetray -i 28 --geometry 10x1+500+0 -bg "$COLOR_DEFAULT_BG" &
+
+wait
+

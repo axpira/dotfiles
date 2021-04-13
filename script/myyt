@@ -1,0 +1,40 @@
+#!/bin/sh -e
+
+source ~/.env
+# urlstring="https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=20&key=${YT_API_KEY}"
+
+
+# curl "${urlstring}"
+
+# backend="fzf --with-nth='1..-2' +m"
+#backend="dmenu -i -p 'Select Video -' -l 20"
+
+if [[ -z "$1" ]]; then
+  printf "Search query: "; 
+  query=$( echo | dmenu -p "Search YT Video:" )
+  #read -rp "Search query: " query
+else
+	query="$1"
+fi
+
+
+
+query="${query// /+}"
+echo "$query"
+
+# YT_API_KEY location
+#YT_API_KEY="$( cat "${HOME}"/.api_keys/YT_API_KEY )"
+urlstring="https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=20&key=${YT_API_KEY}"
+
+video=$( curl -s "${urlstring}" \
+	| jq -r '.items[] | "\(.snippet.channelTitle) => \(.snippet.title) => youtu.be/\(.id.videoId)"' \
+	| dmenu -i -p 'Select Video -' -l 20 \
+	| awk '{print $NF}' \
+)
+#| fzf --with-nth='1..-2' +m \
+
+echo $video
+#youtube-dl -o - "https://$video" | mpv r
+# youtube-dl -o - "https://$video" | mplayer r
+# mplayer $(youtube-dl -g "https://$video")
+youtube-dl -q -o- https://$video | devour mplayer -af scaletempo -cache 8192  -

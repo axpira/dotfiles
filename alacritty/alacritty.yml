@@ -1,0 +1,29 @@
+env:
+  TERM: xterm-256color
+
+window:
+  padding:
+    x: 2
+    y: 2
+
+  decorations: none
+  gtk_theme_variant: dark
+
+font:
+  normal:
+    family: FiraCode Nerd Font
+    style: Regular
+  size: 10
+
+colors:
+  primary:
+    background: '#000000'
+
+selection:
+  save_to_clipboard: true
+
+mouse:
+  hide_when_typing: true
+
+key_bindings:
+  - { key: Plus,   mods: Control|Shift,         action: ResetFontSize }

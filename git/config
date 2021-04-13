@@ -1,0 +1,5 @@
+[include]
+    path = ./conf/settings.gitconfig
+    path = ./conf/aliases.gitconfig
+    path = ./conf/colors.gitconfig
+    path = ./conf/urls.gitconfig

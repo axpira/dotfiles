@@ -1,0 +1,13 @@
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_HEIGHT=30
+#PANEL_FONT_1="-*-fixed-*-*-*-*-20-*-*-*-*-*-*-*"
+#xlsfonts
+PANEL_FONT_1="Liberation Mono:pixelsize=26:antialias=true:autohint=true"
+#PANEL_FONT_1="-adobe-courier-medium-r-normal--24-*-*-*-*-*-*-*"
+#PANEL_FONT_1="-misc-liberation mono-medium-r-normal--26-0-0-0-m-0-iso8859-9"
+#PANEL_FONT_1="Inconsolata Regular:size=6"
+#PANEL_FONT_1="Inconsolata:style=Medium:size=14"
+#PANEL_FONT_2="Font Awesome:size=8"
+#PANEL_FONT_2="-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1"
+PANEL_WM_NAME=bspwm_panel
+export PANEL_FIFO PANEL_HEIGHT PANEL_FONT PANEL_WM_NAME

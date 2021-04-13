@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -xe
+echo mem > /sys/power/state
+
+init-headphone
+
+
+

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# dmenu_run improved
+# if a command ends with "!", it is started in term.
+
+termcmd="st -e"
+# scratchpadcmd="st -n spterm -g 120x34 -e"
+scratchpadcmd="st -t scratchpad -g 120x34 -e"
+tabbedcmd="tabbed -c"
+test -s "$HOME/.dmenurc" && . "$HOME/.dmenurc"
+# static const char scratchpadname[] = "scratchpad";
+# static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
+
+cmd="$(dmenu_path | dmenu "$@")"
+case $cmd in
+    nvim ) ${termcmd} "$(printf "%s" "${cmd}" | cut -d'!' -f1)";;
+    vimb ) ${tabbedcmd} "$(printf "%s" "${cmd}" | cut -d'#' -f1)" -e;;
+    *\! ) ${termcmd} "$(printf "%s" "${cmd}" | cut -d'!' -f1)";;
+    *\@ ) ${scratchpadcmd} "$(printf "%s" "${cmd}" | cut -d'@' -f1)";;
+    *\# ) ${tabbedcmd} "$(printf "%s" "${cmd}" | cut -d'#' -f1)" -e;;
+    * ) ${cmd} ;;
+esac
+

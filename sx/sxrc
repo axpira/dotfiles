@@ -1,0 +1,6 @@
+xrandr --setprovideroffloadsink 1 0
+xrandr --setprovideroutputsource 1 0
+
+xrdb -merge ~/.config/Xresources
+
+exec dwm

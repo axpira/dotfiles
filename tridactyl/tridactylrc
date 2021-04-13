@@ -1,0 +1,40 @@
+
+
+sanitise tridactyllocal tridactylsync
+
+"
+" Binds
+"
+bind J tabnext
+bind K tabprev
+
+" Let Ctrl-c to copy in the commandline
+unbind --mode=ex <C-c>
+
+" Handy multiwindow/multitasking binds
+bind gd tabdetach
+bind gD composite tabduplicate | tabdetach
+
+" bind / fillcmdline find
+" bind ? fillcmdline find -?
+" bind n findnext 1
+" bind N findnext -1
+" bind ,<Space> nohlsearch
+set incsearch true
+
+
+" set editorcmd to suckless terminal, or use the defaults on other platforms
+js tri.browserBg.runtime.getPlatformInfo().then(os=>{const editorcmd = os.os=="linux" ? "st nvim" : "auto"; tri.config.set("editorcmd", editorcmd)})
+"set editorcmd = "nvim"
+
+" Make Tridactyl work on more sites at the expense of some security
+set csp clobber
+fixamo_quiet
+
+blacklistadd draw.io
+blacklistadd websequencediagrams.com
+blacklistadd mail.google.com/mail
+
+
+" This will have to do until someone writes us a nice syntax file :)
+" vim: set filetype=vim:

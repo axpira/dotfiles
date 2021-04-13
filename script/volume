@@ -1,0 +1,58 @@
+#!/bin/sh
+
+
+function get_volume {
+  amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+}
+
+function is_mute {
+  amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+}
+
+function send_notification {
+  volume=`get_volume`
+  # Make the bar with the special character ─ (it's not dash -)
+  # https://en.wikipedia.org/wiki/Box-drawing_character
+  bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
+  bar="$volume%
+$bar"
+  if is_mute ; then
+    icon="ic_volume_off_white_48dp"
+	state="off"
+  else
+    icon="ic_volume_up_white_48dp"
+	state="on"
+  fi
+  # Send the notification
+  #dunstify -i $icon -t 3000 -r 2593 -u normal "$state    $bar"
+}
+
+
+param="$1"
+
+if [[ -z $param ]]; then
+  #send_notification bar
+  if is_mute; then
+    state="婢"
+  else
+    state="墳"
+  fi
+  printf " %s %02d%%  " "$state" `get_volume`
+else
+  source _parse.sh
+  _parse_updown $param
+  
+  if [[ ! -z $value ]]; then
+    logger "$value $percent"
+    amixer set Master $value$percent$signal > /dev/null
+    #send_notification
+  else 
+    message="Invalid parameter '$param'"
+    logger "volume.sh $message"
+    #dunstify -i ic_error_white_48dp -r 2593 -u critical "volume.sh $message"
+    exit 1
+  fi
+
+  pkill -RTMIN+11 dwmblocks
+fi
+

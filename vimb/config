@@ -1,0 +1,59 @@
+set download-path=~/downloads/
+set hint-keys=asdfglkjh
+
+set editor-command=st -e nvim %s
+set history-max-items=99999
+set input-autohide=true
+# // set input-bg-normal=#464f52
+# // set input-fg-normal=#fdf6e3
+set home-page=https://searx.info/
+set smooth-scrolling=true
+set spatial-navigation=true
+
+set spell-checking=true
+set spell-checking-languages=en,pt_BR
+
+# // set statusbar=false
+set webinspector=true
+set dark-mode=true
+
+set default-zoom=200
+
+set webgl=true
+set incsearch=true
+# set default-font=FiraCode Nerd Font:style=Retina,Regular
+# set monospace-font=FiraCode Nerd Font:style=Retina,Regular
+# set sans-serif-font=FiraCode Nerd Font:style=Retina,Regular
+# set serif-font=FiraCode Nerd Font:style=Retina,Regular
+# set font-size=20
+# set monospace-font-size=40
+
+
+shortcut-add duck=https://duckduckgo.com/?q=$0
+shortcut-add g=https://encrypted.google.com/?q=$0
+shortcut-add s=https://searx.info/?q=$0
+
+shortcut-default s
+
+nmap + zI
+nmap - zO
+nmap = zz
+nmap d :quit<CR>
+nnoremap J :sh! xdotool key --window $VIMB_XID ctrl+shift+l<CR><Esc>
+nnoremap K :sh! xdotool key --window $VIMB_XID ctrl+shift+h<CR><Esc>
+
+# GUI color settings
+#set completion-css=color:#d3d0c8;background-color:#393939;font-size:22pt;
+set completion-css=color:#ff0000d3d0c8;background-color:#393939;font:14pt DejaVu Sans Mono;
+set completion-hover-css=color:#d3d0c8;background-color:#393939;font:14pt DejaVu Sans Mono;
+set completion-selected-css=color:#d3d0c8;background-color:#515151;font:14pt DejaVu Sans Mono;
+set input-css=color:#d3d0c8;background-color:#393939;font:14pt DejaVu Sans Mono;
+set input-error-css=color:#f2777a;background-color:#393939;font:14pt DejaVu Sans Mono;
+set status-css=color:#ffcc66;background-color:#393939;font:14pt DejaVu Sans Mono;
+set status-ssl-css=color:#99cc99;background-color:#393939;font:14pt DejaVu Sans Mono;
+set status-ssl-invalid-css=color:#f2777a;background-color:#393939;font:14pt DejaVu Sans Mono;
+
+
+
+set user-agent=googlebot
+set header=DNT=1,User-Agent
