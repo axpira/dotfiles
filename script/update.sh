@@ -56,7 +56,7 @@ NODE_PACKAGES=(
 
 GO_REPOS=(
     github.com/fullstorydev/grpcurl
-    github.com/charmbracelet/glow
+    # github.com/charmbracelet/glow
     github.com/go-delve/delve/cmd/dlv
     golang.org/x/tools/gopls@latest
     golang.org/x/tools/...
