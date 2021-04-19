@@ -24,6 +24,9 @@
 !zathura/
 !zathura/**
 
+!containers/
+!containers/**
+
 !script/
 !script/**
 
