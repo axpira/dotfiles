@@ -38,9 +38,9 @@ alias gocover="go test -coverprofile=coverage.out && go tool cover -html=coverag
 alias wttr="curl wttr.in"
 alias rate="curl rate.sx"
 alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
-alias zathura="devour zathura"
-alias sxiv="devour sxiv"
-alias mpv="devour mpv"
+#alias zathura="devour zathura"
+#alias sxiv="devour sxiv"
+#alias mpv="devour mpv"
 alias grep="grep --color=auto --exclude-dir={.git,artwork,node_modules,vendor}"
 alias g='git'
 alias gs='git status'
