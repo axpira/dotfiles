@@ -67,6 +67,8 @@ GO_REPOS=(
     github.com/divan/expvarmon
     github.com/nojima/httpie-go
     github.com/caarlos0/svu
+    github.com/ahmetb/kubectx
+    github.com/goreleaser/chglog/cmd/chglog
 )
 
 ZSHPLUGS=(
