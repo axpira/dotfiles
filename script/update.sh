@@ -37,6 +37,7 @@ PY3=(
     pipenv
     ps_mem
     speedtest-cli
+    scanapi
 )
 
 NODE_PACKAGES=(
@@ -65,6 +66,7 @@ GO_REPOS=(
     github.com/cweill/gotests/...
     github.com/divan/expvarmon
     github.com/nojima/httpie-go
+    github.com/caarlos0/svu
 )
 
 ZSHPLUGS=(
