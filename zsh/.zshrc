@@ -44,7 +44,7 @@ alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
 alias grep="grep --color=auto --exclude-dir={.git,artwork,node_modules,vendor}"
 alias g='git'
 alias gs='git status'
-alias gl='git log'
+alias gl='git l'
 
 # `ls` after `cd`
 function cd {
