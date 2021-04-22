@@ -53,6 +53,7 @@ NODE_PACKAGES=(
     yaml-language-server
     heroku
     prettier
+    conventional-changelog-cli
 )
 
 GO_REPOS=(
