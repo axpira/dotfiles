@@ -24,6 +24,7 @@ rules=(
  "services;simulator;8090:8080"
  "payment;sale;6571"
  "payment;balance;6599"
+ "payment;anticipation;6444"
  "services;tax;6572"
 )
 

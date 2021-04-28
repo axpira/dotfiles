@@ -46,7 +46,12 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+-- local systray = wibox.widget.systray()
+-- systray.forced_height = auto
+-- systray.forced_width = auto
 beautiful.init("/home/axpira/.config/awesome/zenburn/theme.lua")
+beautiful.notification_icon_size = 24
+beautiful.systray_icon_spacing = 8
 
 
 -- This is used later as the default terminal and editor to run.
@@ -105,7 +110,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+--mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -114,6 +119,16 @@ mytextclock = wibox.widget.textclock()
 mybattery = awful.widget.watch(
   "lua /home/axpira/.config/script/lua/battery.lua",
   15
+)
+
+mybluetooth = awful.widget.watch(
+  "/home/axpira/.config/script/bluetooth",
+  30
+)
+
+myvolume = awful.widget.watch(
+  "/home/axpira/.config/script/volume",
+  30
 )
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -218,6 +233,21 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
 --            mykeyboardlayout,
+            myvolume,
+            wibox.widget{
+                markup = ' ',
+                align  = 'center',
+                valign = 'center',
+                widget = wibox.widget.textbox
+            },
+            mybluetooth,
+            -- wibox.widget.separator,
+            wibox.widget{
+                markup = ' ',
+                align  = 'center',
+                valign = 'center',
+                widget = wibox.widget.textbox
+            },
             mybattery,
             wibox.widget.systray(),
             mytextclock,
@@ -482,7 +512,7 @@ awful.rules.rules = {
           "Gpick",
           "Kruler",
           "MessageWin",  -- kalarm.
-          "Sxiv",
+--          "Sxiv",
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",

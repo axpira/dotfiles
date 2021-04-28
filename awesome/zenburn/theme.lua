@@ -12,7 +12,8 @@ theme.wallpaper = themes_path .. "zenburn/zenburn-background.png"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+--theme.font      = "FiraCode Nerd Font (OTF) 9"
+theme.font      = "FiraCode Nerd Font Mono (OTF) 8"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"

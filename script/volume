@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 
 function get_volume {
@@ -53,6 +53,6 @@ else
     exit 1
   fi
 
-  pkill -RTMIN+11 dwmblocks
+  # pkill -RTMIN+11 dwmblocks
 fi
 
