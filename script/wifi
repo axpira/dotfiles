@@ -1,0 +1,11 @@
+#!/bin/bash
+
+interface="wlp2s0"
+action="$1"
+
+if [ "$action" == "scan" ]; then
+    /sbin/iwlist $interface scan | grep ESSID | cut -d":" -f2 | tr -d '"' | dmenu -i -l 10
+fi
+#iw dev wlp2s0 link | grep "SSID:" | cut -d":" -f2
+essid=$(iwgetid -r)
+printf " %s" "$essid"

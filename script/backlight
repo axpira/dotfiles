@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 #backlight_path="/sys/class/backlight/acpi_video0"
 backlight_path="/sys/class/backlight/intel_backlight"

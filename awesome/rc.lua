@@ -118,7 +118,7 @@ mytextclock = wibox.widget.textclock()
 
 mybattery = awful.widget.watch(
   "lua /home/axpira/.config/script/lua/battery.lua",
-  15
+  30
 )
 
 mybluetooth = awful.widget.watch(
@@ -128,6 +128,11 @@ mybluetooth = awful.widget.watch(
 
 myvolume = awful.widget.watch(
   "/home/axpira/.config/script/volume",
+  30
+)
+
+mywifi = awful.widget.watch(
+  "/home/axpira/.config/script/wifi",
   30
 )
 -- Create a wibox for each screen and add it
@@ -179,6 +184,7 @@ local function set_wallpaper(s)
             wallpaper = wallpaper(s)
         end
         gears.wallpaper.maximized(wallpaper, s, true)
+        -- gears.wallpaper.fit(wallpaper, s, "#000000")
     end
 end
 
@@ -233,6 +239,13 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
 --            mykeyboardlayout,
+            mywifi,
+            wibox.widget{
+                markup = ' ',
+                align  = 'center',
+                valign = 'center',
+                widget = wibox.widget.textbox
+            },
             myvolume,
             wibox.widget{
                 markup = ' ',
@@ -366,9 +379,15 @@ globalkeys = gears.table.join(
     --awful.key({ modkey }, "p", function() menubar.show() end,
     awful.key({ modkey }, "p", function() awful.spawn("dmenu_run_i") end,
               {description = "show the menubar", group = "launcher"}),
+    awful.key({ modkey, "Control" }, "l",
+        function() 
+            awful.spawn("i3lock -i /home/axpira/.config/screenlock.png -c 000000 -e -f")
+        end,
+        {description = "show the menubar", group = "launcher"}),
 
     awful.key({ modkey, "Shift" }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
+
 )
 
 clientkeys = gears.table.join(

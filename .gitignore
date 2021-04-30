@@ -62,6 +62,9 @@ nvim/.netrwhist
 !awesome/
 !awesome/**
 
+!rofi/
+!rofi/**
+
 !qutebrowser/
 !qutebrowser/*
 
