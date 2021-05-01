@@ -35,10 +35,10 @@ require("formatter").setup({
     go = {
       -- gofmt, goimports
       function()
-        return {exe = "gofmt"}
+        return {exe = "gofmt", stdin = true}
       end,
       function()
-        return {exe = "goimports"}
+        return {exe = "goimports", stdin = true}
       end,
     },
   },
