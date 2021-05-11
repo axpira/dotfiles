@@ -38,4 +38,4 @@ for rule in "${rules[@]}"; do
 	i=$((i + 1))
 done
 
-
+#kubectl port-forward --namespace services $(kubectl get pod --namespace services --selector="app=authentication" --output jsonpath='{.items[0].metadata.name}') 8099:8080

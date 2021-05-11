@@ -68,7 +68,7 @@ export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :500 {}'"
-export FZF_COMPLETION_TRIGGER='~~'
+#export FZF_COMPLETION_TRIGGER='~~'
 #export LS_OPTIONS="$LS_OPTIONS --group-directories-first"
 export LESS=-R
 export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"

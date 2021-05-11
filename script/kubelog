@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+BROWSER=${BROWSER:-firefox}
+
+rofi_cmd() {
+    rofi -dmenu \
+        -theme Pop-Dark \
+        -font "Fira Code Nerd Font Mono 10" \
+        -matching fuzzy \
+        -p "$1" \
+        $@
+}
+
+notify() {
+    notify-send -a kubelog -u $1 -t $2 "Kubelog" "$3"
+}
+
+if [ -n "$1" ]; then
+    if ! kubectx $1; then
+        notify critical 5000 "Error on switch context"
+        exit 1
+    fi
+    
+fi
+
+ctx=$(kubectl config current-context)
+
+namespace=".metadata.namespace"
+name=".metadata.name"
+restart="([.status.containerStatuses[].restartCount] | add)"
+status='([.status.containerStatuses[] | if .ready == false then .state.waiting.reason else empty end ] | join("|"))'
+count='([([.status.containerStatuses[] | select(.ready == true) ] | length ),([.status.containerStatuses[] ] | length )] | join("/"))'
+#elapsed='(.metadata.creationTimestamp | fromdate )'
+# string2="10:36:10.8800056"
+# StartDate=$(date -u -d "$string1" +"%s.%N")
+# FinalDate=$(date -u -d "$string2" +"%s.%N")
+# date -u -d "0 $FinalDate sec - $StartDate sec" +"%H:%M:%S.%N"
+
+pod_result=( $(kubectl get pod --all-namespaces -o json \
+    | jq -cr ".items[] | [$namespace,$name,$count,$restart,$status] | @csv" \
+    | column -t -s "," \
+    | tr -d '"' \
+    | rofi_cmd $ctx -width 65) )
+
+if [ ${#pod_result[@]} -eq 0 ]; then
+    notify normal 1000 "canceled"
+    exit 2
+fi
+
+namespace=${pod_result[0]}
+pod=${pod_result[1]}
+container=$(kubectl get pods $pod -n $namespace -o jsonpath='{.spec.containers[0].name}')
+
+output=$(mktemp)
+kubectl -n $namespace logs $pod $container | grep -v "GET /healthz" | tail -100 > $output
+#cat $output
+json=$(cat "$output" | grep "^{" | jq -cr '"\(.time) \(.level) \(.msg // .message) \(.error // "")"' | sort -r)
+rm $output
+
+result=$(echo "$json" | rofi_cmd "$ctx logs" -width 100 -lines 20)
+if [ -z "$result" ]; then
+    notify "normal" 1000 "Canceled"
+    exit 0
+fi
+url_gcp="https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aresource.labels.project_id%3D%22bexspay-staging%22%0Aresource.labels.namespace_name%3D%22$namespace%22%0Alabels.k8s-pod%2Fapp%3D%22$container%22%0ANOT%20textPayload:%22GET%20%2Fhealthz%20HTTP%2F1.1%22;timeRange=PT1H?project=bexspay-staging"
+$BROWSER "$url_gcp"
+#rofi -show run -width 100 -location 1 -lines 5 -bw 2 -yoffset -2

@@ -72,6 +72,7 @@ GO_REPOS=(
     github.com/goreleaser/chglog/cmd/chglog
     github.com/akavel/up
     github.com/peco/peco
+    github.com/wercker/stern
 )
 
 ZSHPLUGS=(
@@ -190,7 +191,7 @@ install_neovim() {
 install_go() {
     print_info "Golang"
     NPATH="$HOME/.local/go"
-    VERSION="1.16.2"
+    VERSION="1.16.3"
     FILENAME="go$VERSION.linux-amd64.tar.gz"
     if [ -d "$NPATH/$VERSION" ]; then
         print_info "Go $VERSION already exists in $NPATH/$VERSION"

@@ -8,6 +8,7 @@ window:
 
   decorations: none
   gtk_theme_variant: dark
+  dynamic_title: true
 
 font:
   normal:

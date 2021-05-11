@@ -76,6 +76,9 @@ nvim/.netrwhist
 !gtk-3.0/
 !gtk-3.0/settings.ini
 
+!i3/
+!i3/*
+
 !git/
 !git/**
 *~
