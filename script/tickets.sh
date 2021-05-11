@@ -62,7 +62,7 @@ selected=$(echo $jira_response \
     | dmenu -p "TICKETS: " -l 50 -i -nf "#ffffff")
 
 if [ -z "$selected" ]; then
-    notify-send normal 2000 "canceled"
+    notify normal 2000 "canceled"
     exit 2
 fi
 

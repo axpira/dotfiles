@@ -147,3 +147,4 @@ if [[ -f ~/.env && -r ~/.env ]]; then
 fi
 
 source $HOME/.fzf.zsh
+source <(kubectl completion zsh)

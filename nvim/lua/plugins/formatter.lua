@@ -2,7 +2,7 @@ local util = require'utils'
 
 -- formatter modules
 local function prettier()
-  return {exe = "prettier", args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)}}
+  return {exe = "prettier", args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)}, stdin = true}
 end
 
 require("formatter").setup({
@@ -18,7 +18,7 @@ require("formatter").setup({
     --},
     python = {
       function()
-        return {exe = "black", args = {"-q", "-"}}
+        return {exe = "black", args = {"-q", "-"}, stdin = true}
       end,
     },
     javascript = {prettier},
@@ -29,6 +29,7 @@ require("formatter").setup({
         return {
           exe = "prettier",
           args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0), "--parser", "json"},
+          stdin = true,
         }
       end,
     },
