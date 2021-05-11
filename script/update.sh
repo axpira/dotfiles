@@ -70,6 +70,8 @@ GO_REPOS=(
     github.com/caarlos0/svu
     github.com/ahmetb/kubectx
     github.com/goreleaser/chglog/cmd/chglog
+    github.com/akavel/up
+    github.com/peco/peco
 )
 
 ZSHPLUGS=(

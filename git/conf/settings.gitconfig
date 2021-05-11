@@ -1,51 +1,54 @@
+[init]
+	defaultBranch = main
+
 [core]
-editor = $EDITOR
-pager = bat
-excludesfile = ~/.gitignore
-attributesfile = ~/.gitattributes
-whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+  editor = $EDITOR
+  pager = bat
+  excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
 [pull]
-rebase = true
+  rebase = true
 
 [push]
-followtags = true
+  followtags = true
 
 [commit]
-verbose = true
+  verbose = true
 
 [status]
-short = true
-branch = true
+  short = true
+  branch = true
 
 [apply]
-whitespace = error
+  whitespace = error
 
 [grep]
-linenumber = true
-patterntype = perl
+  linenumber = true
+  patterntype = perl
 
 [column]
-ui = auto
-tag = never
+  ui = auto
+  tag = never
 
 [merge]
-log = true
-tool = nvimmerge
+  log = true
+  tool = nvimmerge
 
 [mergetool "nvimmerge"]
-cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-trustexitcode = true
+  cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  trustexitcode = true
 
 [diff]
-algorithm = patience
-tool = nvimdiff
-renames = copies
-submodule = log
+  algorithm = patience
+  tool = nvimdiff
+  renames = copies
+  submodule = log
 
 [difftool "nvimdiff"]
-cmd = nvim -d $LOCAL $REMOTE
-trustexitcode = true
+  cmd = nvim -d $LOCAL $REMOTE
+  trustexitcode = true
 
 [help]
-autocorrect = 1
+  autocorrect = 1
