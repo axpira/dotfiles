@@ -5,4 +5,5 @@ pipewire & pipewire-pulse & pipewire-media-session &
 
 xrdb -merge ~/.config/Xresources
 
-exec awesome
+#exec awesome
+exec i3

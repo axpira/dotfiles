@@ -1,0 +1,83 @@
+#[click]
+#full_text=Click me!
+#command=echo "Got clicked with button $button"
+
+# Guess the weather hourly
+# [weather]
+# command=curl -Ss 'https://wttr.in?format=3'
+# #command=curl -Ss 'https://wttr.in?0&T&Q' | cut -c 16- | head -2 | xargs echo
+# interval=3600
+# color=#A4C2F4
+# #color=#F79494
+
+[volume]
+command=volume
+interval=30
+color=#FF0000
+
+[backlight]
+command=backlight
+interval=30
+color=#FF0000
+
+[battery]
+command=battery
+interval=30
+color=#FF0000
+
+[bluetooth]
+command=bluetooth
+interval=30
+color=#A4C2F4
+
+
+# # Query my default IP address only on startup
+# [ip]
+# command=hostname -i | awk '{ print "IP:" $1 }'
+# interval=once
+# color=#91E78B
+
+# Update time every 5 seconds
+[time]
+command=date +'%b, %d %I:%M %p'
+interval=59
+
+
+#[simple]
+#full_text=This is a looong white on red text
+#short_text=Short white on red text
+#background=#FF0000
+#color=#FFFFFF
+#
+## Block with a fixed width
+#[aligned]
+#full_text=Here.
+#min_width=100
+#align=center
+#
+## Fancy text with multiple colors and shapes
+#[funky]
+#full_text=<span foreground="red" size="x-large">Roses</span> and <i><span color="#EE37B8">violets</span></i>!
+#markup=pango
+
+#[pacman]
+#full_text=c ·
+#command=echo "· ${full_text~~}"
+#color=#FFFF00
+
+#[window]
+#command=xtitle -s
+#interval=persist
+
+#[caps-lock]
+#command=xset -q | grep Num | awk '{ print $6, $7, $8 }'
+#interval=once
+#signal=10
+##  pkill -SIGRTMIN+10 i3blocks
+## bindsym --release Caps_Lock exec pkill -SIGRTMIN+10 i3blocks
+
+#[test]
+#full_text=teste
+#command=echo 'first'; echo 'second'; echo '#00ff00'; echo '#0000ff'
+
+

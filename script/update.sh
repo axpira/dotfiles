@@ -72,7 +72,7 @@ GO_REPOS=(
     github.com/goreleaser/chglog/cmd/chglog
     github.com/akavel/up
     github.com/peco/peco
-    github.com/wercker/stern
+    # github.com/wercker/stern
 )
 
 ZSHPLUGS=(

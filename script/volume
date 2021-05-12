@@ -37,7 +37,7 @@ if [[ -z $param ]]; then
   else
     state="墳"
   fi
-  printf " %s %02d%%  " "$state" `get_volume`
+  printf "%s %02d%%\n" "$state" `get_volume`
 else
   source _parse.sh
   _parse_updown $param

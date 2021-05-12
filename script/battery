@@ -45,6 +45,6 @@ case $POWER_SUPPLY_STATUS in
 	"Full")         status="";;
 	*)              status="";;
 esac
-printf " %s%s%s  " "$status" "$prefix" "$sufix"
+printf "%s%s%s\n" "$status" "$prefix" "$sufix"
 
 #eval echo "$1"
