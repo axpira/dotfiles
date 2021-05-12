@@ -10,4 +10,4 @@ fi
 #iw dev wlp2s0 link | grep "SSID:" | cut -d":" -f2
 #essid=$(iwgetid -r)
 essid=$(iw dev $interface link | grep SSID: | cut -d: -f2)
-printf " %s" "$essid"
+printf "%s\n" "$essid"

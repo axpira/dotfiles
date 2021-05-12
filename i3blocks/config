@@ -9,6 +9,10 @@
 # interval=3600
 # color=#A4C2F4
 # #color=#F79494
+[wifi]
+command=wifi
+interval=30
+color=#FF0000
 
 [volume]
 command=volume
