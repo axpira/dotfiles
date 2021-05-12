@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 function get_volume {
   amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
 }
@@ -37,7 +36,13 @@ if [[ -z $param ]]; then
   else
     state="墳"
   fi
-  printf "%s %02d%%\n" "$state" `get_volume`
+  percent="$(get_volume)"
+
+  # if [ "$format" == "json" ]; then
+    printf '{"label":"<span size=\\"x-large\\">%s</span>","full_text":" %s%%"}\n' "$state" "$percent"
+  # else
+    # printf "%s %02d%%\n" "$state" "$percent"
+  # fi
 else
   source _parse.sh
   _parse_updown $param

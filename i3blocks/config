@@ -10,14 +10,20 @@
 # color=#A4C2F4
 # #color=#F79494
 [wifi]
-command=wifi
+command=wifi json
 interval=30
 color=#FF0000
+markup=pango
+format=json
+# icon=
+# label=<span size="x-large">"$icon"</span>
 
 [volume]
 command=volume
 interval=30
 color=#FF0000
+markup=pango
+format=json
 
 [backlight]
 command=backlight
@@ -61,7 +67,7 @@ interval=59
 #
 ## Fancy text with multiple colors and shapes
 #[funky]
-#full_text=<span foreground="red" size="x-large">Roses</span> and <i><span color="#EE37B8">violets</span></i>!
+#full_text= and <i><span color="#EE37B8">violets</span></i>!
 #markup=pango
 
 #[pacman]

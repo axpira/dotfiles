@@ -1,5 +1,5 @@
 #!/bin/bash
-
+format=${1:-console}
 # interface="wlp2s0"
 interface=$(printf '%s\n' /sys/class/net/*/wireless | cut -d/ -f5)
 action="$1"
@@ -9,5 +9,10 @@ if [ "$action" == "scan" ]; then
 fi
 #iw dev wlp2s0 link | grep "SSID:" | cut -d":" -f2
 #essid=$(iwgetid -r)
+icon=""
 essid=$(iw dev $interface link | grep SSID: | cut -d: -f2)
-printf "%s\n" "$essid"
+if [ "$format" == "json" ]; then
+    printf '{"label":"<span size=\\"x-large\\">%s</span>","full_text":"%s"}\n' "$icon" "$essid"
+else
+    printf '%s%s\n' "" "$essid"
+fi

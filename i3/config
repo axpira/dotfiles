@@ -31,6 +31,8 @@ bindsym $mod+p exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+bindsym $mod+Control+l exec --no-startup-id i3lock -i $HOME/.config/screenlock.png -c 000000 -e -f
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
