@@ -57,8 +57,8 @@ bindsym $mod+semicolon split toggle
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout toggle split
-bindsym $mod+Shift+s layout toggle tabbed stacking
+bindsym $mod+question layout toggle splitv splith
+bindsym $mod+Shift+question layout toggle tabbed stacking
 # bindsym $mod+s layout stacking
 # bindsym $mod+w layout tabbed
 # bindsym $mod+e layout toggle split
@@ -123,9 +123,10 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+q exec "i3-msg exit"
 # kill focused window
-bindsym $mod+w kill
+bindsym $mod+q kill
 
 bindsym $mod+F2 exec i3-input -F 'rename workspace to "%s"' -P 'New Name: '
+bindsym $mod+Tab exec --no-startup-id rofi -show window -font "FiraCode Nerd Font Mono 32"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
