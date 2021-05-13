@@ -12,7 +12,7 @@
 [wifi]
 command=wifi json
 interval=30
-color=#FF0000
+color=#98971a
 markup=pango
 format=json
 # icon=
@@ -20,20 +20,25 @@ format=json
 
 [volume]
 command=volume
-interval=30
-color=#FF0000
+interval=once
+color=#689d6a
 markup=pango
 format=json
+signal=11
 
 [backlight]
 command=backlight
-interval=30
-color=#FF0000
+interval=once
+color=#d79921
+#color=#fadb2f
+signal=10
+markup=pango
+format=json
 
 [battery]
 command=battery
 interval=30
-color=#FF0000
+color=#98971a
 
 [bluetooth]
 command=bluetooth

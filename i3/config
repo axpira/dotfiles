@@ -167,7 +167,7 @@ bar {
         mode hide
         position top
         output primary
-        strip_workspace_numbers yes
+        # strip_workspace_numbers yes
 }
 
 default_border pixel 1

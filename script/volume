@@ -17,13 +17,13 @@ function send_notification {
 $bar"
   if is_mute ; then
     icon="ic_volume_off_white_48dp"
-	state="off"
+    state="off"
   else
     icon="ic_volume_up_white_48dp"
 	state="on"
   fi
   # Send the notification
-  #dunstify -i $icon -t 3000 -r 2593 -u normal "$state    $bar"
+  dunstify -i $icon -t 3000 -r 2593 -u normal "$state    $bar"
 }
 
 
@@ -50,7 +50,8 @@ else
   if [[ ! -z $value ]]; then
     logger "$value $percent"
     amixer set Master $value$percent$signal > /dev/null
-    #send_notification
+    send_notification
+    pkill -SIGRTMIN+11 i3blocks
   else 
     message="Invalid parameter '$param'"
     logger "volume.sh $message"
@@ -58,6 +59,5 @@ else
     exit 1
   fi
 
-  # pkill -RTMIN+11 dwmblocks
 fi
 

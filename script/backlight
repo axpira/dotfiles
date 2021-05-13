@@ -15,31 +15,30 @@ get_brightness_percent() {
   echo "${p%.*}"
 }
 
-#send_notification() {
-#  brightness="$(get_brightness)"
-#  brightness_p="$(get_brightness_percent)"
-#  # Make the bar with the special character ─ (it's not dash -)
-#  # https://en.wikipedia.org/wiki/Box-drawing_character
-#  bar=$(seq -s "─" $(($brightness * 2)) | sed 's/[0-9]//g')
+send_notification() {
+ brightness="$(get_brightness)"
+ brightness_p="$(get_brightness_percent)"
+ # Make the bar with the special character ─ (it's not dash -)
+ # https://en.wikipedia.org/wiki/Box-drawing_character
+ bar=$(seq -s "─" $(($brightness * 2)) | sed 's/[0-9]//g')
 #  bar="$brightness%
-#$bar"
-#  icon="ic_brightness_7_white_48dp" 
-#
-#  if [ "$1" == "bar" ]; then
-#    echo "BRI${brightness}" >> /tmp/panel-fifo
-#  else
-#    # Send the notification
-#    #dunstify -i $icon -t 3000 -r 2600 -u normal "    $bar"
-#    dunstify -i $icon -t 3000 -r 2600 -u normal "$brightness $brightness_p%"
-#    #echo "BRI${brightness}" >> /tmp/panel-fifo
-#	fi
-#}
+# $bar"
+ icon="ic_brightness_7_white_48dp" 
+
+ if [ "$1" == "bar" ]; then
+   echo "BRI${brightness}" >> /tmp/panel-fifo
+ else
+   # Send the notification
+   #dunstify -i $icon -t 3000 -r 2600 -u normal "    $bar"
+   dunstify -i $icon -t 3000 -r 2600 -u normal "$brightness_p%"
+   #echo "BRI${brightness}" >> /tmp/panel-fifo
+fi
+}
 
 param="$1"
 base_path="$(dirname "$0")"
 
 if [ -z "$param" ]; then
-  #send_notification bar
   brightness=$(get_brightness)
   brightness_p=$(get_brightness_percent)
   icon=""
@@ -47,7 +46,8 @@ if [ -z "$param" ]; then
   elif [ $brightness_p -le 50 ]; then icon=""
   elif [ $brightness_p -le 95 ]; then icon=""
   else icon=""; fi
-  printf " %s %s%%  " "$icon" "$brightness_p"
+  #printf "%s %s%%\n" "$icon" "$brightness_p"
+  printf '{"label":"<span size=\\"x-large\\">%s</span>","full_text":" %s%%"}\n' "$icon" "$brightness_p"
 else
   value=""
   percent=""
@@ -61,10 +61,10 @@ else
     if [ "$percent" = "%" ]; then
       change="$(( max_brightness * value / 100 ))"
       if [ -z "$signal" ]; then
-	value_final="$change"
+        value_final="$change"
       else
         brightness=$(get_brightness)
-	value_final=$(($brightness $signal $change))
+        value_final=$(($brightness $signal $change))
       fi
     elif [ -z "$signal" ]; then
       value_final="$value"
@@ -73,16 +73,17 @@ else
       value_final=$(echo "$brightness$signal$value" | bc) 
     fi
     if [ -n "$value_final" ]; then 
-	[ "$value_final" -lt 1 ] && value_final=1
-	[ "$value_final" -gt "$max_brightness" ] && value_final=$max_brightness
-        logger "[$brightness] [$signal] [$value] [$percent] = [$value_final]"
-        echo "$value_final" > $backlight_path/brightness
+      [ "$value_final" -lt 1 ] && value_final=1
+      [ "$value_final" -gt "$max_brightness" ] && value_final=$max_brightness
+      logger "[$brightness] [$signal] [$value] [$percent] = [$value_final]"
+      echo "$value_final" > $backlight_path/brightness
     fi
-    pkill -RTMIN+10 dwmblocks
+    pkill -SIGRTMIN+10 i3blocks
+    send_notification
   else 
     message="Invalid parameter '$param'"
     logger "backlight.sh $message"
-    #dunstify -i ic_error_white_48dp -r 2593 -u critical "backlight.sh $message"
+    dunstify -i ic_error_white_48dp -r 2593 -u critical "backlight.sh $message"
     exit 1
   fi
 fi
