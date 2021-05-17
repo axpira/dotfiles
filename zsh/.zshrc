@@ -147,4 +147,4 @@ if [[ -f ~/.env && -r ~/.env ]]; then
 fi
 
 source $HOME/.fzf.zsh
-command -v foo >/dev/null 2>&1 && { source <(kubectl completion zsh) }
+command -v kubectl >/dev/null 2>&1 && { source <(kubectl completion zsh) }
