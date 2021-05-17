@@ -38,6 +38,6 @@ application/x-extension-shtml=userapp-Firefox-XU4NVZ.desktop;userapp-Firefox-W2U
 application/xhtml+xml=userapp-Firefox-XU4NVZ.desktop;userapp-Firefox-W2U48Z.desktop;userapp-Firefox-0BEY9Z.desktop;userapp-Firefox-BY0HD0.desktop;userapp-Firefox-LWPLD0.desktop;qutebrowser.desktop;userapp-Firefox-AA6CU0.desktop;userapp-Firefox-YWO8W0.desktop;userapp-Firefox-DKMX00.desktop;firefox.desktop;
 application/x-extension-xhtml=userapp-Firefox-XU4NVZ.desktop;userapp-Firefox-W2U48Z.desktop;userapp-Firefox-0BEY9Z.desktop;userapp-Firefox-BY0HD0.desktop;userapp-Firefox-LWPLD0.desktop;qutebrowser.desktop;userapp-Firefox-AA6CU0.desktop;userapp-Firefox-YWO8W0.desktop;userapp-Firefox-DKMX00.desktop;firefox.desktop;
 application/x-extension-xht=userapp-Firefox-XU4NVZ.desktop;userapp-Firefox-W2U48Z.desktop;userapp-Firefox-0BEY9Z.desktop;userapp-Firefox-BY0HD0.desktop;userapp-Firefox-LWPLD0.desktop;qutebrowser.desktop;userapp-Firefox-AA6CU0.desktop;userapp-Firefox-YWO8W0.desktop;userapp-Firefox-DKMX00.desktop;firefox.desktop;
-image/png=gimp.desktop;
+image/png=org.gnome.eog.desktop;gimp.desktop;
 x-scheme-handler/tg=userapp-Telegram Desktop-KJOU00.desktop;userapp-Telegram Desktop-91UV00.desktop;userapp-Telegram Desktop-7KQE10.desktop;
 application/vnd.debian.binary-package=apturl.desktop;

@@ -15,7 +15,14 @@ paq {'savq/paq-nvim', opt=true}
 
 --colorscheme
 paq 'habamax/vim-colors-lessthan'
+paq 'ewilazarus/preto'
+paq 'pbrisbin/vim-colors-off'
+paq 'fxn/vim-monochrome'
+
+paq 'rktjmp/lush.nvim'
+paq 'npxbr/gruvbox.nvim'
 paq 'jacoborus/tender.vim'
+
 
 paq 'mhartington/formatter.nvim'
 

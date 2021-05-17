@@ -1,6 +1,7 @@
 [global]
 #font = Iosevka Term 11
-font = Inconsolata 20
+#font = Inconsolata 20
+font = FiraCode Nerd Font Mono 12
 
 # Allow a small subset of html markup:
 #   <b>bold</b>

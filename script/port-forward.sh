@@ -3,6 +3,7 @@
 WINDOW_NAME="port-forward"
 tmux rename-window "$WINDOW_NAME"
 tmux split-window -h
+tmux split-window -h
 tmux select-pane -L
 tmux split-window -v
 tmux split-window -v
@@ -11,6 +12,10 @@ tmux split-window -v
 tmux select-pane -R
 tmux split-window -v
 tmux split-window -v
+tmux split-window -v
+tmux split-window -v
+
+tmux select-pane -R
 tmux split-window -v
 tmux split-window -v
 
@@ -38,4 +43,4 @@ for rule in "${rules[@]}"; do
 	i=$((i + 1))
 done
 
-#kubectl port-forward --namespace services $(kubectl get pod --namespace services --selector="app=authentication" --output jsonpath='{.items[0].metadata.name}') 8099:8080
+tmux send-keys -t $WINDOW_NAME.$i "kubectl port-forward --namespace services $(kubectl get pod --namespace services --selector='app=authentication' --output jsonpath='{.items[0].metadata.name}') 8099:8080"
