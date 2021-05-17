@@ -57,17 +57,22 @@ bindsym $mod+semicolon split toggle
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+question layout toggle splitv splith
-bindsym $mod+Shift+question layout toggle tabbed stacking
+# bindsym $mod+question layout toggle splitv splith
+# bindsym $mod+Shift+question layout toggle tabbed stacking
+bindsym $mod+slash             layout toggle splitv splith
+bindsym $mod+Shift+question          layout toggle tabbed stacking
+
 # bindsym $mod+s layout stacking
 # bindsym $mod+w layout tabbed
 # bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Control+f floating toggle
+# bindsym $mod+Control+f floating toggle
+bindsym $mod+period    floating toggle
+bindsym $mod+comma     focus mode_toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -126,7 +131,7 @@ bindsym $mod+Shift+q exec "i3-msg exit"
 bindsym $mod+q kill
 
 bindsym $mod+F2 exec i3-input -F 'rename workspace to "%s"' -P 'New Name: '
-bindsym $mod+Tab exec --no-startup-id rofi -show window -font "FiraCode Nerd Font Mono 32"
+bindsym $mod+Tab exec --no-startup-id rofi -show window -font "FiraCode Nerd Font Mono 32" -theme Pop-Dark
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -159,13 +164,19 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Shift+grave move scratchpad
 bindsym $mod+grave scratchpad show
 
+bindsym $mod+u      [urgent=latest] focus
+bindsym $mod+b      border toggle
+bindsym $mod+m      bar mode toggle
+# bindsym $mod+m      bar hidden_state toggle
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         font pango:FiraCode Nerd Font Mono 10
         # status_command i3status
         status_command i3blocks
-        mode hide
+        #mode hide
+        mode dock
+        tray_padding 5
         position top
         output primary
         # strip_workspace_numbers yes
