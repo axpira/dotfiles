@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+IMAGE_PATH="$HOME/.cache/wallpaper.png"
+
+fortune -s |\
+  cowsay |\
+  convert \
+    -background black \
+    -fill grey \
+    -font "Fira-Code-Retina-Nerd-Font-Complete-Mono" \
+    -size '1000x1000' \
+    -trim label:@- \
+    $IMAGE_PATH
+
+feh --no-fehbg --bg-center $IMAGE_PATH
