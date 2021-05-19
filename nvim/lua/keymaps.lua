@@ -29,8 +29,8 @@ util.set_global_key_mappings({
   {"n", "<Leader>T", [[<Cmd>TestFile<CR>]], opts},
 
   {"n", "<Leader>cf", [[<Cmd>Format<CR>]], opts},
-  {"n", "]c", [[<cmd>lua require\"gitsigns\".next_hunk()<CR>]], opts},
-  {"n", "[c", [[<cmd>lua require\"gitsigns\".prev_hunk()<CR>]], opts},
+  {"n", "]g", [[<cmd>lua require\"gitsigns\".next_hunk()<CR>]], opts},
+  {"n", "[g", [[<cmd>lua require\"gitsigns\".prev_hunk()<CR>]], opts},
   -- {"n", "<leader>gs", [[<cmd>lua require"gitsigns".stage_hunk()<CR>]], opts},
   -- {"n", "<leader>gu", [[<cmd>lua require"gitsigns".undo_stage_hunk()<CR>]], opts},
   -- {"n", "<leader>gr", [[<cmd>lua require"gitsigns".reset_hunk()<CR>]], opts},
@@ -62,7 +62,16 @@ util.set_global_key_mappings({
   {"t", "<A-d>", [[<C-\><C-n>:lua require('lspsaga.floaterm').close_float_terminal()<CR>]], opts},
   {"n", '<Leader>q', [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]], opts},
 
-
+  {"n", "<F5>"  , [[<cmd>lua require('dap').continue()<CR>]], opts},
+  {"n", "<F9>"  , [[<cmd>lua require('dap').toggle_breakpoint()<CR>]], opts},
+  {"n", "<F10>" , [[<cmd>lua require('dap').step_over()<CR>]], opts},
+  {"n", "<F11>" , [[<cmd>lua require('dap').step_into()<CR>]], opts},
+  {"n", "<F12>" , [[<cmd>lua require('dap').step_out()<CR>]], opts},
+  -- {"n", '<leader>b"  , [[lua require'dap'.toggle_breakpoint()]], opts},
+  -- {"n", '<leader>B"  , [[lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))]], opts},
+  -- {"n", '<leader>lp" , [[lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))]], opts},
+  -- {"n", '<leader>dr" , [[lua require'dap'.repl.open()]], opts},
+  -- {"n", '<leader>dl" , [[lua require'dap'.run_last()]], opts},
 
   --{"n", "<Leader>f", [[<Cmd>Format<CR>]], {noremap = false, silent = true}},
   -- -- {"v", "<", [[<gv]], opts},

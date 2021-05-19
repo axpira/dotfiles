@@ -59,7 +59,11 @@ paq 'neovim/nvim-lspconfig'
 paq 'glepnir/lspsaga.nvim'
 paq 'hrsh7th/nvim-compe'
 paq 'kristijanhusak/vim-dadbod-completion'
---require'plugins.dap'
+
+paq 'mfussenegger/nvim-dap'
+paq 'nvim-telescope/telescope-dap.nvim'
+paq 'theHamsta/nvim-dap-virtual-text'
+paq 'rcarriga/nvim-dap-ui'
 
 paq 'vim-test/vim-test'
 
@@ -116,6 +120,7 @@ require'kommentary.config'.configure_language("default", {
 })
 
 require'plugins.lsp'
+require'plugins.dap'
 
 vim.g["test#strategy"] = "neovim"
 vim.g["test#neovim#term_position"] = "bot 30"
