@@ -61,7 +61,7 @@ GO_REPOS=(
     # github.com/charmbracelet/glow
     github.com/goreleaser/goreleaser
     github.com/go-delve/delve/cmd/dlv
-    golang.org/x/tools/gopls@latest
+    #golang.org/x/tools/gopls@latest
     golang.org/x/tools/...
     github.com/divan/expvarmon
     github.com/cweill/gotests/...
@@ -72,6 +72,7 @@ GO_REPOS=(
     github.com/goreleaser/chglog/cmd/chglog
     github.com/akavel/up
     github.com/peco/peco
+    github.com/go-delve/delve/cmd/dlv
     # github.com/wercker/stern
 )
 
@@ -114,8 +115,9 @@ configure_go() {
     print_info "Configuring golang environment.."
 
     for repo in "${GO_REPOS[@]}"; do
-        go get -u $repo
+        go get $repo
     done
+    GO111MODULE=on go get golang.org/x/tools/gopls@latest
 }
 
 configure_python() {
@@ -127,7 +129,7 @@ configure_python() {
         curl https://bootstrap.pypa.io/get-pip.py -o "$tmp_file"
         python3 "$tmp_file" --user
     fi
-    pip3 install -U pip
+    pip3 install --user -U pip
 
     print_info "Installing python 3 packages"
     for pkg in "${PY3[@]}"; do
@@ -191,7 +193,7 @@ install_neovim() {
 install_go() {
     print_info "Golang"
     NPATH="$HOME/.local/go"
-    VERSION="1.16.3"
+    VERSION="1.16.4"
     FILENAME="go$VERSION.linux-amd64.tar.gz"
     if [ -d "$NPATH/$VERSION" ]; then
         print_info "Go $VERSION already exists in $NPATH/$VERSION"
