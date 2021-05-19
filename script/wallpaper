@@ -14,7 +14,6 @@ fortune -s |\
     -background black \
     -fill grey \
     -font "Fira-Code-Retina-Nerd-Font-Complete-Mono" \
-    -pointsize 16 \
     -size $resolution \
     -gravity center \
     -trim label:@- \
