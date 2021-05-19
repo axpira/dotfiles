@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
 
+set -e
+
 IMAGE_PATH="$HOME/.cache/wallpaper.png"
 
+cows=( $(cowsay -l| grep -v '^Cow files') )
+cow_image=${cows[RANDOM%${#cows[@]}]}
+
 fortune -s |\
-  cowsay |\
+  cowsay -f $cow_image |\
   convert \
     -background black \
     -fill grey \
     -font "Fira-Code-Retina-Nerd-Font-Complete-Mono" \
-    -size '1000x1000' \
+    -size '600x600' \
     -trim label:@- \
     $IMAGE_PATH
 
