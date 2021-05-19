@@ -6,6 +6,7 @@ IMAGE_PATH="$HOME/.cache/wallpaper.png"
 
 cows=( $(cowsay -l| grep -v '^Cow files') )
 cow_image=${cows[RANDOM%${#cows[@]}]}
+resolution=$(xdpyinfo | awk '/dimensions:/ { print $2 }')
 
 fortune -s |\
   cowsay -f $cow_image |\
@@ -13,7 +14,9 @@ fortune -s |\
     -background black \
     -fill grey \
     -font "Fira-Code-Retina-Nerd-Font-Complete-Mono" \
-    -size '600x600' \
+    -pointsize 16 \
+    -size $resolution \
+    -gravity center \
     -trim label:@- \
     $IMAGE_PATH
 
