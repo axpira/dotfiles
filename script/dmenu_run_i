@@ -2,9 +2,9 @@
 # dmenu_run improved
 # if a command ends with "!", it is started in term.
 
-termcmd="st -e"
+termcmd="alacritty -e"
 # scratchpadcmd="st -n spterm -g 120x34 -e"
-scratchpadcmd="st -t scratchpad -g 120x34 -e"
+scratchpadcmd="alacritty -t scratchpad -g 120x34 -e"
 tabbedcmd="tabbed -c"
 test -s "$HOME/.dmenurc" && . "$HOME/.dmenurc"
 # static const char scratchpadname[] = "scratchpad";
