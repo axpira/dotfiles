@@ -308,6 +308,7 @@ main() {
     configure_node
     configure_fonts
     configure_zsh
+    curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o $HOME/.local/bin/ugit && chmod +x $HOME/.local/bin/ugit
     echo "Success! Please restart the terminal to see the changes!"
 }
 

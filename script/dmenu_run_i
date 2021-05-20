@@ -17,6 +17,6 @@ case $cmd in
     *\! ) ${termcmd} "$(printf "%s" "${cmd}" | cut -d'!' -f1)";;
     *\@ ) ${scratchpadcmd} "$(printf "%s" "${cmd}" | cut -d'@' -f1)";;
     *\# ) ${tabbedcmd} "$(printf "%s" "${cmd}" | cut -d'#' -f1)" -e;;
-    * ) ${cmd} ;;
+    * ) ${cmd} & ;;
 esac
 
