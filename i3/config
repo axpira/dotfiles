@@ -133,14 +133,36 @@ bindsym $mod+q kill
 bindsym $mod+F2 exec i3-input -F 'rename workspace to "%s"' -P 'New Name: '
 bindsym $mod+Tab exec --no-startup-id rofi -font "FiraCode Nerd Font Mono 14" -theme "Pop-Dark" -show window
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+mode "volume" {
+        bindsym Control+P exec --no-startup-id volume +1%
+        bindsym Control+N exec --no-startup-id volume -1%
+        bindsym P exec --no-startup-id volume +5%
+        bindsym N exec --no-startup-id volume -5%
+        bindsym Mod1+P exec --no-startup-id volume max
+        bindsym Mod1+N exec --no-startup-id volume min
+        bindsym m exec --no-startup-id volume mute
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
+        bindsym Return mode "default"
+        bindsym Control+bracketleft mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Mod1+v mode "volume"
+
+mode "backlight" {
+        bindsym Control+P exec --no-startup-id backlight +1%
+        bindsym Control+N exec --no-startup-id backlight -1%
+        bindsym P exec --no-startup-id backlight +5%
+        bindsym N exec --no-startup-id backlight -5%
+        bindsym Mod1+P exec --no-startup-id backlight max
+        bindsym Mod1+N exec --no-startup-id backlight min
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Control+bracketleft mode "default"
+}
+bindsym $mod+Mod1+b mode "backlight"
+
+mode "resize" {
         bindsym h resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
@@ -151,15 +173,15 @@ mode "resize" {
         bindsym Control+k resize shrink height 1 px or 1 ppt
         bindsym Control+l resize grow width 1 px or 1 ppt
 
-        # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
+        bindsym Control+bracketleft mode "default"
 }
 
+bindsym $mod+r mode "resize"
 bindsym $mod+Control+c move position center
 bindsym $mod+Control+s sticky toggle
-bindsym $mod+r mode "resize"
 
 bindsym $mod+Shift+grave move scratchpad
 bindsym $mod+grave scratchpad show
