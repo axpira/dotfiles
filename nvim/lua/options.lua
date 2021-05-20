@@ -52,6 +52,8 @@ utils.set_options({
     foldmethod = "indent",
     foldlevelstart = 99,
 
-    omnifunc = "v:lua.vim.lsp.omnifunc"
+    omnifunc = "v:lua.vim.lsp.omnifunc",
+
+    undofile = true
 })
 
