@@ -2,7 +2,7 @@
 format=${1:-console}
 # interface="wlp2s0"
 interface=$(printf '%s\n' /sys/class/net/*/wireless | cut -d/ -f5)
-ip=$(ip a  | grep -Eo '(([[:digit:]]{1,3})\.){3}[[:digit:]]{1,3}' | grep -v '127.0.0.1' | column)
+#ip=$(ip a show $interface primary | grep -Eo '(([[:digit:]]{1,3})\.){3}[[:digit:]]{1,3}' | grep -v '127.0.0.1')
 action="$1"
 
 if [ "$action" == "scan" ]; then
