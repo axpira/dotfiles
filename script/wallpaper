@@ -2,11 +2,22 @@
 
 set -e
 
+resize() {
+    local x
+    x=$1
+    x=$( bc <<< "$x * 0.55" )
+    echo ${x%.*}
+}
+
 IMAGE_PATH="$HOME/.cache/wallpaper.png"
 
 cows=( $(cowsay -l| grep -v '^Cow files') )
 cow_image=${cows[RANDOM%${#cows[@]}]}
 resolution=$(xdpyinfo | awk '/dimensions:/ { print $2 }')
+w=$(resize "${resolution%x*}")
+h=$(resize "${resolution#*x}")
+resolution="${w}x${h}"
+
 
 fortune -s |\
   cowsay -f $cow_image |\
