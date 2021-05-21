@@ -2,6 +2,7 @@
 format=${1:-console}
 # interface="wlp2s0"
 interface=$(printf '%s\n' /sys/class/net/*/wireless | cut -d/ -f5)
+ip=$(ip a  | grep -Eo '(([[:digit:]]{1,3})\.){3}[[:digit:]]{1,3}' | grep -v '127.0.0.1' | column)
 action="$1"
 
 if [ "$action" == "scan" ]; then
@@ -12,7 +13,7 @@ fi
 icon=""
 essid=$(iw dev $interface link | grep SSID: | cut -d: -f2)
 if [ "$format" == "json" ]; then
-    printf '{"label":"<span size=\\"x-large\\">%s</span>","full_text":"%s"}\n' "$icon" "$essid"
+    printf '{"label":"<span size=\\"x-large\\">%s</span>","full_text":"%s"}\n' "$icon" "$essid $ip"
 else
     printf '%s%s\n' "" "$essid"
 fi
