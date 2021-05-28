@@ -131,7 +131,8 @@ bindsym $mod+Shift+q exec "i3-msg exit"
 bindsym $mod+q kill
 
 bindsym $mod+F2 exec i3-input -F 'rename workspace to "%s"' -P 'New Name: '
-bindsym $mod+Tab exec --no-startup-id rofi -font "FiraCode Nerd Font Mono 14" -theme "Pop-Dark" -show window
+bindsym $mod+Tab exec --no-startup-id "rofi -font 'FiraCode Nerd Font Mono 14' -theme Pop-Dark -combi-modi window,run -show combi -modi combi"
+
 
 mode "volume" {
         bindsym Control+P exec --no-startup-id volume +1%

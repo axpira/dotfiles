@@ -43,4 +43,4 @@ for rule in "${rules[@]}"; do
 	i=$((i + 1))
 done
 
-tmux send-keys -t $WINDOW_NAME.$i "kubectl port-forward --namespace services $(kubectl get pod --namespace services --selector='app=authentication' --output jsonpath='{.items[0].metadata.name}') 8099:8080"
+tmux send-keys -t $WINDOW_NAME.$i "kubectl port-forward --namespace services $(kubectl get pod --namespace services --selector='app=authentication' --output jsonpath='{.items[0].metadata.name}') 8099:8080" C-m

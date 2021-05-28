@@ -13,7 +13,7 @@ utils.set_options({
     titlestring = "%{expand('%:p')}",
     number = true,
     relativenumber = true,
-    colorcolumn = "80,100",
+    colorcolumn = "100,120",
     wrap = false,
     termguicolors = true,
 

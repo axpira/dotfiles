@@ -1,12 +1,15 @@
 #!/bin/bash
 #-video_size 1366x768 \
 
-ffmpeg \
-  -video_size 1366x200 \
-  -framerate 30 \
-  -f x11grab \
-  -i :0.0+0,0 \
-  -c:v libx264rgb \
-  -crf 0 \
-  -preset ultrafast \
-  sample.mkv
+slop=$(slop -f "%x %y %w %h %g %i") || exit 1
+read -r X Y W H G ID < <(echo $slop)
+ffmpeg -f x11grab -s "$W"x"$H" -i :0.0+$X,$Y -f alsa -i pulse ~/myfile.webm
+# ffmpeg \
+#   -video_size 1366x200 \
+#   -framerate 30 \
+#   -f x11grab \
+#   -i :0.0+0,0 \
+#   -c:v libx264rgb \
+#   -crf 0 \
+#   -preset ultrafast \
+#   sample.mkv

@@ -22,6 +22,7 @@ paq 'fxn/vim-monochrome'
 paq 'rktjmp/lush.nvim'
 paq 'npxbr/gruvbox.nvim'
 paq 'jacoborus/tender.vim'
+paq 'stefanvanburen/rams.vim'
 
 
 paq 'mhartington/formatter.nvim'
@@ -73,7 +74,7 @@ if not paq_exists then
   require'paq-nvim'.install()
 end
 
-vim.cmd([[colorscheme lessthan]])
+vim.cmd([[colorscheme rams]])
 
 require'plugins.treesitter'
 

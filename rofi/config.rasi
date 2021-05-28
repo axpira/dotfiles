@@ -1,8 +1,8 @@
 configuration {
-	modi: "window,run,ssh,windowcd,combi,drun,keys";
-	width: 50;
-	lines: 20;
-	columns: 1;
+	/* modi: "window,run,ssh,windowcd,combi,drun,keys"; */
+	/* width: 50; */
+	/* lines: 20; */
+	/* columns: 1; */
 	font: "FireCode Nerd Font Mono (OTF) 12";
 /*	bw: 1;*/
 /*	location: 0;*/
@@ -10,7 +10,7 @@ configuration {
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
-	show-icons: true;
+	/* show-icons: true; */
 	terminal: "alacritty";
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
@@ -29,7 +29,7 @@ configuration {
 /*	sorting-method: ;*/
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
-	sidebar-mode: true;
+	/* sidebar-mode: true; */
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
@@ -42,8 +42,8 @@ configuration {
 /*	line-padding: 1;*/
 /*	filter: ;*/
 /*	separator-style: "dash";*/
-	hide-scrollbar: true;
-	fullscreen: false;
+	/* hide-scrollbar: true; */
+	/* fullscreen: false; */
 /*	fake-transparency: false;*/
 /*	dpi: -1;*/
 /*	threads: 0;*/
@@ -54,10 +54,10 @@ configuration {
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
 /*	theme: ;*/
-	color-normal: "#222222, #b1b4b3, #222222, #005577, #b1b4b3";
-	color-urgent: "#222222, #b1b4b3, #222222, #77003d, #b1b4b3";
-	color-active: "#222222, #b1b4b3, #222222, #007763, #b1b4b3";
-	color-window: "#222222, #222222, #b1b4b3";
+	/* color-normal: "#222222, #b1b4b3, #222222, #005577, #b1b4b3"; */
+	/* color-urgent: "#222222, #b1b4b3, #222222, #77003d, #b1b4b3"; */
+	/* color-active: "#222222, #b1b4b3, #222222, #007763, #b1b4b3"; */
+	/* color-window: "#222222, #222222, #b1b4b3"; */
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	matching-negate-char: '-' /* unsupported */;*/
@@ -84,9 +84,9 @@ configuration {
 /*	kb-remove-char-forward: "Delete,Control+d";*/
 /*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+h";*/
 /* *	kb-remove-to-eol: "Control+k"; */
-	kb-remove-to-eol: "";
+	/* kb-remove-to-eol: ""; */
 /*	kb-remove-to-sol: "Control+u";*/
-	kb-accept-entry: "Control+m,Return,KP_Enter";
+	/* kb-accept-entry: "Control+m,Return,KP_Enter"; */
 /*	kb-accept-custom: "Control+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
@@ -94,8 +94,8 @@ configuration {
 /*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
-	kb-row-up: "Up,Control+p,ISO_Left_Tab,Control+k";
-	kb-row-down: "Down,Control+n,Control+j";
+	/* kb-row-up: "Up,Control+p,ISO_Left_Tab,Control+k"; */
+	/* kb-row-down: "Down,Control+n,Control+j"; */
 /*	kb-row-tab: "Tab";*/
 /*	kb-page-prev: "Page_Up";*/
 /*	kb-page-next: "Page_Down";*/

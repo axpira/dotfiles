@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+notify() {
+    notify-send "bt" "$*"
+}
+
+power() {
+    output=$(bluetoothctl power $1)
+    notify "$output"
+}
+
+status=$(bluetoothctl show | grep -Eo "Powered: (yes|no)" | grep -Eo "[a-z]+$")
+
+[[ $status == "yes" ]] && options="off" || options="on"
+options="$options
+"
+
+devices=$(bluetoothctl paired-devices)
+option=$(rofi -dmenu <<< "$options$devices")
+
+case $option in
+    "") echo "Nothing to do";;
+    on) power on ;;
+    off) power off ;;
+    *)
+        device=$(rg -o '\b([[:xdigit:]]{2}:){5}[[:xdigit:]]{2}\b' <<< $option)
+        echo "Connecting to $device"
+        [[ $status == "no" ]] && power on
+        output=$(bluetoothctl connect $device)
+        if [[ $? -ne 0 ]]; then
+            power off
+        fi
+        notify "$output"
+        ;;
+esac
+
+# bluetoothctl power on
+# bluetoothctl connect $device
