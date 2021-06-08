@@ -54,6 +54,7 @@ NODE_PACKAGES=(
     heroku
     prettier
     conventional-changelog-cli
+    @mermaid-js/mermaid-cli
 )
 
 GO_REPOS=(
@@ -302,10 +303,10 @@ main() {
     install_go
     install_jq
     install_neovim
+    configure_node
     configure_go
     configure_python
     configure_rust
-    configure_node
     configure_fonts
     configure_zsh
     curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o $HOME/.local/bin/ugit && chmod +x $HOME/.local/bin/ugit
