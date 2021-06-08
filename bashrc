@@ -1,4 +1,4 @@
-. ~/.profile
+. ~/.config/profile
 
 if [[ $- != *i* ]] ; then
 	# Shell is non-interactive.  Be done now!
@@ -43,6 +43,9 @@ PS1="\[\033[01;38;5;60m\]\u@\h\[\033[01;38;5;240m\] \w \$(parse_git_branch) \$\[
 set -o vi 
 bind 'set show-mode-in-prompt on'
 set enable-bracketed-paste on
+shopt -s histappend
+shopt -s lithist
+shopt -s progcomp_alias
 
 alias ll='ls -lh'
 alias la='ls -lah'
@@ -57,6 +60,7 @@ alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
 alias tf="tail -f /var/log/messages"
 alias vb="vimb -e tabbed"
 alias dua="du -sch .[!.]* * |sort -h"
+alias g="git"
 
 ## Base16 Shell
 #BASE16_SHELL="$HOME/.config/base16-shell/"

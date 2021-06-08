@@ -10,13 +10,14 @@ resize() {
 }
 
 IMAGE_PATH="$HOME/.cache/wallpaper.png"
+LOCK_IMAGE_PATH="$HOME/.cache/screenlock.png"
 
 cows=( $(cowsay -l| grep -v '^Cow files') )
 cow_image=${cows[RANDOM%${#cows[@]}]}
 resolution=$(xdpyinfo | awk '/dimensions:/ { print $2 }')
 w=$(resize "${resolution%x*}")
 h=$(resize "${resolution#*x}")
-resolution="${w}x${h}"
+new_res="${w}x${h}"
 
 
 fortune -s |\
@@ -25,9 +26,12 @@ fortune -s |\
     -background black \
     -fill grey \
     -font "Fira-Code-Retina-Nerd-Font-Complete-Mono" \
-    -size $resolution \
+    -size $new_res\
     -gravity center \
     -trim label:@- \
     $IMAGE_PATH
 
 feh --no-fehbg --bg-center $IMAGE_PATH
+
+# echo $resolution
+# convert $IMAGE_PATH -scale $resolution $LOCK_IMAGE_PATH

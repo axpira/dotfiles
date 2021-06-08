@@ -1,7 +1,9 @@
 #xrandr --setprovideroffloadsink 1 0
 #xrandr --setprovideroutputsource 1 0
 
-pipewire & pipewire-pulse & pipewire-media-session &
+pipewire &
+pipewire-pulse &
+pipewire-media-session &
 
 xrdb -merge ~/.config/Xresources
 

@@ -49,7 +49,7 @@ export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
 export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
 export KUBECONFIG=~/.kube/config
 
-export PATH="$HOME/.fzf/bin:$HOME/.local/bin/:$HOME/.config/script:$HOME/.local/share/cargo/bin:$GOROOT/bin:$GOPATH/bin:$NODE_PATH/bin:$PATH"
+export PATH="$HOME/.fzf/bin:$HOME/.local/bin/:$HOME/.config/script:$HOME/.local/share/cargo/bin:$GOROOT/bin:$GOPATH/bin:$NODE_PATH/bin:$PATH:."
 #export PATH="$HOME/.local/bin/:$HOME/.config/script:$GOPATH/bin:$NODE_PATH/bin:$PATH"
 
 
