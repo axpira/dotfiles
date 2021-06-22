@@ -38,7 +38,8 @@ parse_git_branch() {
 }
 
 #PS1="\[\033[01;32m\]]0;\u@\h:\w\007\]\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$(parse_git_branch) \$\[\033[00m\] "
-PS1="\[\033[01;38;5;60m\]\u@\h\[\033[01;38;5;240m\] \w \$(parse_git_branch) \$\[\033[00m\] "
+#PS1="\[\033[01;38;5;60m\]\u@\h\[\033[01;38;5;240m\] \w \$(parse_git_branch) \$\[\033[00m\] "
+PS1="\[\033[01;38;5;240m\]\w\[\033[01;30;5;240m\]\$(parse_git_branch)\[\033[01;38;5;60m\]\$\[\033[00m\] "
 
 set -o vi 
 bind 'set show-mode-in-prompt on'
@@ -101,3 +102,4 @@ export FZF_DEFAULT_OPTS="
 
 _gen_fzf_default_opts
 
+source <(kubectl completion bash)
