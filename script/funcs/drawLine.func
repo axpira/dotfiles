@@ -1,0 +1,8 @@
+
+# $1 size
+
+(( $# == 0 )) && size=$(tput cols) || size=$1
+# size=${1:-$(tput cols)}
+# size=$(tput cols)
+#echo $size
+printf "%${size}s" ' ' | sed "s/ /$(printf '\e(0\x71\e(B')/g"
