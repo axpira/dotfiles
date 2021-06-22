@@ -51,6 +51,9 @@ export KUBECONFIG=~/.kube/config
 
 export PATH="$HOME/.fzf/bin:$HOME/.local/bin/:$HOME/.config/script:$HOME/.local/share/cargo/bin:$GOROOT/bin:$GOPATH/bin:$NODE_PATH/bin:$PATH:."
 #export PATH="$HOME/.local/bin/:$HOME/.config/script:$GOPATH/bin:$NODE_PATH/bin:$PATH"
+export PATH="$PATH:$HOME/.config/script/funcs"
+
+export CDPATH=.:..:~:~/workspaces:~/.config
 
 
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"
