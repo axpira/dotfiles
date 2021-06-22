@@ -68,6 +68,8 @@ paq 'rcarriga/nvim-dap-ui'
 
 paq 'vim-test/vim-test'
 
+paq 'cuducos/yaml.nvim'
+paq 'sotte/presenting.vim'
 
 if not paq_exists then
   print("Installing packages")
@@ -103,14 +105,14 @@ local actions = require('telescope.actions')
 require'telescope'.setup{
   defaults = {
     defaults = {shorten_path = false},
-    mappings = {
-      i = {
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-        ["<C-S-j>"] = actions.move_selection_better,
-        ["<C-S-k>"] = actions.move_selection_worse,
-      },
-    },
+    -- mappings = {
+    --   i = {
+    --     ["<C-j>"] = actions.move_selection_next,
+    --     ["<C-k>"] = actions.move_selection_previous,
+    --     ["<C-S-j>"] = actions.move_selection_better,
+    --     ["<C-S-k>"] = actions.move_selection_worse,
+    --   },
+    -- },
   }
 }
 
@@ -125,3 +127,5 @@ require'plugins.dap'
 
 vim.g["test#strategy"] = "neovim"
 vim.g["test#neovim#term_position"] = "bot 30"
+
+-- require("yaml_nvim").init()
