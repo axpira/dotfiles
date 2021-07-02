@@ -41,9 +41,10 @@ parse_git_branch() {
 #PS1="\[\033[01;38;5;60m\]\u@\h\[\033[01;38;5;240m\] \w \$(parse_git_branch) \$\[\033[00m\] "
 PS1="\[\033[01;38;5;240m\]\w\[\033[01;30;5;240m\]\$(parse_git_branch)\[\033[01;38;5;60m\]\$\[\033[00m\] "
 
-set -o vi 
+set -o vi
 bind 'set show-mode-in-prompt on'
 set enable-bracketed-paste on
+bind '"\C-l":clear-screen'
 shopt -s histappend
 shopt -s lithist
 shopt -s progcomp_alias
