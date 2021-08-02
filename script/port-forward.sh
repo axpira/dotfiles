@@ -4,6 +4,8 @@ WINDOW_NAME="port-forward"
 tmux rename-window "$WINDOW_NAME"
 tmux split-window -h
 tmux split-window -h
+tmux split-window -h
+tmux select-pane -L
 tmux select-pane -L
 tmux split-window -v
 tmux split-window -v
@@ -18,19 +20,28 @@ tmux split-window -v
 tmux select-pane -R
 tmux split-window -v
 tmux split-window -v
+tmux split-window -v
+tmux split-window -v
+
+tmux select-pane -R
+tmux split-window -v
 
 tmux select-layout tiled
 
 rules=(
  "payment;token;6565"
  "services;simulator;6569"
- "backservice;merchant;6567"
+ "backservice;merchant;6567 8098:8080"
  "backservice;consumer;6568"
  "services;simulator;8090:8080"
  "payment;sale;6571"
  "payment;balance;6599"
  "payment;anticipation;6444"
- "services;tax;6572"
+ "payment;link;8085:8080"
+ "payment;payment;8080:8080 32100:8080"
+ "services;tax;6572 8096:8080"
+ "backservice;taxes;9112"
+ "backservice;backoffice;8097:8080"
 )
 
 i=0
