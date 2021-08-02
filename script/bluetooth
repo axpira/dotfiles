@@ -1,5 +1,13 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
+function trim {
+    local var="$*"
+    # remove leading whitespace characters
+    var="${var#"${var%%[![:space:]]*}"}"
+    # remove trailing whitespace characters
+    var="${var%"${var##*[![:space:]]}"}"   
+    printf '%s' "$var"
+}
 
 #https://wiki.archlinux.org/index.php/Bluetooth_headset
 #
@@ -16,17 +24,17 @@
 #exit
 
 #bluetoothctl connect 0C:E0:E4:23:BB:86
-icon=""
 powered=$(bluetoothctl show | grep "Powered:" | cut -d":" -f2)
 if [[ $powered == *no* ]]; then
-    icon=""
+    printf '%s\n' "-"
 else
     status=$(bluetoothctl info | grep 'Alias: ' | cut -d":" -f2-)
     if [ -n "$status" ]; then
-        icon=""
+        name=$(trim $status)
+        name=${name// /_}
+        printf "= %s\n" "$name"
     else
-        icon=""
+        printf "+\n"
     fi
 fi
 
-printf "%s\n" "$icon"

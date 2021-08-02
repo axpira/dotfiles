@@ -1,5 +1,5 @@
 #!/bin/bash
-format=${1:-console}
+#format=${1:-console}
 # interface="wlp2s0"
 interface=$(printf '%s\n' /sys/class/net/*/wireless | cut -d/ -f5)
 #ip=$(ip a show $interface primary | grep -Eo '(([[:digit:]]{1,3})\.){3}[[:digit:]]{1,3}' | grep -v '127.0.0.1')
@@ -10,13 +10,14 @@ if [ "$action" == "scan" ]; then
 fi
 #iw dev wlp2s0 link | grep "SSID:" | cut -d":" -f2
 #essid=$(iwgetid -r)
-icon=""
-essid=$(iw dev $interface link | grep SSID: | cut -d: -f2)
-if [ "$format" == "json" ]; then
-    printf '{"label":"<span size=\\"x-large\\">%s</span>","full_text":"%s"}\n' "$icon" "$essid $ip"
-else
-    printf '%s%s\n' "" "$essid"
-fi
+iw dev $interface link | grep SSID: | cut -d: -f2
+
+
+# if [ "$format" == "json" ]; then
+#     printf '{"label":"<span size=\\"x-large\\">%s</span>","full_text":"%s"}\n' "$icon" "$essid $ip"
+# else
+#     printf '%s%s\n' "" "$essid"
+# fi
 
 # sudo iw dev wlp2s0 scan | egrep "signal:|SSID:" | sed -e "s/\tsignal: //" -e "s/\tSSID: //" | awk '{ORS = (NR % 2 == 0)? "\n" : " "; print}' | sort 
 

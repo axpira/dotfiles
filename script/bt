@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 notify() {
-    notify-send "bt" "$*"
+    #notify-send "bt" "$*"
+    status.sh bluetooth
 }
 
 power() {

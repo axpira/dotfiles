@@ -63,6 +63,7 @@ alias tf="tail -f /var/log/messages"
 alias vb="vimb -e tabbed"
 alias dua="du -sch .[!.]* * |sort -h"
 alias g="git"
+alias ymp3dl='youtube-dl --xattrs -x --embed-thumbnail --add-metadata --audio-format mp3'
 
 ## Base16 Shell
 #BASE16_SHELL="$HOME/.config/base16-shell/"

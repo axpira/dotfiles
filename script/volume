@@ -9,21 +9,22 @@ function is_mute {
 }
 
 function send_notification {
-  volume=`get_volume`
-  # Make the bar with the special character ─ (it's not dash -)
-  # https://en.wikipedia.org/wiki/Box-drawing_character
-  bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
-  bar="$volume%
-$bar"
-  if is_mute ; then
-    icon="ic_volume_off_white_48dp"
-    state="off"
-  else
-    icon="ic_volume_up_white_48dp"
-	state="on"
-  fi
-  # Send the notification
-  dunstify -i $icon -t 3000 -r 2593 -u normal "$state    $bar"
+    status.sh volume
+#   volume=`get_volume`
+#   # Make the bar with the special character ─ (it's not dash -)
+#   # https://en.wikipedia.org/wiki/Box-drawing_character
+#   bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
+#   bar="$volume%
+# $bar"
+#   if is_mute ; then
+#     icon="ic_volume_off_white_48dp"
+#     state="off"
+#   else
+#     icon="ic_volume_up_white_48dp"
+# 	state="on"
+#   fi
+#   # Send the notification
+#   dunstify -i $icon -t 3000 -r 2593 -u normal "$state    $bar"
 }
 
 
@@ -39,7 +40,7 @@ if [[ -z $param ]]; then
   percent="$(get_volume)"
 
   # if [ "$format" == "json" ]; then
-    printf '{"label":"<span size=\\"x-large\\">%s</span>","full_text":" %s%%"}\n' "$state" "$percent"
+    printf '%s %s\n' "$state" "$percent"
   # else
     # printf "%s %02d%%\n" "$state" "$percent"
   # fi

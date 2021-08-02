@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	termite
+	alacritty
   
 # program launcher
 #super + @space
@@ -13,17 +13,17 @@ super + @p
 	dmenu_run_i
 
 # make sxhkd reload its configuration files:
-super + Escape
+super + alt + ctrl + r
 	pkill -USR1 -x sxhkd
 	
-super + ctrl + Escape
-	bspc quit
+# super + ctrl + Escape
+# 	bspc quit
 
-super
-	echo -e -n 'teste' | lemonbar -f 'Font Awesome' -p
+# super
+# 	echo -e -n 'teste' | lemonbar -f 'Font Awesome' -p
 #	
-@super + space
-	pkill lemonbar
+# @super + space
+# 	pkill lemonbar
 
 # bspwm hotkeys
 #
@@ -41,24 +41,30 @@ super + m
 	bspc desktop -l next
 
 # send the newest marked node to the newest preselected node
-super + y
-	bspc node newest.marked.local -n newest.!automatic.local
+# super + y
+# 	bspc node newest.marked.local -n newest.!automatic.local
+super + shift + Return
+	bspc node -n newest.!automatic.local
 
 # swap the current node and the biggest node
-super + g
-	bspc node -s biggest
+# super + g
+# 	bspc node -s biggest
 
 #
 # state/flags
 #
 
 # set the window state
-super + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+# super + {t,shift + t,s,f}
+# 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+super + {t,shift + f,f}
+	bspc node -t {tiled,floating,fullscreen}
 
 # set the node flags
 # super + ctrl + {m,x,y,z}
 # 	bspc node -g {marked,locked,sticky,private}
+super + ctrl + alt + {m,l,s,p}
+ 	bspc node -g {marked,locked,sticky,private}
 
 #
 # focus/swap
@@ -81,8 +87,13 @@ super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
+# super + {grave,Tab}
+# 	bspc {node,desktop} -f last
+super + grave
+	bspc node -f last
+
+super + Tab
+	rofi -font 'FiraCode Nerd Font Mono 22' -theme Pop-Dark -combi-modi window,run -show combi -modi combi
 
 # focus the older or newer node in the focus history
 super + {o,i}
@@ -143,3 +154,10 @@ super + alt + {minus,equal}
 
 super + alt + ctrl + {minus,equal}
 	bspc config -d focused border_width "$(( $(bspc config -d focused border_width) {-,+} 1))"
+
+
+
+super + alt + {_, shift +} + {_,ctrl +} v
+	volume {-,+}{10,1}%
+super + alt + {_, shift +} + {_,ctrl +} b
+	backlight {-,+}{10,1}%

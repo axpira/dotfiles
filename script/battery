@@ -7,44 +7,51 @@ eval $(cat $battery/uevent) || break
 percent=$POWER_SUPPLY_CAPACITY
 status=$POWER_SUPPLY_STATUS
 calc_time() {
-	time=$(echo "scale=4;$POWER_SUPPLY_CHARGE_NOW/$POWER_SUPPLY_CURRENT_NOW" | bc )
-	hours=${time%.*}
-	[ -z $hours ] && hours=0
-	minutes=$(echo "($time - $hours) * 60" | bc)
-	minutes=${minutes%.*}
-	time="$hours:$minutes"
+    local time=$(echo "scale=4;$POWER_SUPPLY_CHARGE_NOW/$POWER_SUPPLY_CURRENT_NOW" | bc )
+    local hours=${time%.*}
+    [ -z $hours ] && hours=0
+    local minutes=$(echo "($time - $hours) * 60" | bc)
+    minutes=${minutes%.*}
+    # time="$hours:$minutes"
+    printf "%02d:%02d" "$hours" "$minutes"
 }
 
-status=""
 prefix=""
-sufix=""
-
-icon=""
+time=""
 case $POWER_SUPPLY_STATUS in
-	"Discharging")
-		if [ $percent -le 15 ]; then sufix=""; fi
-		if   [ $percent -le 10 ]; then status="";
-		elif [ $percent -le 20 ]; then status="";
-		elif [ $percent -le 30 ]; then status="";
-		elif [ $percent -le 40 ]; then status="";
-		elif [ $percent -le 50 ]; then status="";
-		elif [ $percent -le 60 ]; then status="";
-		elif [ $percent -le 70 ]; then status="";
-		elif [ $percent -le 80 ]; then status="";
-		elif [ $percent -le 90 ]; then status="";
-		else status=""; fi
-		calc_time
-		prefix="$(printf "%02d%02d:%02d" "$percent" "$hours" "$minutes")"
-		;;
-	"Not charging") status="";;
-	"Unknown")      status="";;
-	"Charging")
-		status=""
-		prefix="$(printf "%02d" "$percent")"
-		;;
-	"Full")         status="";;
-	*)              status="";;
+    "Discharging")  prefix="-"; time=$(calc_time) ;;
+    "Not charging") prefix="?"; time=$(calc_time) ;;
+    "Unknown")      prefix="?" ;;
+    "Charging")     prefix="+" ;;
+    "Full")         prefix="#" ;;
+    *)              prefix="!" ;;
 esac
-printf "%s%s%s\n" "$status" "$prefix" "$sufix"
+# icon=""
+# case $POWER_SUPPLY_STATUS in
+# 	"Discharging")
+# 		if [ $percent -le 15 ]; then sufix=""; fi
+# 		if   [ $percent -le 10 ]; then status="";
+# 		elif [ $percent -le 20 ]; then status="";
+# 		elif [ $percent -le 30 ]; then status="";
+# 		elif [ $percent -le 40 ]; then status="";
+# 		elif [ $percent -le 50 ]; then status="";
+# 		elif [ $percent -le 60 ]; then status="";
+# 		elif [ $percent -le 70 ]; then status="";
+# 		elif [ $percent -le 80 ]; then status="";
+# 		elif [ $percent -le 90 ]; then status="";
+# 		else status=""; fi
+# 		calc_time
+# 		prefix="$(printf "%02d%02d:%02d" "$percent" "$hours" "$minutes")"
+# 		;;
+# 	"Not charging") status="";;
+# 	"Unknown")      status="";;
+# 	"Charging")
+# 		status=""
+# 		prefix="$(printf "%02d" "$percent")"
+# 		;;
+# 	"Full")         status="";;
+# 	*)              status="";;
+# esac
+printf "%s %s %s\n" "$prefix" "$percent" "$time"
 
 #eval echo "$1"

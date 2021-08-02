@@ -16,9 +16,9 @@ nvim_lsp.html.setup{
 nvim_lsp.jsonls.setup{
   capabilities = capabilities,
 }
-nvim_lsp.pyls.setup{
-  capabilities = capabilities,
-}
+-- nvim_lsp.pyls.setup{
+--   capabilities = capabilities,
+-- }
 nvim_lsp.sqlls.setup{
   capabilities = capabilities,
 }

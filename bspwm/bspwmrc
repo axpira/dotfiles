@@ -1,29 +1,36 @@
-#!/bin/sh
+#!/bin/bash
 
+pkill sxhkd
 sxhkd &
+pkill status_panel.sh
+status_panel.sh &
+pkill stalonetray
+stalonetray --geometry "1x1-0" -i 32 -bg "#34322e" --grow-gravity NE --kludges force_icons_size &
 #pgrep -x panel > /dev/null || ~/.config/script/panel/panel &
+#pkill picom
 #picom &
 
 
-bspc monitor eDP-1 -d I II III IV V
-#bspc monitor HDMI-1-1 -d 6
+bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 0
+# bspc monitor eDP-1 -d I II III IV V
+# #bspc monitor HDMI-1-1 -d 6
 
-bspc config border_width         2
-bspc config window_gap          12
+# bspc config border_width         2
+# bspc config window_gap          12
 
-bspc config split_ratio          0.55
+# bspc config split_ratio          0.55
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-#bspc config ignore_ewmh_fullscreen all
-bspc config ignore_ewmh_focus true
+# #bspc config ignore_ewmh_fullscreen all
+# bspc config ignore_ewmh_focus true
 
 
-#bspc rule -a Gimp desktop='^8' state=floating follow=on
-#bspc rule -a Chromium desktop='^2'
-#bspc rule -a mplayer2 state=floating
-#bspc rule -a Kupfer.py focus=on
-#bspc rule -a Screenkey manage=off
+# #bspc rule -a Gimp desktop='^8' state=floating follow=on
+# #bspc rule -a Chromium desktop='^2'
+# #bspc rule -a mplayer2 state=floating
+# #bspc rule -a Kupfer.py focus=on
+# #bspc rule -a Screenkey manage=off
 
 bspc rule -a Zathura state=tiled
-bspc rule -a surf state=tiled
+# bspc rule -a surf state=tiled

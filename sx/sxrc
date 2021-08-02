@@ -1,11 +1,14 @@
 #xrandr --setprovideroffloadsink 1 0
 #xrandr --setprovideroutputsource 1 0
 
-pipewire &
-pipewire-pulse &
-pipewire-media-session &
+pkill pipewire*
+/usr/bin/pipewire &
+/usr/bin/pipewire-pulse &
+/usr/bin/pipewire-media-session &
 
 xrdb -merge ~/.config/Xresources
 
 #exec awesome
-exec i3
+#exec i3
+#sxhkd &
+exec bspwm
