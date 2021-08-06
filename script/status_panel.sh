@@ -1,21 +1,19 @@
 #!/bin/bash
 
-trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+finish() {
+    rm $PANEL_FIFO
+    bspc config top_padding 0
+    # bspc wm -r
+    trap - TERM
+    kill 0
+}
+trap 'finish' INT TERM QUIT EXIT
+
+[ -e $PANEL_FIFO ] && rm $PANEL_FIFO
+mkfifo $PANEL_FIFO
 
 while true; do status.sh time; sleep 59; done &
-while true; do status.sh battery bluetooth wifi; sleep 10; done &
-
-# parse_sed() {
-#     sed -E \
-#         -e 's/^WM(.[^:]*)//' \
-#         -e 's/^(.*):L([TM][^:]*)(.*)$/^fg()^bg()\2^p(5)\1\3/' \
-#         -e 's/^(.*):T([TPF=@][^:]*)(.*)$/^fg()^bg()\2^p(5)\1\3/' \
-#         -e 's/^(.*):G([SPLM][^:]*)?(.*)$/^fg()^bg()\2^p(5)\1\2/' \
-#         -e 's/:f([0-9][^:]*)//g' \
-#         -e 's/(:O|:F)(.[^:]*)/^fg()^bg(#285577)^r(15)\2^r(15)/g' \
-#         -e 's/:o(.[^:]*)/^fg()^bg()^r(5)\1^r(5)/g' \
-#         -e 's/$/^fg()^bg()/' <<< $1
-# }
+while true; do status.sh bluetooth wifi battery; sleep 10; done &
 
 parse_loop() {
     local line=$1
@@ -46,49 +44,44 @@ parse_loop() {
         esac
         shift
     done
-    printf "$wm^fg()^bg()"
+    printf "$wm^fg()^bg()\n"
 }
 
 # bspc subscribe report | while read -r line; do
 while read -r line; do
     wm=$(parse_loop $line)
-    name=$(xdotool getactivewindow getwindowname)
+    name="$(/usr/bin/xdotool getactivewindow getwindowname)"
     printf "%s %s\n" "$wm" "$name"
-done < <(bspc subscribe report) | dzen2 -fn 'FiraCode Nerd Font:size=12' -ta l -fg '#717171' -w 1600 -dock &
+done < <(bspc subscribe report) | dzen2 -fn 'FiraCode Nerd Font:size=12' -ta l -fg '#717171' -w 400 -dock &
 
-# bspc subscribe report | while read -r line; do
-#     xdotool getactivewindow getwindowname
-# done | dzen2 -fn 'FiraCode Nerd Font:size=12' -ta c -w 800 -fg '#717171' -bg '#0000ff' &
-# mkfifo /tmp/left-bar
-# mkfifo /tmp/middle-bar
-# mkfifo /tmp/right-bar
 
 status.sh &
-
-while read -r line < /tmp/panel-fifo ; do
-    case $line in
-        TIME*)
-            time="${line:4}"
-            ;;
-        BATTERY*)
-            battery="${line:7}"
-            ;;
-        BACKLIGHT*)
-            backlight="${line:9}"
-            ;;
-        VOLUME*)
-            volume="${line:6}"
-            ;;
-        BLUETOOTH*)
-            bluetooth="${line:9}"
-            ;;
-        WIFI*)
-            wifi="${line:4}"
-            ;;
-    esac
-    msg="^fg(#81A1C1)${bluetooth} ^fg(#98971a)${wifi} ^fg(#689d6a)${volume} ^fg(#d79921)${backlight} ^fg(#98971a)${battery} ^fg()${time}"
-    printf "%s\n" "$msg"
-done | dzen2 -fn 'FiraCode Nerd Font:size=12' -dock -w 2000 -x -2100 -ta r -fg '#717171' &
-
+while true; do
+    while read -r line < $PANEL_FIFO ; do
+        case $line in
+            TIME*)
+                time="${line:4}"
+                ;;
+            BATTERY*)
+                battery="${line:7}"
+                ;;
+            BACKLIGHT*)
+                backlight="${line:9}"
+                ;;
+            VOLUME*)
+                volume="${line:6}"
+                ;;
+            BLUETOOTH*)
+                bluetooth="${line:9}"
+                ;;
+            WIFI*)
+                wifi="${line:4}"
+                ;;
+        esac
+        msg="^fg(#81A1C1)${bluetooth} ^fg(#98971a)${wifi} ^fg(#689d6a)${volume} ^fg(#d79921)${backlight} ^fg(#98971a)${battery} ^fg()${time}"
+        printf "%s\n" "$msg"
+    done | dzen2 -fn 'FiraCode Nerd Font:size=12' -dock -w 800 -x -900 -ta r -fg '#717171'
+done &
 
 wait
+

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # valor icon porcentagem
 
@@ -24,7 +24,8 @@
 
 # notify battery time ....
 #trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
-PANEL_FIFO=/tmp/panel-fifo
+# PANEL_FIFO=/tmp/panel-fifo
+# PANEL_FIFO
 
 # [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 # mkfifo "$PANEL_FIFO"
