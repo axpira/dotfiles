@@ -14,6 +14,8 @@ export BROWSER=firefox
 export READER=zathura
 export SXHKD_SHELL="sh"
 
+export PANEL_FIFO=/tmp/panel-fifo
+
 # ~/ Clean-up:
 export XDG_DESKTOP_DIR="$HOME/desktop"
 export XDG_DOWNLOAD_DIR="$HOME/downloads"

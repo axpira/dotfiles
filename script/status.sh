@@ -101,7 +101,11 @@ function update {
         wifi) key=WIFI; value="$(get_wifi)" ;;
         wm) key=WM; value="$(get_wm)" ;;
     esac
-    [[ -n $key ]] && printf "%s%s\n" "$key" "$value" > $PANEL_FIFO
+    if [[ -p $PANEL_FIFO ]]; then
+        [[ -n $key ]] && printf "%s%s\n" "$key" "$value" > $PANEL_FIFO
+    else
+        printf "%s%s\n" "$key" "$value"
+    fi
 }
 
 actions=$@

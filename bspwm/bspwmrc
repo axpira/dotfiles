@@ -4,7 +4,6 @@ pkill sxhkd
 sxhkd &
 pkill status.sh
 pkill status_panel.sh
-export PANEL_FIFO="/tmp/panel-fifo$$"
 status_panel.sh &
 pkill stalonetray
 stalonetray --geometry "1x1-0" -i 16 -bg "#34322e" --grow-gravity NE --kludges force_icons_size &

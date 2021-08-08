@@ -3,7 +3,7 @@
 #[ -z "$1" ] && set -- '${icon} ${time} ${percent}%'
 
 battery="/sys/class/power_supply/BAT0"
-eval $(cat $battery/uevent) || exit 1
+eval "$(cat $battery/uevent)" 2>&- || exit 1
 percent=$POWER_SUPPLY_CAPACITY
 status=$POWER_SUPPLY_STATUS
 calc_time() {
