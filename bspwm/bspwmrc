@@ -9,7 +9,7 @@ pkill stalonetray
 stalonetray --geometry "1x1-0" -i 16 -bg "#34322e" --grow-gravity NE --kludges force_icons_size &
 #pgrep -x panel > /dev/null || ~/.config/script/panel/panel &
 pkill picom
-picom -CGb &
+picom -CGb --no-fading-openclose &
 wallpaper &
 pkill dunst
 dunst &
