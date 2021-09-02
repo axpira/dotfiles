@@ -102,7 +102,7 @@ function update {
         wm) key=WM; value="$(get_wm)" ;;
     esac
     if [[ -p $PANEL_FIFO ]]; then
-        [[ -n $key ]] && printf "%s%s\n" "$key" "$value" > $PANEL_FIFO
+        [[ -n $key ]] && printf "%s%s\n" "$key" "$value" > $PANEL_FIFO &
     else
         printf "%s%s\n" "$key" "$value"
     fi
