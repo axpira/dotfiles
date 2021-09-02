@@ -93,7 +93,7 @@ super + {grave,Escape}
 	bspc {node,desktop} -f last
 
 super + Tab
-	rofi -font 'FiraCode Nerd Font Mono 16' -theme Pop-Dark -combi-modi window,run -show combi -modi combi
+	rofi -m -1 -font 'FiraCode Nerd Font Mono 14' -theme Pop-Dark -combi-modi window,run -show combi -modi combi
 
 # focus the older or newer node in the focus history
 super + {o,i}
