@@ -2,6 +2,8 @@
 !.gitignore
 !bspwm/
 !bspwm/**
+!polybar/
+!polybar/**
 !bashrc
 !bash_profile
 !mkshrc

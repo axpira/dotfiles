@@ -26,15 +26,15 @@ function trim {
 #bluetoothctl connect 0C:E0:E4:23:BB:86
 powered=$(bluetoothctl show | grep "Powered:" | cut -d":" -f2)
 if [[ $powered == *no* ]]; then
-    printf '%s\n' "-"
+    printf '%s\n' ""
 else
     status=$(bluetoothctl info | grep 'Alias: ' | cut -d":" -f2-)
     if [ -n "$status" ]; then
         name=$(trim $status)
         name=${name// /_}
-        printf "= %s\n" "$name"
+        printf " %s\n" "$name"
     else
-        printf "+\n"
+        printf "\n"
     fi
 fi
 

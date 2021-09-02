@@ -71,6 +71,8 @@ paq 'vim-test/vim-test'
 paq 'cuducos/yaml.nvim'
 paq 'sotte/presenting.vim'
 
+paq 'earthly/earthly.vim'
+
 if not paq_exists then
   print("Installing packages")
   require'paq-nvim'.install()

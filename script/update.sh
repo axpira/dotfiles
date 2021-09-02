@@ -169,12 +169,14 @@ install_neovim() {
     print_info "Neovim"
     NPATH="$HOME/.local"
     FILENAME="nvim-linux64.tar.gz"
-    VERSION="nightly"
+    #VERSION="nightly"
+    VERSION="latest"
     # download latest nightly
     curl -fLo "$NPATH/$FILENAME" --create-dirs \
-        "https://github.com/neovim/neovim/releases/download/$VERSION/$FILENAME"
+        "https://github.com/neovim/neovim/releases/$VERSION/download/$FILENAME"
 
-
+        # "https://github.com/neovim/neovim/releases/latest"
+        # "https://github.com/neovim/neovim/releases/latest/download/earthly-linux-amd64"
     rm -rf "$NPATH/nvim/$VERSION"
     mkdir -p "$NPATH/nvim/$VERSION"
 
@@ -191,10 +193,18 @@ install_neovim() {
     #update-desktop-database "$NPATH/share/applications"
 }
 
+install_earthly() {
+    # tmp=$(mktemp -d)
+    curl -fLo "$HOME/.local/bin/earthly" --create-dirs \
+        "https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64"
+    chmod +x $HOME/.local/bin/earthly
+    earthly bootstrap --with-autocomplete
+}
+
 install_go() {
     print_info "Golang"
     NPATH="$HOME/.local/go"
-    VERSION="1.16.4"
+    VERSION="1.17"
     FILENAME="go$VERSION.linux-amd64.tar.gz"
     if [ -d "$NPATH/$VERSION" ]; then
         print_info "Go $VERSION already exists in $NPATH/$VERSION"
@@ -275,34 +285,62 @@ install_telegram() {
 
 configure_fonts() {
   local fonts_path="$HOME/.local/share/fonts"
-  if [ ! -f "$fonts_path/Fira Code Retina Nerd Font Complete.otf" ]; then
+  # if [ ! -f "$fonts_path/Fira Code Retina Nerd Font Complete.otf" ]; then
+  #     local tmp="$(mktemp -d)"
+  #     print_info $tmp
+  #     mkdir -p $fonts_path
+
+  #     curl -fLo "$tmp/firecode.zip" \
+  #         https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+
+  #     unzip $tmp/firecode.zip -d "$tmp"
+  #     cp "$tmp/Fira Code Retina Nerd Font Complete.otf" $fonts_path
+  #     cp "$tmp/Fira Code Retina Nerd Font Complete Mono.otf" $fonts_path
+  #     cp "$tmp/Fira Code Regular Nerd Font Complete Mono.otf" $fonts_path
+  #     rm -rf $tmp
+  # fi
       local tmp="$(mktemp -d)"
       print_info $tmp
       mkdir -p $fonts_path
 
-      curl -fLo "$tmp/firecode.zip" \
-          https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+      curl -fLo "$tmp/SourceCodePro.zip" \
+          https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip
+          #https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Inconsolata.zip
+          # https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
 
-      unzip $tmp/firecode.zip -d "$tmp"
-      cp "$tmp/Fira Code Retina Nerd Font Complete.otf" $fonts_path
-      cp "$tmp/Fira Code Retina Nerd Font Complete Mono.otf" $fonts_path
-      cp "$tmp/Fira Code Regular Nerd Font Complete Mono.otf" $fonts_path
-  fi
+      unzip $tmp/SourceCodePro.zip -d "$tmp"
+      # cp "$tmp/Inconsolata Nerd Font Complete.otf" $fonts_path
+      # cp "$tmp/Inconsolata Regular Nerd Font Complete.ttf" $fonts_path
+      # cp "$tmp/Inconsolata Nerd Font Complete Mono.otf" $fonts_path
+      # cp "$tmp/Inconsolata Regular Nerd Font Complete Mono.ttf" $fonts_path
+      cp "$tmp/Sauce Code Pro Light Nerd Font Complete Mono.ttf" $fonts_path
+      cp "$tmp/Sauce Code Pro Light Nerd Font Complete.ttf" $fonts_path
+      cp "$tmp/Sauce Code Pro ExtraLight Nerd Font Complete Mono.ttf" $fonts_path
+      cp "$tmp/Sauce Code Pro ExtraLight Nerd Font Complete.ttf" $fonts_path
+      cp "$tmp/Sauce Code Pro Nerd Font Complete.ttf" $fonts_path
+      cp "$tmp/Sauce Code Pro Nerd Font Complete Mono.ttf" $fonts_path
+      cp "$tmp/Sauce Code Pro Medium Nerd Font Complete Mono.ttf" $fonts_path
+      cp "$tmp/Sauce Code Pro Medium Nerd Font Complete.ttf" $fonts_path
+
+
+      rm -rf $tmp
   fc-cache
 }
 
 
 main() {
     create_folders
-    if $GITCLONE https://github.com/junegunn/fzf.git "$DOTFZF"; then
+    if $GITCLONE https://github.com/junegunn/fzf.git "$DOTFZF" 2>&-; then
         "$DOTFZF/install" --key-bindings --completion --no-update-rc
     else
        git -C $DOTFZF pull
     fi
     install_telegram
+    install_earthly
     install_go
-    install_jq
     install_neovim
+    install_jq
+    configure_fonts
     configure_node
     configure_go
     configure_python
