@@ -11,10 +11,19 @@ window:
   dynamic_title: true
 
 font:
+  # normal:
+  #   family: FiraCode Nerd Font Mono
+  #   style: Retina,Regular
+  # normal:
+  #   family: Iosevka Nerd Font Mono
+  #   style: Regular
+  # normal:
+  #   family: Inconsolata Nerd Font Mono
+  #   style: Regular
   normal:
-    family: FiraCode Nerd Font Mono
-    style: Retina,Regular
-  size: 9
+    family: SauceCodePro Nerd Font Mono
+    style: Light,Regular
+  size: 8
 
 colors:
   primary:
