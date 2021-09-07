@@ -33,10 +33,12 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = fixed:pixelsize=8;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=9;1
-font-3 = FiraCode Nerd Font Mono:style=Regular:pixelsize=10
+; font-0 = SauceCodePro Nerd Font Mono:style=ExtraLight,Regular:pixelsize=9
+font-0 = SauceCodePro Nerd Font Mono:style=Light,Regular:pixelsize=9
+; font-0 = fixed:pixelsize=8;1
+; font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+; font-2 = siji:pixelsize=9;1
+; font-3 = FiraCode Nerd Font Mono:style=Regular:pixelsize=10
 
 modules-left = bspwm
 modules-center = xwindow
@@ -69,6 +71,8 @@ format-foreground = #717171
 [module/bspwm]
 type = internal/bspwm
 format-foreground = #717171
+
+format = <label-state> <label-mode>
 
 pin-workspaces = false
 
