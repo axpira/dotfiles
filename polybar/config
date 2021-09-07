@@ -71,6 +71,8 @@ format-foreground = #717171
 type = internal/bspwm
 format-foreground = #717171
 
+format = <label-state> <label-mode>
+
 pin-workspaces = false
 
 label-focused = %index%
