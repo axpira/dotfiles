@@ -20,10 +20,19 @@ font:
   # normal:
   #   family: Inconsolata Nerd Font Mono
   #   style: Regular
+  # normal:
+  #   family: SauceCodePro Nerd Font Mono
+  #   style: Light,Regular
+  # normal:
+  #   family: MesloLGS NF
+  #   style: Regular
   normal:
-    family: SauceCodePro Nerd Font Mono
-    style: Light,Regular
+    family: JetBrainsMono Nerd Font
+    style: ExtraLight,Regular
+
   size: 8
+  use_thin_strokes: true
+
 
 colors:
   primary:

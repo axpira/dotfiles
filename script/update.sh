@@ -303,24 +303,30 @@ configure_fonts() {
       print_info $tmp
       mkdir -p $fonts_path
 
-      curl -fLo "$tmp/SourceCodePro.zip" \
-          https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip
-          #https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Inconsolata.zip
-          # https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
+      # curl -fLo "$tmp/SourceCodePro.zip" \
+      #     https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip
+      #     #https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Inconsolata.zip
+      #     # https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Iosevka.zip
 
-      unzip $tmp/SourceCodePro.zip -d "$tmp"
-      # cp "$tmp/Inconsolata Nerd Font Complete.otf" $fonts_path
-      # cp "$tmp/Inconsolata Regular Nerd Font Complete.ttf" $fonts_path
-      # cp "$tmp/Inconsolata Nerd Font Complete Mono.otf" $fonts_path
-      # cp "$tmp/Inconsolata Regular Nerd Font Complete Mono.ttf" $fonts_path
-      cp "$tmp/Sauce Code Pro Light Nerd Font Complete Mono.ttf" $fonts_path
-      cp "$tmp/Sauce Code Pro Light Nerd Font Complete.ttf" $fonts_path
-      cp "$tmp/Sauce Code Pro ExtraLight Nerd Font Complete Mono.ttf" $fonts_path
-      cp "$tmp/Sauce Code Pro ExtraLight Nerd Font Complete.ttf" $fonts_path
-      cp "$tmp/Sauce Code Pro Nerd Font Complete.ttf" $fonts_path
-      cp "$tmp/Sauce Code Pro Nerd Font Complete Mono.ttf" $fonts_path
-      cp "$tmp/Sauce Code Pro Medium Nerd Font Complete Mono.ttf" $fonts_path
-      cp "$tmp/Sauce Code Pro Medium Nerd Font Complete.ttf" $fonts_path
+      # unzip $tmp/SourceCodePro.zip -d "$tmp"
+      # cp "$tmp/Sauce Code Pro Light Nerd Font Complete Mono.ttf" $fonts_path
+      # cp "$tmp/Sauce Code Pro Light Nerd Font Complete.ttf" $fonts_path
+      # cp "$tmp/Sauce Code Pro ExtraLight Nerd Font Complete Mono.ttf" $fonts_path
+      # cp "$tmp/Sauce Code Pro ExtraLight Nerd Font Complete.ttf" $fonts_path
+      # cp "$tmp/Sauce Code Pro Nerd Font Complete.ttf" $fonts_path
+      # cp "$tmp/Sauce Code Pro Nerd Font Complete Mono.ttf" $fonts_path
+      # cp "$tmp/Sauce Code Pro Medium Nerd Font Complete Mono.ttf" $fonts_path
+      # cp "$tmp/Sauce Code Pro Medium Nerd Font Complete.ttf" $fonts_path
+
+      curl -fLo "$fonts_path/MesloLGS NF Regular.ttf" \
+          "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+    # curl -fLo "<FONT NAME> Nerd Font Complete.otf" \
+    #     https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/<FONT_PATH>/complete/<FONT_NAME>%20Nerd%20Font%20Complete.otf
+    curl -fLo "$fonts_path/JetBrains Mono ExtraLight Nerd Font Complete.ttf" \
+        https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/ExtraLight/complete/JetBrains%20Mono%20ExtraLight%20Nerd%20Font%20Complete.ttf?raw=true
+    curl -fLo "$fonts_path/JetBrains Mono Light Nerd Font Complete.ttf" \
+        https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Light/complete/JetBrains%20Mono%20Light%20Nerd%20Font%20Complete.ttf?raw=true
+
 
 
       rm -rf $tmp
@@ -336,11 +342,10 @@ main() {
        git -C $DOTFZF pull
     fi
     install_telegram
-    install_earthly
+    # install_earthly
     install_go
     install_neovim
     install_jq
-    configure_fonts
     configure_node
     configure_go
     configure_python
