@@ -79,10 +79,10 @@ GO_REPOS=(
 
 ZSHPLUGS=(
   "zsh-completions"
-  "zsh-history-substring-search"
-  "zsh-syntax-highlighting"
   "zsh-autosuggestions"
+  "zsh-syntax-highlighting"
 )
+  # "zsh-history-substring-search"
 
 print_error() {
     printf "\\e[0;31m%s\\e[0m\\n" " [ ✖ ] $1 $2"
@@ -160,9 +160,16 @@ configure_node() {
 
 configure_zsh() {
     for zshplug in "${ZSHPLUGS[@]}"; do
-        $GITCLONE "https://github.com/zsh-users/$zshplug.git" "$ZPLUGINSDIR/$zshplug" || \
-            git -C "$ZPLUGINSDIR/$zshplug" pull
+        if [ ! -d "$ZPLUGINSDIR/$zshplug" ]; then
+            $GITCLONE "https://github.com/zsh-users/$zshplug.git" "$ZPLUGINSDIR/$zshplug"
+        fi
+        git -C "$ZPLUGINSDIR/$zshplug" pull
     done
+
+    if [ ! -d "$HOME/.powerlevel10k/" ]; then
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
+    fi
+    git -C ~/.powerlevel10k pull
 }
 
 install_neovim() {
