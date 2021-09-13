@@ -43,6 +43,7 @@ setopt PUSHD_SILENT         # Do not print the directory stack after pushd or po
 setopt extendedglob
 setopt COMPLETE_ALIASES     # For autocompletion of command line switches for aliases
 setopt correctall
+setopt SH_WORD_SPLIT
 
 # Use vi keybindings
 bindkey -v
