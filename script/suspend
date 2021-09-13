@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -xe
+lock
 echo mem > /sys/power/state
 
 init-headphone
