@@ -16,6 +16,7 @@ alias POST='http POST'
 alias wttr="curl wttr.in"
 alias rate="curl rate.sx"
 alias h='function hdi(){ howdoi $* -c -n 5; }; hdi'
+alias uuid='cat /proc/sys/kernel/random/uuid'
 
 alias vim='nvim'
 alias vimdiff='nvim -d'
