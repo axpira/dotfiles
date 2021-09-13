@@ -5,7 +5,11 @@
 # terminal emulator
 super + Return
 	alacritty
-  
+
+super + ctrl + shift + Escape
+	~/.config/script/lock
+super + ctrl + Escape
+	~/.config/script/suspend
 # program launcher
 #super + @space
 #	dmenu_run
