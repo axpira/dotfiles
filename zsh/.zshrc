@@ -43,7 +43,7 @@ setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
 setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
 setopt extendedglob
 setopt COMPLETE_ALIASES     # For autocompletion of command line switches for aliases
-setopt correctall
+#setopt correctall
 setopt SH_WORD_SPLIT
 
 # Use vi keybindings
@@ -80,7 +80,7 @@ source ~/.powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 source $HOME/.fzf.zsh
 
-fpath=($ZPLUGINSDIR/zsh-completions/src $fpath)
+#fpath=($ZPLUGINSDIR/zsh-completions/src $fpath)
 # Use modern completion system
 autoload -Uz compinit
 compinit

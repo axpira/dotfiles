@@ -43,7 +43,7 @@ PS1="\[\033[01;38;5;240m\]\w\[\033[01;30;5;240m\]\$(parse_git_branch)\[\033[01;3
 
 set -o vi
 bind 'set show-mode-in-prompt on'
-set enable-bracketed-paste on
+#set enable-bracketed-paste on
 bind '"\C-l":clear-screen'
 shopt -s histappend
 shopt -s lithist

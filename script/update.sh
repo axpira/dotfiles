@@ -38,6 +38,8 @@ PY3=(
     ps_mem
     speedtest-cli
     scanapi
+    mkdocs
+    mkdocs-build-plantuml-plugin
 )
 
 NODE_PACKAGES=(
@@ -340,6 +342,12 @@ configure_fonts() {
   fc-cache
 }
 
+install_cheat() {
+    local PATH_DIR="$HOME/.local/bin"  # or another directory on your $PATH
+    mkdir -p "$PATH_DIR"
+    curl https://cht.sh/:cht.sh > "$PATH_DIR/cht"
+    chmod +x "$PATH_DIR/cht"
+}
 
 main() {
     create_folders
@@ -350,6 +358,7 @@ main() {
     fi
     install_telegram
     # install_earthly
+    install_cheat
     install_go
     install_neovim
     install_jq

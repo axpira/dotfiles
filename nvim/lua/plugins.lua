@@ -73,6 +73,8 @@ paq 'sotte/presenting.vim'
 
 paq 'earthly/earthly.vim'
 
+paq 'dbeniamine/cheat.sh-vim'
+
 if not paq_exists then
   print("Installing packages")
   require'paq-nvim'.install()
