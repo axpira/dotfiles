@@ -2,6 +2,8 @@
 !.gitignore
 !bspwm/
 !bspwm/**
+!spectrwm/
+!spectrwm/**
 !polybar/
 !polybar/**
 !bashrc

@@ -68,7 +68,7 @@ paq 'rcarriga/nvim-dap-ui'
 
 paq 'vim-test/vim-test'
 
-paq 'cuducos/yaml.nvim'
+-- paq 'cuducos/yaml.nvim'
 paq 'sotte/presenting.vim'
 
 paq 'earthly/earthly.vim'

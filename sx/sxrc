@@ -7,8 +7,10 @@ pkill pipewire*
 /usr/bin/pipewire-media-session &
 
 xrdb -merge ~/.config/Xresources
+#~/.config/script/hdmi.sh off
 
 #exec awesome
 #exec i3
 #sxhkd &
-exec bspwm
+#exec bspwm
+exec spectrwm

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-
+set -ex
+external="HDMI-1-1"
+internal="eDP-1"
 # ##I would like to use Nouveau for offloading the Intel card
 # xrandr --setprovideroffloadsink nouveau modesetting
 # #If the second GPU has outputs that aren't accessible by the primary GPU, you can use "Reverse PRIME" to make use of them. This will involve using the primary GPU to render the images, and then pass them off to the secondary GPU
@@ -12,38 +14,39 @@
 # #xrandr --output HDMI-1-1 --off
 
 
+#exit 1
 # glxinfo | grep "OpenGL vendor string"
 # export DRI_PRIME=1
 # glxinfo | grep "OpenGL vendor string"
     # --dpi 276 \
     # --fb 7040x3960 \
 if [ "$1" == "on" ]; then
-    bspc monitor eDP-1 -d 4 5 6 7 8 9 0
-    bspc monitor HDMI-1-1 -d 1 2 3
     xrandr \
-        --output eDP-1 \
+        --dpi 192 \
+        --output $internal \
             --primary \
             --mode 3840x2160 \
-            --pos 1920x0 \
             --rotate normal \
-        --output HDMI-1-1 \
+            --right-of $external \
+        --output $external \
             --mode 1920x1080 \
-            --pos 0x0 \
-            --rotate normal \
-            --scale 1x1 \
-        --output DP-1-1 --off \
-        --output DP-1-2 --off
-else
+            --rotate normal
+elif [ "$1" == "off" ]; then
     xrandr \
-        --output eDP-1 \
+        --dpi 192 \
+        --output $internal \
             --primary \
             --mode 3840x2160 \
-            --pos 1920x0 \
             --rotate normal \
-        --output HDMI-1-1 --off \
-        --output DP-1-1 --off \
-        --output DP-1-2 --off
-    bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 0
+        --output $external --off
+else
+    if xrandr | grep HDMI | grep -q connected; then
+        $0 on
+    else
+        $0 off
+    fi
+    exit 0
 fi
 # bspc monitor eDP-1 -d I II III IV V
 # #bspc monitor HDMI-1-1 -d 6
+wallpaper
