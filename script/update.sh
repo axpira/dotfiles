@@ -264,7 +264,7 @@ install_jq() {
 install_telegram() {
     print_info "Telegram"
     NPATH="$HOME/.local/telegram"
-    VERSION="2.7.4"
+    VERSION="3.1.8"
     FILENAME="tsetup-$VERSION.tar.xz"
     if [ -d "$NPATH/$VERSION" ]; then
         print_info "Telegram $VERSION already exists in $NPATH/$VERSION"
