@@ -16,24 +16,24 @@ get_brightness_percent() {
 }
 
 send_notification() {
-    status.sh backlight
-#  brightness="$(get_brightness)"
-#  brightness_p="$(get_brightness_percent)"
-#  # Make the bar with the special character ─ (it's not dash -)
-#  # https://en.wikipedia.org/wiki/Box-drawing_character
-#  bar=$(seq -s "─" $(($brightness * 2)) | sed 's/[0-9]//g')
-# #  bar="$brightness%
-# # $bar"
-#  icon="ic_brightness_7_white_48dp" 
+    # status.sh backlight
+ brightness="$(get_brightness)"
+ brightness_p="$(get_brightness_percent)"
+ # Make the bar with the special character ─ (it's not dash -)
+ # https://en.wikipedia.org/wiki/Box-drawing_character
+ bar=$(seq -s "─" $(($brightness * 2)) | sed 's/[0-9]//g')
+#  bar="$brightness%
+# $bar"
+ icon="ic_brightness_7_white_48dp" 
 
-#  if [ "$1" == "bar" ]; then
-#    echo "BRI${brightness}" >> /tmp/panel-fifo
-#  else
-#    # Send the notification
-#    #dunstify -i $icon -t 3000 -r 2600 -u normal "    $bar"
-#    dunstify -i $icon -t 3000 -r 2600 -u normal "$brightness_p%"
-#    #echo "BRI${brightness}" >> /tmp/panel-fifo
-# fi
+ if [ "$1" == "bar" ]; then
+   echo "BRI${brightness}" >> /tmp/panel-fifo
+ else
+   # Send the notification
+   #dunstify -i $icon -t 3000 -r 2600 -u normal "    $bar"
+   dunstify -a backlight -i $icon -t 3000 -r 2600 -u normal "$brightness_p%"
+   #echo "BRI${brightness}" >> /tmp/panel-fifo
+fi
 }
 
 param="$1"
@@ -50,13 +50,14 @@ if [ -z "$param" ]; then
   #printf "%s %s%%\n" "$icon" "$brightness_p"
   # printf '%s %s%%\n' "$icon" "$brightness_p"
   printf "$brightness_p"
+  send_notification
 else
   value=""
   percent=""
   signal=""
   . "$base_path/_parse.sh"
   _parse_updown "$param"
-  
+
   logger "Value [$value] Percent [$percent] Signal [$signal]"
   if [ -n "$value" ]; then
     max_brightness=$(cat $backlight_path/max_brightness )
@@ -85,7 +86,7 @@ else
   else 
     message="Invalid parameter '$param'"
     logger "backlight.sh $message"
-    #dunstify -i ic_error_white_48dp -r 2593 -u critical "backlight.sh $message"
+    dunstify -i ic_error_white_48dp -r 2593 -u critical "backlight.sh $message"
     exit 1
   fi
 fi

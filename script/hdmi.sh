@@ -20,6 +20,15 @@ internal="eDP-1"
 # glxinfo | grep "OpenGL vendor string"
     # --dpi 276 \
     # --fb 7040x3960 \
+# xrandr \
+#     --output $internal --mode 3840x2160 --pos 0x0    --auto \
+#     --output $external  --mode 1920x1080 --pos 3840x0 --auto \
+#         --panning 3840x2160+3840+0 --scale 2.0x2.0 \
+#     --fb 7680x2400
+# exit 1
+# xrandr --output $internal --auto --output $external --auto --scale 2x2 --right-of $internal
+# xrandr --output $internal --auto --output $external --auto --panning 3840x2160+3840+0 --scale 2x2 --right-of $internal
+# exit 1
 if [ "$1" == "on" ]; then
     xrandr \
         --dpi 192 \
@@ -30,7 +39,9 @@ if [ "$1" == "on" ]; then
             --right-of $external \
         --output $external \
             --mode 1920x1080 \
+            --scale 1.0x1.0 \
             --rotate normal
+            #--panning 3840x2160+0+0
 elif [ "$1" == "off" ]; then
     xrandr \
         --dpi 192 \

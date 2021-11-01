@@ -2,7 +2,8 @@
 
 notify() {
     #notify-send "bt" "$*"
-    status.sh bluetooth
+    dunstify -a bluetooth -i $icon -t 3000 -r 2593 -u normal "$*"
+    #status.sh bluetooth
 }
 
 power() {
@@ -28,9 +29,9 @@ case $option in
         echo "Connecting to $device"
         [[ $status == "no" ]] && power on
         output=$(bluetoothctl connect $device)
-        if [[ $? -ne 0 ]]; then
-            power off
-        fi
+        # if [[ $? -ne 0 ]]; then
+        #     power off
+        # fi
         notify "$output"
         ;;
 esac

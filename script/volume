@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 function get_volume {
   amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
@@ -9,50 +9,50 @@ function is_mute {
 }
 
 function send_notification {
-    status.sh volume
-#   volume=`get_volume`
-#   # Make the bar with the special character ─ (it's not dash -)
-#   # https://en.wikipedia.org/wiki/Box-drawing_character
-#   bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
-#   bar="$volume%
-# $bar"
-#   if is_mute ; then
-#     icon="ic_volume_off_white_48dp"
-#     state="off"
-#   else
-#     icon="ic_volume_up_white_48dp"
-# 	state="on"
-#   fi
-#   # Send the notification
-#   dunstify -i $icon -t 3000 -r 2593 -u normal "$state    $bar"
+#    status.sh volume
+  volume=`get_volume`
+  # Make the bar with the special character ─ (it's not dash -)
+  # https://en.wikipedia.org/wiki/Box-drawing_character
+  bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
+  bar="$volume%
+$bar"
+  if is_mute ; then
+    icon="ic_volume_off_white_48dp"
+    state="off"
+  else
+    icon="ic_volume_up_white_48dp"
+    state="on"
+  fi
+  # Send the notification
+  dunstify -a volume -i $icon -t 3000 -r 2593 -u normal "$state    $bar"
 }
 
 
 param="$1"
 
 if [[ -z $param ]]; then
-  #send_notification bar
-  if is_mute; then
-    state="婢"
-  else
-    state="墳"
-  fi
-  percent="$(get_volume)"
-
-  # if [ "$format" == "json" ]; then
-    printf '%s %s\n' "$state" "$percent"
+  send_notification
+  # if is_mute; then
+  #   state="婢"
   # else
-    # printf "%s %02d%%\n" "$state" "$percent"
+  #   state="墳"
   # fi
+  # percent="$(get_volume)"
+
+  # # if [ "$format" == "json" ]; then
+  #   printf '%s %s\n' "$state" "$percent"
+  # # else
+  #   # printf "%s %02d%%\n" "$state" "$percent"
+  # # fi
 else
   source _parse.sh
   _parse_updown $param
-  
+
   if [[ ! -z $value ]]; then
     logger "$value $percent"
     amixer set Master $value$percent$signal > /dev/null
     send_notification
-    pkill -SIGRTMIN+11 i3blocks
+    #pkill -SIGRTMIN+11 i3blocks
   else 
     message="Invalid parameter '$param'"
     logger "volume.sh $message"

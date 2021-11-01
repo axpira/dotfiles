@@ -1,4 +1,7 @@
 #!/bin/bash
+function send_notification {
+  dunstify -a wifi -t 3000 -r 2603 -u normal "$(iw dev $interface link | grep SSID: | cut -d: -f2)"
+}
 #format=${1:-console}
 # interface="wlp2s0"
 interface=$(printf '%s\n' /sys/class/net/*/wireless | cut -d/ -f5)
@@ -7,10 +10,12 @@ action="$1"
 
 if [ "$action" == "scan" ]; then
     /sbin/iwlist $interface scan | grep ESSID | cut -d":" -f2 | tr -d '"' | dmenu -i -l 10
+else
+    send_notification
 fi
 #iw dev wlp2s0 link | grep "SSID:" | cut -d":" -f2
 #essid=$(iwgetid -r)
-iw dev $interface link | grep SSID: | cut -d: -f2
+#iw dev $interface link | grep SSID: | cut -d: -f2
 
 
 # if [ "$format" == "json" ]; then
