@@ -4,6 +4,8 @@
 !bspwm/**
 !spectrwm/
 !spectrwm/**
+!barrier
+!barrier/**
 !polybar/
 !polybar/**
 !bashrc
