@@ -9,13 +9,7 @@ function is_mute {
 }
 
 function send_notification {
-#    status.sh volume
   volume=`get_volume`
-  # Make the bar with the special character ─ (it's not dash -)
-  # https://en.wikipedia.org/wiki/Box-drawing_character
-  bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
-  bar="$volume%
-$bar"
   if is_mute ; then
     icon="ic_volume_off_white_48dp"
     state="off"
@@ -24,7 +18,8 @@ $bar"
     state="on"
   fi
   # Send the notification
-  dunstify -a volume -i $icon -t 3000 -r 2593 -u normal "$state    $bar"
+  dunstify -a volume -i $icon -t 3000 -r 2593 -u normal -h int:value:$volume "$volume"
+  # dunstify -a "changeVolume" -u low -i audio-volume-high -h int:value:"10" "Volume: 10%"
 }
 
 

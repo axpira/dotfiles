@@ -52,6 +52,7 @@ esac
 # 	"Full")         status="";;
 # 	*)              status="";;
 # esac
-printf "%s %s %s\n" "$prefix" "$percent" "$time"
+#printf "%s %s %s\n" "$prefix" "$percent" "$time"
+dunstify -a battery -t 3000 -r 2594 -u normal -h int:value:$percent "$percent% $time"
 
 #eval echo "$1"

@@ -9,32 +9,22 @@ function trim {
     printf '%s' "$var"
 }
 
-#https://wiki.archlinux.org/index.php/Bluetooth_headset
-#
-#bluetoothctl
-#
-#power on
-#agent on
-#default-agent
-#scan on
-#
-#pair 00:1D:43:6D:03:26
-#connect 00:1D:43:6D:03:26
-#scan off
-#exit
+function send_notification {
+  dunstify -a bluetooth -t 3000 -r 2605 -u normal "$*"
+}
 
-#bluetoothctl connect 0C:E0:E4:23:BB:86
+#https://wiki.archlinux.org/index.php/Bluetooth_headset
 powered=$(bluetoothctl show | grep "Powered:" | cut -d":" -f2)
 if [[ $powered == *no* ]]; then
-    printf '%s\n' ""
+    send_notification ""
 else
     status=$(bluetoothctl info | grep 'Alias: ' | cut -d":" -f2-)
     if [ -n "$status" ]; then
         name=$(trim $status)
         name=${name// /_}
-        printf " %s\n" "$name"
+        send_notification " $name"
     else
-        printf "\n"
+        send_notification ""
     fi
 fi
 

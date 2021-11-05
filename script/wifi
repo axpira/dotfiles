@@ -1,6 +1,7 @@
 #!/bin/bash
 function send_notification {
   dunstify -a wifi -t 3000 -r 2603 -u normal "$(iw dev $interface link | grep SSID: | cut -d: -f2)"
+  # dunstify -a "changeVolume" -u low -i audio-volume-high -h int:value:"10" "Volume: 10%"
 }
 #format=${1:-console}
 # interface="wlp2s0"
