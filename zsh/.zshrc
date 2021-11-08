@@ -21,6 +21,8 @@ alias uuid='cat /proc/sys/kernel/random/uuid'
 alias vim='nvim'
 alias vimdiff='nvim -d'
 
+alias k='kubectl'
+
 if [[ -f ~/.alias && -r ~/.alias ]]; then
 	source ~/.alias
 fi
@@ -86,6 +88,7 @@ autoload -Uz compinit
 compinit
 
 source <(kubectl completion zsh)
+source <(kubectl completion zsh | sed 's/kubectl/k/g')
 
 #zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*' menu select
