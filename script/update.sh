@@ -94,6 +94,12 @@ NVIM_PLUGINS=(
   "git@github.com:nvim-lua/plenary.nvim.git"
   "git@github.com:stefanvanburen/rams.vim.git"
   "git@github.com:nvim-telescope/telescope.nvim.git"
+  "git@github.com:nvim-treesitter/nvim-treesitter.git"
+  "git@github.com:leoluz/nvim-dap-go.git"
+  "git@github.com:mfussenegger/nvim-dap.git"
+  "git@github.com:rcarriga/nvim-dap-ui.git"
+  "git@github.com:nvim-telescope/telescope-dap.nvim.git"
+  "git@github.com:theHamsta/nvim-dap-virtual-text.git"
 )
 
 print_error() {

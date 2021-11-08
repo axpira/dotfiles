@@ -11,6 +11,11 @@ require('mini.surround').setup({})
 require('mini.trailspace').setup({})
 require('gitsigns').setup()
 
+require("dapui").setup()
+require('telescope').load_extension('dap')
+require('dap-go').setup()
+require("nvim-dap-virtual-text").setup()
+
 vim.opt.termguicolors = true
 require('colorizer').setup()
 
@@ -99,6 +104,14 @@ map("n", '<M-h>', [[<C-w><<CR>]], {noremap = true})
 map("n", '<M-l>', [[<C-w>><CR>]], {noremap = true})
 map("n", '<M-k>', [[<C-w>-<CR>]], {noremap = true})
 map("n", '<M-j>', [[<C-w>+<CR>]], {noremap = true})
+
+map("n", "<F2>" , [[<cmd>lua require('dapui').toggle()<CR>]], {noremap=true})
+map("n", "<F3>" , [[<cmd>lua require('dapui').eval()<CR>]], {noremap=true})
+map("n", "<F4>" , [[<cmd>lua require('dap').toggle_breakpoint()<CR>]], {noremap=true})
+map("n", "<F5>" , [[<cmd>lua require('dap').continue()<CR>]], {noremap=true})
+map("n", "<F6>" , [[<cmd>lua require('dap').step_over()<CR>]], {noremap=true})
+map("n", "<F7>" , [[<cmd>lua require('dap').step_into()<CR>]], {noremap=true})
+map("n", "<F8>" , [[<cmd>lua require('dap').step_out()<CR>]], {noremap=true})
 
 local nvim_lsp = require("lspconfig")
 nvim_lsp.gopls.setup({})
