@@ -202,6 +202,7 @@ configure_nvim() {
         fi
     done
     cd -
+    nvim --headless +TSUpdate +q
 }
 
 install_neovim() {
