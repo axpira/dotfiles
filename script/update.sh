@@ -2,6 +2,7 @@
 set -e
 DOTFZF=$HOME/.fzf
 GITCLONE="git clone --depth=1"
+NVIM_PLUGIN_DIR="$HOME/.local/share/nvim/site/pack/mini/start"
 
 RUST_CRATES=(
     bat
@@ -85,6 +86,15 @@ ZSHPLUGS=(
   "zsh-syntax-highlighting"
 )
   # "zsh-history-substring-search"
+NVIM_PLUGINS=(
+  "git@github.com:lewis6991/gitsigns.nvim.git"
+  "git@github.com:echasnovski/mini.nvim.git"
+  "git@github.com:norcalli/nvim-colorizer.lua.git"
+  "git@github.com:neovim/nvim-lspconfig.git"
+  "git@github.com:nvim-lua/plenary.nvim.git"
+  "git@github.com:stefanvanburen/rams.vim.git"
+  "git@github.com:nvim-telescope/telescope.nvim.git"
+)
 
 print_error() {
     printf "\\e[0;31m%s\\e[0m\\n" " [ ✖ ] $1 $2"
@@ -111,6 +121,7 @@ set_trap() {
 create_folders() {
     mkdir -p ~/.local/bin
     mkdir -p $ZPLUGINSDIR
+    mkdir -p "$NVIM_PLUGIN_DIR"
     # mkdir -p ~/.local/share/applications
 }
 
@@ -172,6 +183,21 @@ configure_zsh() {
         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
     fi
     git -C ~/.powerlevel10k pull
+}
+
+configure_nvim() {
+    cd $NVIM_PLUGIN_DIR
+    for plug in "${NVIM_PLUGINS[@]}"; do
+        local name="${plug/*\/}"
+        name="${name%.*}"
+        echo $name
+        if [ ! -d "$name" ]; then
+            git clone "$plug"
+        else
+            git -C "$name" pull
+        fi
+    done
+    cd -
 }
 
 install_neovim() {
@@ -362,6 +388,7 @@ main() {
     install_go
     install_neovim
     install_jq
+    configure_nvim
     configure_node
     configure_go
     configure_python
