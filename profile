@@ -3,8 +3,8 @@
 . /etc/profile
 
 
-export QT_AUTO_SCREEN_SCALE=0
-export QT_SCALE_FACTOR=2
+#export QT_AUTO_SCREEN_SCALE=0
+#export QT_SCALE_FACTOR=2
 # Default programs:
 export EDITOR="nvim"
 export TERMINAL="alacritty"
@@ -55,7 +55,8 @@ export PATH="$HOME/.fzf/bin:$HOME/.local/bin/:$HOME/.config/script:$HOME/.local/
 #export PATH="$HOME/.local/bin/:$HOME/.config/script:$GOPATH/bin:$NODE_PATH/bin:$PATH"
 export PATH="$PATH:$HOME/.config/script/funcs"
 
-export CDPATH=.:..:~:~/workspaces:~/.config
+#export CDPATH=.:..:~:~/workspaces:~/.config
+export CDPATH=.:..
 
 
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"

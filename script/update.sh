@@ -31,7 +31,7 @@ PY3=(
     pynvim
     python-language-server
     vim-vint
-    pyls-black
+    pyright
     httpie
     pipenv-shebang
     pipenv

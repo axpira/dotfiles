@@ -29,6 +29,7 @@ internal="eDP-1"
 # xrandr --output $internal --auto --output $external --auto --scale 2x2 --right-of $internal
 # xrandr --output $internal --auto --output $external --auto --panning 3840x2160+3840+0 --scale 2x2 --right-of $internal
 # exit 1
+#--mode 1920x1080 \
 if [ "$1" == "on" ]; then
     xrandr \
         --dpi 192 \
