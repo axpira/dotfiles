@@ -61,22 +61,21 @@ NODE_PACKAGES=(
 )
 
 GO_REPOS=(
-    github.com/fullstorydev/grpcurl
+    # github.com/fullstorydev/grpcurl/cmd/grpccurl
     # github.com/charmbracelet/glow
-    github.com/goreleaser/goreleaser
+    # github.com/goreleaser/goreleaser
     github.com/go-delve/delve/cmd/dlv
-    #golang.org/x/tools/gopls@latest
-    golang.org/x/tools/...
+    golang.org/x/tools/gopls
+    golang.org/x/tools/cmd/goimports
     github.com/divan/expvarmon
-    github.com/cweill/gotests/...
     github.com/divan/expvarmon
-    github.com/nojima/httpie-go
+    github.com/nojima/httpie-go/cmd/ht
     github.com/caarlos0/svu
-    github.com/ahmetb/kubectx
+    github.com/ahmetb/kubectx/cmd/kubectx
+    github.com/ahmetb/kubectx/cmd/kubens
     github.com/goreleaser/chglog/cmd/chglog
     github.com/akavel/up
-    github.com/peco/peco
-    github.com/go-delve/delve/cmd/dlv
+    github.com/peco/peco/cmd/peco
     # github.com/wercker/stern
 )
 
@@ -135,9 +134,8 @@ configure_go() {
     print_info "Configuring golang environment.."
 
     for repo in "${GO_REPOS[@]}"; do
-        go get $repo
+        go install "${repo}@latest"
     done
-    GO111MODULE=on go get golang.org/x/tools/gopls@latest
 }
 
 configure_python() {
