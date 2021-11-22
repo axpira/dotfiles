@@ -76,6 +76,7 @@ GO_REPOS=(
     github.com/goreleaser/chglog/cmd/chglog
     github.com/akavel/up
     github.com/peco/peco/cmd/peco
+    honnef.co/go/tools/cmd/staticcheck
     # github.com/wercker/stern
 )
 
@@ -387,7 +388,7 @@ main() {
     else
        git -C $DOTFZF pull
     fi
-    install_telegram
+    # install_telegram
     # install_earthly
     install_cheat
     install_go

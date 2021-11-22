@@ -5,7 +5,7 @@ require('mini.comment').setup({})
 --require('mini.cursorword').setup({ delay = 1000 })
 require('mini.fuzzy').setup({})
 require('mini.misc').setup({})
-require('mini.pairs').setup({})
+--require('mini.pairs').setup({})
 require('mini.statusline').setup({})
 require('mini.surround').setup({})
 require('mini.trailspace').setup({})
@@ -36,6 +36,7 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 vim.opt.expandtab = true
+vim.opt.clipboard = "unnamed"
 
 vim.opt.swapfile = false
 
