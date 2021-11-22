@@ -21,9 +21,9 @@ RUST_CRATES=(
     procs
     hyperfine
     alacritty
-    xplr
+    #xplr
     gping
-    neovide
+    #neovide
 )
 
 PY3=(
