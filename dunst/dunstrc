@@ -165,26 +165,26 @@ frame_color = "#c5c8c6"
 separator_color = "#c5c8c6"
 
 
-[shortcuts]
-
-# Shortcuts are specified as [modifier+][modifier+]...key
-# Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
-# "mod3" and "mod4" (windows-key).
-# Xev might be helpful to find names for keys.
-
-# Close notification.
-close = ctrl+space
-
-# Close all notifications.
-close_all = ctrl+shift+space
-
-# Redisplay last message(s).
-# On the US keyboard layout "grave" is normally above TAB and left
-# of "1".
-history = ctrl+grave
-
-# Context menu.
-context = ctrl+shift+period
+# [shortcuts]
+#
+# # Shortcuts are specified as [modifier+][modifier+]...key
+# # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
+# # "mod3" and "mod4" (windows-key).
+# # Xev might be helpful to find names for keys.
+#
+# # Close notification.
+# close = ctrl+space
+#
+# # Close all notifications.
+# close_all = ctrl+shift+space
+#
+# # Redisplay last message(s).
+# # On the US keyboard layout "grave" is normally above TAB and left
+# # of "1".
+# history = ctrl+grave
+#
+# # Context menu.
+# context = ctrl+shift+period
 
 #[urgency_low]
 ## IMPORTANT: colors have to be defined in quotation marks.
