@@ -78,6 +78,7 @@ GO_REPOS=(
     github.com/peco/peco/cmd/peco
     honnef.co/go/tools/cmd/staticcheck
     # github.com/wercker/stern
+    github.com/cucumber/godog/cmd/godog
 )
 
 ZSHPLUGS=(
