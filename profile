@@ -56,7 +56,8 @@ export PATH="$HOME/.fzf/bin:$HOME/.local/bin/:$HOME/.config/script:$HOME/.local/
 export PATH="$PATH:$HOME/.config/script/funcs"
 
 #export CDPATH=.:..:~:~/workspaces:~/.config
-export CDPATH=.:..
+#export CDPATH=.:..
+export CDPATH=.
 
 
 export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/history"

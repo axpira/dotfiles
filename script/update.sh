@@ -24,6 +24,7 @@ RUST_CRATES=(
     #xplr
     gping
     #neovide
+    startship
 )
 
 PY3=(
@@ -51,6 +52,7 @@ NODE_PACKAGES=(
     diagnostic-languageserver
     dockerfile-language-server-nodejs
     vscode-json-languageserver
+    vscode-langservers-extracted
     typescript-language-server
     vim-language-server
     yaml-language-server
@@ -79,6 +81,7 @@ GO_REPOS=(
     honnef.co/go/tools/cmd/staticcheck
     # github.com/wercker/stern
     github.com/cucumber/godog/cmd/godog
+    github.com/segmentio/topicctl/cmd/topicctl
 )
 
 ZSHPLUGS=(
@@ -101,6 +104,7 @@ NVIM_PLUGINS=(
   "git@github.com:rcarriga/nvim-dap-ui.git"
   "git@github.com:nvim-telescope/telescope-dap.nvim.git"
   "git@github.com:theHamsta/nvim-dap-virtual-text.git"
+  "git@github.com:alexghergh/nvim-tmux-navigation.git"
 )
 
 print_error() {
