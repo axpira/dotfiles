@@ -8,7 +8,11 @@ fi
 function = { echo "4k $@ p" | dc }
 # PID Port
 function pp {
-  ss -lptn sport = :$1 | grep -Eo 'pid=[0-9]+' | cut -c5-
+  ss -lptn sport = :$1 | grep -Eo 'pid=[0-9]+' | cut -c5- | sort -u
+}
+
+function pk {
+  pp $1 | xargs kill
 }
 
 alias GET='http'
@@ -22,6 +26,7 @@ alias vim='nvim'
 alias vimdiff='nvim -d'
 
 alias k='kubectl'
+alias code-maat="java -jar $HOME/.local/bin/code-maat-1.0.2-standalone.jar"
 
 if [[ -f ~/.alias && -r ~/.alias ]]; then
 	source ~/.alias
@@ -89,6 +94,7 @@ compinit
 
 source <(kubectl completion zsh)
 source <(kubectl completion zsh | sed 's/kubectl/k/g')
+source <(kubectl completion zsh | sed 's/kubectl/log/g')
 
 #zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*' menu select
