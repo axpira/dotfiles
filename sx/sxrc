@@ -8,9 +8,19 @@ pkill pipewire*
 
 xrdb -merge ~/.config/Xresources
 #~/.config/script/hdmi.sh off
+#
+stalonetray --dockapp-mode simple --geometry 5x1-0+4 --sticky true --window-layer top -bg '#000000' --grow-gravity NE --kludges force_icons_size -i 16 &
+#stalonetray -c ~/.config/stalonetray/stalonetray.conf &
+#picom -CGb --no-fading-openclose &
+dunst &
+wallpaper &
+
+(while true; do xsetroot -name "$(date +'%A, %b %d %Y %H:%M')"; sleep 60; done) &
+
 
 #exec awesome
 #exec i3
 #sxhkd &
 #exec bspwm
-exec spectrwm
+#exec spectrwm
+exec dwm

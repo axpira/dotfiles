@@ -28,6 +28,7 @@ RUST_CRATES=(
 )
 
 PY3=(
+    podman-compose
     black
     flake8
     pynvim
@@ -104,7 +105,6 @@ NVIM_PLUGINS=(
   "git@github.com:rcarriga/nvim-dap-ui.git"
   "git@github.com:nvim-telescope/telescope-dap.nvim.git"
   "git@github.com:theHamsta/nvim-dap-virtual-text.git"
-  "git@github.com:alexghergh/nvim-tmux-navigation.git"
 )
 
 print_error() {
@@ -146,17 +146,11 @@ configure_go() {
 
 configure_python() {
     print_info "Configuring python environment.."
-    curl -o ~/.local/bin/podman-compose https://raw.githubusercontent.com/containers/podman-compose/devel/podman_compose.py
-    chmod +x ~/.local/bin/podman-compose
-    if ! command -v pip3 >/dev/null; then
-        local tmp_file="$(mktemp)"
-        curl https://bootstrap.pypa.io/get-pip.py -o "$tmp_file"
-        python3 "$tmp_file" --user
-    fi
-    pip3 install --user -U pip
-
+    python -m ensurepip --upgrade
+    python -m pip install --upgrade pip
     print_info "Installing python 3 packages"
     for pkg in "${PY3[@]}"; do
+        echo Installing $pkg
         pip3 install --user --upgrade "$pkg" --timeout=2
     done
 }
@@ -393,8 +387,6 @@ main() {
     else
        git -C $DOTFZF pull
     fi
-    # install_telegram
-    # install_earthly
     install_cheat
     install_go
     install_neovim

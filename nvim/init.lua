@@ -69,24 +69,6 @@ map("n", "<Leader>c", [[<Cmd>cclose<CR>]], {noremap = true})
 map("n", "<Leader>z", [[<Cmd>lua MiniMisc.zoom()<CR>]], {noremap = true})
 map("n", "<Leader>t", [[<Cmd>lua MiniTrailspace.trim()<CR>]], {noremap = true})
 
-require'nvim-tmux-navigation'.setup {
-    disable_when_zoomed = true, -- defaults to false
-    keybindings = {
-        left = "<M-h>",
-        down = "<M-j>",
-        up = "<M-k>",
-        right = "<M-l>",
-        last_active = "<M-\\>",
-        next = "<M-Space>",
-    }
-}
--- map("n", "<M-h>", [[<Cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateLeft()<cr>]], {noremap = true})
--- map("n", "<M-j>", [[<Cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateDown()<cr>, {noremap = true})
--- map("n", "<M-k>", [[<Cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateUp()<cr>, {noremap = true})
--- map("n", "<M-l>", [[<Cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateRight()<cr>, {noremap = true})
--- map("n", "<M-\>", [[<Cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateLastActive()<cr>, {noremap = true})
--- map("n", "<M-Space>", [[<Cmd>lua require'nvim-tmux-navigation'.NvimTmuxNavigateNext()<cr>, {noremap = true})
-
 map("n", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]], {noremap = true})
 map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {noremap = true})
 map("i", "<C-k>", [[<cmd>lua vim.lsp.buf.hover()<CR>]], {noremap = true})
