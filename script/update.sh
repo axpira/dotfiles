@@ -17,14 +17,14 @@ RUST_CRATES=(
     cargo-watch
     skim
     tokei
-    watchexec
-    procs
+    #watchexec
+    #procs
     hyperfine
     alacritty
     #xplr
     gping
     #neovide
-    startship
+    #startship
 )
 
 PY3=(
@@ -43,6 +43,7 @@ PY3=(
     scanapi
     mkdocs
     mkdocs-build-plantuml-plugin
+    gcloud
 )
 
 NODE_PACKAGES=(
@@ -146,8 +147,10 @@ configure_go() {
 
 configure_python() {
     print_info "Configuring python environment.."
-    python -m ensurepip --upgrade
-    python -m pip install --upgrade pip
+    if ! grep -q debian /etc/os-release; then
+      python -m ensurepip --upgrade || true
+      python -m pip install --upgrade pip
+    fi
     print_info "Installing python 3 packages"
     for pkg in "${PY3[@]}"; do
         echo Installing $pkg
@@ -397,7 +400,7 @@ main() {
     configure_python
     configure_rust
     configure_fonts
-    configure_zsh
+    # configure_zsh
     curl -fsSL https://github.com/Bhupesh-V/ugit/releases/latest/download/ugit -o $HOME/.local/bin/ugit && chmod +x $HOME/.local/bin/ugit
     echo "Success! Please restart the terminal to see the changes!"
 }
