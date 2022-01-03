@@ -7,7 +7,7 @@
 #export QT_SCALE_FACTOR=2
 # Default programs:
 export EDITOR="nvim"
-export TERMINAL="alacritty"
+export TERMINAL="st"
 #export BROWSER="qutebrowser"
 #export BROWSER=luakit
 export BROWSER=firefox
@@ -177,5 +177,5 @@ ex=🎯:\
 
 #complete -C /home/axpira/.local/bin/vault vault
 
-#[ -z "$DISPLAY" ] && [ "$(tty)" = /dev/tty1 ] && exec sx
 [ -f "$HOME/.env" ] && . $HOME/.env
+[ -z "$DISPLAY" ] && [ "$(tty)" = /dev/tty1 ] && exec sx

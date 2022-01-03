@@ -7,9 +7,9 @@ pkill pipewire*
 /usr/bin/pipewire-media-session &
 
 xrdb -merge ~/.config/Xresources
-#~/.config/script/hdmi.sh off
+~/.config/script/hdmi.sh off
 #
-stalonetray --dockapp-mode simple --geometry 5x1-0+4 --sticky true --window-layer top -bg '#000000' --grow-gravity NE --kludges force_icons_size -i 16 &
+#stalonetray --dockapp-mode simple --geometry 5x1-0+4 --sticky true --window-layer top -bg '#000000' --grow-gravity NE --kludges force_icons_size -i 16 &
 #stalonetray -c ~/.config/stalonetray/stalonetray.conf &
 #picom -CGb --no-fading-openclose &
 dunst &

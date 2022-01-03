@@ -1,6 +1,7 @@
-Xft.dpi: 192
+!Xft.dpi: 192
 !Xft.dpi:  279x274
-!Xft.dpi: 144
+#Xft.dpi: 144
+Xft.dpi: 96
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
@@ -8,7 +9,7 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 
-Xcursor.size: 48
+#Xcursor.size: 48
 
 XTerm.termName: xterm-256color
 XTerm*metaSendsEscape: true
