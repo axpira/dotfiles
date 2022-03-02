@@ -178,4 +178,4 @@ ex=🎯:\
 #complete -C /home/axpira/.local/bin/vault vault
 
 [ -f "$HOME/.env" ] && . $HOME/.env
-[ -z "$DISPLAY" ] && [ "$(tty)" = /dev/tty1 ] && exec sx
+[ -z "$DISPLAY" ] && [ "$(tty)" = /dev/tty2 ] && exec sx
