@@ -22,7 +22,7 @@ RUST_CRATES=(
     hyperfine
     alacritty
     #xplr
-    gping
+    #gping
     #neovide
     #startship
 )
@@ -44,6 +44,7 @@ PY3=(
     mkdocs
     mkdocs-build-plantuml-plugin
     gcloud
+    tstock
 )
 
 NODE_PACKAGES=(
