@@ -149,7 +149,8 @@ NVIM_PLUGINS=(
 	"git@github.com:rcarriga/nvim-dap-ui.git"
 	"git@github.com:nvim-telescope/telescope-dap.nvim.git"
 	"git@github.com:theHamsta/nvim-dap-virtual-text.git"
-  "git@github.com:mfussenegger/nvim-dap-python.git"
+	"git@github.com:mfussenegger/nvim-dap-python.git"
+	"git@github.com:numToStr/Comment.nvim.git"
 )
 
 print_error() {

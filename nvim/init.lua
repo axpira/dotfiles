@@ -10,6 +10,7 @@
 --require('mini.trailspace').setup({})
 --require('gitsigns').setup()
 --
+require('Comment').setup()
 require("dapui").setup()
 --require('mini.fuzzy').setup({})
 require('telescope').setup({})
