@@ -14,6 +14,8 @@ xrdb -merge ~/.config/Xresources
 #picom -CGb --no-fading-openclose &
 dunst &
 wallpaper &
+barrierc -n nico --no-tray --disable-crypto 192.168.15.114 &
+
 
 (while true; do xsetroot -name "$(date +'%A, %b %d %Y %H:%M')"; sleep 60; done) &
 

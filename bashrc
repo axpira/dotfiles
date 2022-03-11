@@ -157,7 +157,7 @@ export FZF_DEFAULT_OPTS="
 
 _gen_fzf_default_opts
 
-source <(kubectl completion bash)
+#source <(kubectl completion bash)
 
 if [[ -f ~/.alias && -r ~/.alias ]]; then
 	source ~/.alias

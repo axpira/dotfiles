@@ -20,12 +20,13 @@ h=$(resize "${resolution#*x}")
 new_res="${w}x${h}"
 
 
+#-font "Fira-Code-Retina-Nerd-Font-Complete-Mono" \
 fortune -s |\
   cowsay -f $cow_image |\
   convert \
     -background black \
     -fill grey \
-    -font "Fira-Code-Retina-Nerd-Font-Complete-Mono" \
+    -font "$HOME/.local/share/fonts/JetBrains Mono Light Nerd Font Complete.ttf" \
     -size $new_res\
     -gravity center \
     -trim label:@- \

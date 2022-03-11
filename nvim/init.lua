@@ -1,21 +1,77 @@
-require('mini.base16').mini_palette('#112641', '#e2e98f', 75)
-require('mini.bufremove').setup({})
-require('mini.comment').setup({})
---require('mini.completion').setup({})
---require('mini.cursorword').setup({ delay = 1000 })
-require('mini.misc').setup({})
---require('mini.pairs').setup({})
-require('mini.statusline').setup({})
-require('mini.surround').setup({})
-require('mini.trailspace').setup({})
-require('gitsigns').setup()
-
+--require('mini.base16').mini_palette('#112641', '#e2e98f', 75)
+--require('mini.bufremove').setup({})
+--require('mini.comment').setup({})
+----require('mini.completion').setup({})
+----require('mini.cursorword').setup({ delay = 1000 })
+--require('mini.misc').setup({})
+----require('mini.pairs').setup({})
+--require('mini.statusline').setup({})
+--require('mini.surround').setup({})
+--require('mini.trailspace').setup({})
+--require('gitsigns').setup()
+--
 require("dapui").setup()
-require('mini.fuzzy').setup({})
-require('telescope').setup({defaults = {generic_sorter = require('mini.fuzzy').get_telescope_sorter}})
+--require('mini.fuzzy').setup({})
+require('telescope').setup({})
+--require('telescope').setup({defaults = {generic_sorter = require('mini.fuzzy').get_telescope_sorter}})
 require('telescope').load_extension('dap')
 require('dap-go').setup()
 require("nvim-dap-virtual-text").setup()
+require("dap-python").setup("/usr/bin/python")
+require'nvim-web-devicons'.setup({})
+require("trouble").setup({})
+local null_ls = require("null-ls")
+null_ls.setup({
+    sources = {
+      null_ls.builtins.formatting.prettier,
+      null_ls.builtins.formatting.autopep8,
+      null_ls.builtins.formatting.black,
+      null_ls.builtins.formatting.codespell,
+      null_ls.builtins.formatting.eslint_d,
+      null_ls.builtins.formatting.fixjson,
+      null_ls.builtins.formatting.gofmt,
+      null_ls.builtins.formatting.gofumpt,
+      null_ls.builtins.formatting.goimports,
+      null_ls.builtins.formatting.isort,
+      null_ls.builtins.formatting.protolint,
+      null_ls.builtins.formatting.shellharden,
+      null_ls.builtins.formatting.shfmt,
+      null_ls.builtins.formatting.taplo,
+      null_ls.builtins.formatting.trim_newlines,
+      null_ls.builtins.formatting.trim_whitespace,
+
+      null_ls.builtins.diagnostics.mypy,
+      null_ls.builtins.diagnostics.actionlint,
+      null_ls.builtins.diagnostics.checkmake,
+      null_ls.builtins.diagnostics.codespell,
+      null_ls.builtins.diagnostics.eslint_d,
+      null_ls.builtins.diagnostics.flake8,
+      null_ls.builtins.diagnostics.jsonlint,
+      null_ls.builtins.diagnostics.markdownlint,
+      null_ls.builtins.diagnostics.misspell,
+      null_ls.builtins.diagnostics.proselint,
+      null_ls.builtins.diagnostics.protoc_gen_lint,
+      null_ls.builtins.diagnostics.protolint,
+      null_ls.builtins.diagnostics.pydocstyle,
+      null_ls.builtins.diagnostics.shellcheck,
+      null_ls.builtins.diagnostics.standardjs,
+      null_ls.builtins.diagnostics.trail_space,
+      null_ls.builtins.diagnostics.vulture,
+      null_ls.builtins.diagnostics.write_good,
+      null_ls.builtins.diagnostics.xo,
+      null_ls.builtins.diagnostics.yamllint,
+      null_ls.builtins.diagnostics.staticcheck,
+      null_ls.builtins.diagnostics.golangci_lint,
+
+      null_ls.builtins.code_actions.eslint_d,
+      null_ls.builtins.code_actions.gitsigns,
+      null_ls.builtins.code_actions.proselint,
+      null_ls.builtins.code_actions.shellcheck,
+      null_ls.builtins.code_actions.xo,
+
+      null_ls.builtins.completion.spell,
+    },
+})
 
 vim.opt.termguicolors = true
 require('colorizer').setup()
@@ -37,12 +93,13 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.tabstop = 2
 vim.opt.expandtab = true
-vim.opt.clipboard = "unnamed"
+--vim.opt.clipboard = "unnamed"
 
 vim.opt.swapfile = false
 
 vim.opt.omnifunc = "v:lua.vim.lsp.omnifunc"
 vim.opt.undofile = true
+vim.bo.undofile = true
 
 vim.opt.list = true
 vim.opt.listchars = [[tab:»·,nbsp:+,trail:·,extends:→,precedes:←]]
@@ -67,45 +124,47 @@ map("n", "<Leader>bp", [[<Cmd>bp<CR>]], {noremap = true})
 map("n", "<Leader>bd", [[<Cmd>b#<bar>bd#<CR>]], {noremap = true})
 map("n", "<Leader>bD", [[<Cmd>bd!<CR>]], {noremap = true})
 map("n", "<Leader>c", [[<Cmd>cclose<CR>]], {noremap = true})
-map("n", "<Leader>z", [[<Cmd>lua MiniMisc.zoom()<CR>]], {noremap = true})
-map("n", "<Leader>t", [[<Cmd>lua MiniTrailspace.trim()<CR>]], {noremap = true})
+--map("n", "<Leader>z", [[<Cmd>lua MiniMisc.zoom()<CR>]], {noremap = true})
+map("n", "<Leader>z", [[<Cmd>tab split<CR>]], {noremap = true})
+--map("n", "<Leader>t", [[<Cmd>lua MiniTrailspace.trim()<CR>]], {noremap = true})
+map("n", "Y", [["+y]], {noremap = true})
+map("v", "Y", [["+y]], {noremap = true})
+map("n", "P", [["+p]], {noremap = true})
+map("v", "P", [["+p]], {noremap = true})
+map("n", "K", "{", {noremap = true})
+map("n", "J", "}", {noremap = true})
+map("n", "H", "^", {noremap = true})
+map("n", "L", "$", {noremap = true})
 
-map("n", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]], {noremap = true})
-map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', {noremap = true})
 map("i", "<C-k>", [[<cmd>lua vim.lsp.buf.hover()<CR>]], {noremap = true})
+--map("i", '<C-K>', [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], {noremap = true})
+--map("i", "<C-k>", [[<cmd>lua vim.lsp.buf.hover()<CR>]], {noremap = true})
 -- map("n", "[e", [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]], {noremap = true})
 -- map("n", "]e", [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]], {noremap = true})
-map("n", "gD", [[<Cmd>lua vim.lsp.buf.declaration()<CR>]], {noremap = true})
---map("n", "gd", [[<Cmd>lua vim.lsp.buf.definition()<CR>]], {noremap = true})
-map("n", "gd", [[<Cmd>Telescope lsp_definitions<CR>]], {noremap = true})
---map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', {noremap = true})
-map('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', {noremap = true})
---map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true})
-map('n', 'gr', '<cmd>Telescope lsp_references<CR>', {noremap = true})
-map("n", "<Leader>rn", [[<Cmd>lua vim.lsp.buf.rename()<CR>]], {noremap = true})
---map('n', '<Leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', {noremap = true})
-map('n', '<Leader>D', '<cmd>Telescope lsp_type_definitions<CR>', {noremap = true})
---map('n', '<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', {noremap = true})
-map('n', '<Leader>ca', '<cmd>Telescope lsp_code_actions<CR>', {noremap = true})
-map('n', '<Leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', {noremap = true})
+--map("n", "gD", [[<Cmd>lua vim.lsp.buf.declaration()<CR>]], {noremap = true})
+map('n', '<Leader>gh', [[<cmd>lua vim.lsp.buf.hover()<CR>]], {noremap = true})
+map("n", "<Leader>gd", [[<Cmd>lua vim.lsp.buf.definition()<CR>]], {noremap = true})
+--map("n", "gd", [[<Cmd>Telescope lsp_definitions<CR>]], {noremap = true})
+map('n', '<Leader>gi', [[<cmd>Telescope lsp_implementations<CR>]], {noremap = true})
+map('n', '<Leader>gr', [[<cmd>Telescope lsp_references<CR>]], {noremap = true})
+map("n", "<Leader>gR", [[<Cmd>lua vim.lsp.buf.rename()<CR>]], {noremap = true})
+map('n', '<Leader>gt', '<cmd>Telescope lsp_type_definitions<CR>', {noremap = true})
+map('n', '<Leader>gD', '<cmd>Telescope diagnostics<CR>', {noremap = true})
+map('n', '<Leader>ga', '<cmd>Telescope lsp_code_actions<CR>', {noremap = true})
+map('n', '<Leader>gq', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', {noremap = true})
+map('n', '<Leader>gf', '<cmd>lua vim.lsp.buf.formatting()<CR>', {noremap = true})
 map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', {noremap = true})
 map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', {noremap = true})
-map('n', '<Leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', {noremap = true})
-map('n', '<Leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', {noremap = true})
 
 map("n", "]g", [[<cmd>lua require"gitsigns".next_hunk()<CR>]], {noremap = true})
 map("n", "[g", [[<cmd>lua require"gitsigns".prev_hunk()<CR>]], {noremap = true})
 
 
 map("n", "<Leader>fg", [[<Cmd>lua require("telescope.builtin").live_grep()<CR>]], {noremap = true})
+map("n", "<Leader>fG", [[<Cmd>lua require("telescope.builtin").grep_string()<CR>]], {noremap = true})
 map("n", "<Leader>ff", [[<Cmd>lua require("telescope.builtin").git_files()<CR>]], {noremap = true})
 map("n", "<Leader>fF", [[<Cmd>lua require("telescope.builtin").find_files()<CR>]], {noremap = true})
 map("n", "<Leader>fb", [[<Cmd>lua require("telescope.builtin").buffers()<CR>]], {noremap = true})
-
--- map("n", '<M-h>', [[<C-w><<CR>]], {noremap = true})
--- map("n", '<M-l>', [[<C-w>><CR>]], {noremap = true})
--- map("n", '<M-k>', [[<C-w>-<CR>]], {noremap = true})
--- map("n", '<M-j>', [[<C-w>+<CR>]], {noremap = true})
 
 map("n", "<F2>" , [[<cmd>lua require('dapui').toggle()<CR>]], {noremap=true})
 map("n", "<F3>" , [[<cmd>lua require('dapui').eval()<CR>]], {noremap=true})
@@ -114,6 +173,7 @@ map("n", "<F5>" , [[<cmd>lua require('dap').continue()<CR>]], {noremap=true})
 map("n", "<F6>" , [[<cmd>lua require('dap').step_over()<CR>]], {noremap=true})
 map("n", "<F7>" , [[<cmd>lua require('dap').step_into()<CR>]], {noremap=true})
 map("n", "<F8>" , [[<cmd>lua require('dap').step_out()<CR>]], {noremap=true})
+map("n", "<Leader>dt" , [[<cmd>lua require('dap-go').debug_test()<CR>]], {noremap=true})
 
 local nvim_lsp = require("lspconfig")
 nvim_lsp.gopls.setup({})
@@ -125,3 +185,12 @@ nvim_lsp.sqlls.setup({})
 nvim_lsp.tsserver.setup({})
 nvim_lsp.vimls.setup({})
 nvim_lsp.yamlls.setup({})
+
+
+
+vim.cmd [[
+autocmd BufRead * autocmd FileType <buffer> ++once
+      \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
+command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+      \ | wincmd p | diffthis
+]]
