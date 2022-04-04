@@ -1,13 +1,11 @@
 #!/usr/bin/env lua
+package.path = package.path .. ";/home/axpira/.config/script/lua/?.lua"
+local util = require('util')
 
 local name = "/sys/class/power_supply/BAT0/uevent"
 
-local lines = {}
-for line in io.lines(name) do
-  for k, v in string.gmatch(line, "([%w_]+)=(%w+)") do
-    lines[k:lower():sub(14)] = v
- end
-end
+local file = io.open(name, "r")
+local lines = util.parse_file(file, "=", 14)
 
 function get_time()
   local t = lines.charge_now / lines.current_now

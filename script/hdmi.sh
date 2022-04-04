@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 
-external="HDMI"
-internal="eDP"
-resolution="1920x1080"
+external="HDMI-1"
+internal="eDP-1"
+internal_resolution="1366x768"
+external_resolution="1920x1080"
 position="${MONITOR_INTERNAL_POSITION:-right}" # primary position
 dpi=${DPI:-96}
 # ##I would like to use Nouveau for offloading the Intel card
@@ -13,23 +14,25 @@ dpi=${DPI:-96}
 # xrandr --output HDMI-1-1 --auto --above eDP-1
 output=$(xrandr)
 function get_output_name {
-  grep -Po "^$1[0-9-]+(?= )" <<< $output || true
+  # grep -Po "^$1[0-9-]+(?= )" <<< $output || true
+  grep -Po "^$1(?= )" <<< $output || true
 }
 function is_output_connected {
   grep -q "^$1 connected" <<< $output
 }
 
-primary=$(get_output_name eDP)
-secondary=$(get_output_name HDMI)
+primary=$(get_output_name $internal)
+secondary=$(get_output_name $external)
 
 if is_output_connected $primary; then
-  params="$params --output $primary --primary --mode $resolution --rotate normal"
+  params="$params --output $primary --primary --mode $internal_resolution --rotate normal"
   [ -n "$secondary" ] && params="$params --${position}-of $secondary"
 fi
 if is_output_connected $secondary; then
-  params="$params --output $secondary --mode $resolution --rotate normal"
+  params="$params --output $secondary --mode $external_resolution --rotate normal"
 else
   params="$params --output $secondary --off"
 fi
+echo $params
 xrandr $params
 wallpaper

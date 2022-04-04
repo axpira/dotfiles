@@ -56,7 +56,10 @@ PY3=(
 	vulture
 	yamllint
 	codespell
-  debugpy
+	debugpy
+	PyQt5
+	PyQtWebEngine
+	qutebrowser
 )
 
 NODE_PACKAGES=(
@@ -138,6 +141,7 @@ NVIM_PLUGINS=(
 	"git@github.com:ellisonleao/gruvbox.nvim.git"
 	"git@github.com:neovim/nvim-lspconfig.git"
 	"git@github.com:stefanvanburen/rams.vim.git"
+	#"git@github.com:stefanvanburen/rams.git"
 	"git@github.com:lewis6991/gitsigns.nvim.git"
 	"git@github.com:nvim-lua/plenary.nvim.git"
 	"git@github.com:norcalli/nvim-colorizer.lua.git"
@@ -151,6 +155,7 @@ NVIM_PLUGINS=(
 	"git@github.com:theHamsta/nvim-dap-virtual-text.git"
 	"git@github.com:mfussenegger/nvim-dap-python.git"
 	"git@github.com:numToStr/Comment.nvim.git"
+	"git@github.com:feline-nvim/feline.nvim.git"
 )
 
 print_error() {
@@ -292,7 +297,7 @@ install_earthly() {
 install_go() {
 	print_info "Golang"
 	NPATH="$HOME/.local/go"
-	VERSION="1.17"
+	VERSION="1.18"
 	FILENAME="go$VERSION.linux-amd64.tar.gz"
 	if [ -d "$NPATH/$VERSION" ]; then
 		print_info "Go $VERSION already exists in $NPATH/$VERSION"

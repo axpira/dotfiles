@@ -3,26 +3,16 @@
 --    By Adrian C. (anrxc)   --
 -------------------------------
 
--- local themes_path = require("gears.filesystem").get_themes_dir()
-local themes_path = require("gears.filesystem"). get_configuration_dir() 
+local themes_path = require("gears.filesystem").get_themes_dir()
 local dpi = require("beautiful.xresources").apply_dpi
 
 -- {{{ Main
 local theme = {}
 --theme.wallpaper = themes_path .. "zenburn/zenburn-background.png"
--- theme.wallpaper = themes_path .. "zenburn/wallpaper.png"
---theme.wallpaper = themes_path .. "zenburn/wallpaper1.jpg"
-theme.wallpaper = themes_path .. "zenburn/wallpaper_code.png"
 -- }}}
 
 -- {{{ Styles
---theme.font      = "FiraCode Nerd Font (OTF) 9"
-theme.font      = "FiraCode Nerd Font Mono (OTF) 8"
-theme.notification_font      = "FiraCode Nerd Font Mono (OTF) 12"
--- theme.notification_bg = "#000000"
-theme.notification_max_width = 400
-theme.notification_max_height = 400
-theme.notification_icon_size = 100
+theme.font      = "sans 8"
 
 -- {{{ Colors
 theme.fg_normal  = "#DCDCCC"
@@ -65,7 +55,7 @@ theme.titlebar_bg_normal = "#3F3F3F"
 --theme.fg_center_widget = "#88A175"
 --theme.fg_end_widget    = "#FF5656"
 --theme.bg_widget        = "#494B4F"
--- theme.border_widget    = "#3F3F3F"
+--theme.border_widget    = "#3F3F3F"
 -- }}}
 
 -- {{{ Mouse finder
