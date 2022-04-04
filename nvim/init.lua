@@ -8,8 +8,6 @@
 --require('mini.statusline').setup({})
 --require('mini.surround').setup({})
 --require('mini.trailspace').setup({})
---require('gitsigns').setup()
---
 require('Comment').setup()
 require("dapui").setup()
 --require('mini.fuzzy').setup({})
@@ -27,7 +25,7 @@ null_ls.setup({
       null_ls.builtins.formatting.prettier,
       null_ls.builtins.formatting.autopep8,
       null_ls.builtins.formatting.black,
-      null_ls.builtins.formatting.codespell,
+      -- null_ls.builtins.formatting.codespell,
       null_ls.builtins.formatting.eslint_d,
       null_ls.builtins.formatting.fixjson,
       null_ls.builtins.formatting.gofmt,
@@ -73,9 +71,122 @@ null_ls.setup({
       null_ls.builtins.completion.spell,
     },
 })
+require('gitsigns').setup()
 
 vim.opt.termguicolors = true
 require('colorizer').setup()
+
+local components = {
+    active = {},
+    inactive = {}
+}
+table.insert(components.inactive, {})
+table.insert(components.inactive, {})
+table.insert(components.inactive, {})
+table.insert(components.inactive, {})
+table.insert(components.inactive[2], {
+  provider = 'file_info',
+  type = 'full-path',
+  left_sep = ' ',
+})
+table.insert(components.active, {})
+table.insert(components.active, {})
+table.insert(components.active, {})
+-- table.insert(components.active[1], {
+--     -- Component info here
+-- })
+table.insert(components.active[1], {
+  provider = 'vi_mode',
+  hl = function()
+        return {
+            name = require('feline.providers.vi_mode').get_mode_highlight_name(),
+            fg = require('feline.providers.vi_mode').get_mode_color(),
+        }
+    end,
+})
+table.insert(components.active[1], {
+  provider = 'git_branch',
+})
+table.insert(components.active[1], {
+  provider = 'git_diff_added',
+  left_sep = ' ',
+  hl = {
+      fg = 'lightgreen',
+  }
+})
+table.insert(components.active[1], {
+  provider = 'git_diff_removed',
+  hl = {
+      fg = 'lightred',
+  }
+})
+table.insert(components.active[1], {
+  provider = 'git_diff_changed',
+  hl = {
+      fg = 'orange',
+  }
+})
+-- table.insert(components.active[1], {
+--   provider = 'lsp_client_names',
+--   left_sep = ' ',
+-- })
+table.insert(components.active[1], {
+  provider = 'diagnostic_warnings',
+  left_sep = ' ',
+  hl = {
+      fg = 'yellow',
+  }
+})
+table.insert(components.active[1], {
+  provider = 'diagnostic_errors',
+  hl = {
+      fg = 'red',
+  }
+})
+table.insert(components.active[1], {
+  provider = 'diagnostic_hints',
+  left_sep = ' ',
+  hl = {
+      fg = 'cyan',
+  }
+})
+table.insert(components.active[1], {
+  provider = 'diagnostic_info',
+  left_sep = ' ',
+})
+table.insert(components.active[2], {
+  provider = 'file_info',
+  type = 'full-path',
+  left_sep = ' ',
+})
+table.insert(components.active[3], {
+  provider = 'file_type',
+})
+table.insert(components.active[3], {
+  provider = 'file_format',
+  left_sep = ' ',
+})
+table.insert(components.active[3], {
+  provider = 'file_encoding',
+  left_sep = ' ',
+})
+table.insert(components.active[3], {
+  provider = 'position',
+  left_sep = ' ',
+})
+table.insert(components.active[3], {
+  provider = 'line_percentage',
+  left_sep = ' ',
+})
+-- components.active[2][1] = {
+--     -- Component info here
+-- }
+-- components.active[3][1] = {
+--     -- Component info here
+-- }
+require('feline').setup({
+  components = components,
+})
 
 vim.g.maplocalleader = ' '
 vim.g.mapleader = ' '
@@ -130,14 +241,13 @@ map("n", "<Leader>z", [[<Cmd>tab split<CR>]], {noremap = true})
 --map("n", "<Leader>t", [[<Cmd>lua MiniTrailspace.trim()<CR>]], {noremap = true})
 map("n", "Y", [["+y]], {noremap = true})
 map("v", "Y", [["+y]], {noremap = true})
-map("n", "P", [["+p]], {noremap = true})
-map("v", "P", [["+p]], {noremap = true})
-map("n", "K", "{", {noremap = true})
-map("n", "J", "}", {noremap = true})
+-- map("n", "P", [["+p]], {noremap = true})
+-- map("v", "P", [["+p]], {noremap = true})
 map("n", "H", "^", {noremap = true})
 map("n", "L", "$", {noremap = true})
 
 map("i", "<C-k>", [[<cmd>lua vim.lsp.buf.hover()<CR>]], {noremap = true})
+map("n", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]], {noremap = true})
 --map("i", '<C-K>', [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], {noremap = true})
 --map("i", "<C-k>", [[<cmd>lua vim.lsp.buf.hover()<CR>]], {noremap = true})
 -- map("n", "[e", [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]], {noremap = true})
@@ -177,7 +287,13 @@ map("n", "<F8>" , [[<cmd>lua require('dap').step_out()<CR>]], {noremap=true})
 map("n", "<Leader>dt" , [[<cmd>lua require('dap-go').debug_test()<CR>]], {noremap=true})
 
 local nvim_lsp = require("lspconfig")
-nvim_lsp.gopls.setup({})
+nvim_lsp.gopls.setup({
+  settings = {
+    gopls = {
+      buildFlags =  {"-tags=integration test functional"},
+    }
+  },
+})
 nvim_lsp.dockerls.setup({})
 nvim_lsp.html.setup({})
 nvim_lsp.jsonls.setup({})
