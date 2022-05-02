@@ -86,7 +86,7 @@ function parse_git_dirty {
 
 function bash_prompt {
   # PS1="$(date +%X) $ "
-  PS1="\[\033[01;38;240m\]\w\[\033[01;30;240m\]\$(parse_git_branch)\[\033[01;38;60m\]\$\[\033[00m\] "
+  PS1="\[\033[01;38;240m\]\w\[\033[0;36;240m\]\$(parse_git_branch)\[\033[01;38;240m\]\$\[\033[00m\] "
 }
 PROMPT_COMMAND=bash_prompt
 #PS1="\[\033[01;38m\]]\ww\007\]\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$(parse_git_branch) \$\[\033[00m\] "

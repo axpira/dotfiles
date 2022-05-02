@@ -76,19 +76,42 @@ require('gitsigns').setup()
 vim.opt.termguicolors = true
 require('colorizer').setup()
 
+require("rest-nvim").setup({
+  -- Open request results in a horizontal split
+  result_split_horizontal = false,
+  -- Skip SSL verification, useful for unknown certificates
+  skip_ssl_verification = false,
+  -- Highlight request on run
+  highlight = {
+    enabled = true,
+    timeout = 150,
+  },
+  result = {
+    -- toggle showing URL, HTTP info, headers at top the of result window
+    show_url = true,
+    show_http_info = true,
+    show_headers = true,
+  },
+  -- Jump to request line on run
+  jump_to_request = false,
+  env_file = '.env',
+  custom_dynamic_variables = {},
+  yank_dry_run = true,
+})
+
 local components = {
     active = {},
-    inactive = {}
+    -- inactive = {}
 }
-table.insert(components.inactive, {})
-table.insert(components.inactive, {})
-table.insert(components.inactive, {})
-table.insert(components.inactive, {})
-table.insert(components.inactive[2], {
-  provider = 'file_info',
-  type = 'full-path',
-  left_sep = ' ',
-})
+-- table.insert(components.inactive, {})
+-- table.insert(components.inactive, {})
+-- table.insert(components.inactive, {})
+-- table.insert(components.inactive, {})
+-- table.insert(components.inactive[2], {
+--   provider = 'file_info',
+--   type = 'full-path',
+--   left_sep = ' ',
+-- })
 table.insert(components.active, {})
 table.insert(components.active, {})
 table.insert(components.active, {})
@@ -155,9 +178,12 @@ table.insert(components.active[1], {
   left_sep = ' ',
 })
 table.insert(components.active[2], {
-  provider = 'file_info',
-  type = 'full-path',
-  left_sep = ' ',
+  provider = {
+    name = 'file_info',
+    opts = {
+      type = 'relative'
+    },
+  }
 })
 table.insert(components.active[3], {
   provider = 'file_type',
@@ -184,6 +210,7 @@ table.insert(components.active[3], {
 -- components.active[3][1] = {
 --     -- Component info here
 -- }
+vim.opt.laststatus = 3
 require('feline').setup({
   components = components,
 })

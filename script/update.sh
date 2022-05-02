@@ -121,20 +121,7 @@ ZSHPLUGS=(
 	"zsh-autosuggestions"
 	"zsh-syntax-highlighting"
 )
-# "zsh-history-substring-search"
-# "git@github.com:lewis6991/gitsigns.nvim.git"
-# "git@github.com:echasnovski/mini.nvim.git"
-# "git@github.com:norcalli/nvim-colorizer.lua.git"
-# "git@github.com:neovim/nvim-lspconfig.git"
-# "git@github.com:nvim-lua/plenary.nvim.git"
-# "git@github.com:stefanvanburen/rams.vim.git"
-# "git@github.com:nvim-telescope/telescope.nvim.git"
-# "git@github.com:nvim-treesitter/nvim-treesitter.git"
-# "git@github.com:leoluz/nvim-dap-go.git"
-# "git@github.com:mfussenegger/nvim-dap.git"
-# "git@github.com:rcarriga/nvim-dap-ui.git"
-# "git@github.com:nvim-telescope/telescope-dap.nvim.git"
-# "git@github.com:theHamsta/nvim-dap-virtual-text.git"
+
 NVIM_PLUGINS=(
 	"git@github.com:kyazdani42/nvim-web-devicons.git"
 	"git@github.com:folke/trouble.nvim.git"
@@ -156,6 +143,7 @@ NVIM_PLUGINS=(
 	"git@github.com:mfussenegger/nvim-dap-python.git"
 	"git@github.com:numToStr/Comment.nvim.git"
 	"git@github.com:feline-nvim/feline.nvim.git"
+	"git@github.com:NTBBloodbath/rest.nvim.git"
 )
 
 print_error() {
@@ -211,6 +199,7 @@ configure_python() {
 
 configure_rust() {
 	print_info "Installing rust"
+	rustup update
 
 	CARGO=$(which cargo)
 	print_info "Installing rust crates"
@@ -347,7 +336,7 @@ install_jq() {
 install_telegram() {
 	print_info "Telegram"
 	NPATH="$HOME/.local/telegram"
-	VERSION="3.1.8"
+	VERSION="3.7.1"
 	FILENAME="tsetup-$VERSION.tar.xz"
 	if [ -d "$NPATH/$VERSION" ]; then
 		print_info "Telegram $VERSION already exists in $NPATH/$VERSION"
@@ -430,6 +419,12 @@ install_cheat() {
 	chmod +x "$PATH_DIR/cht"
 }
 
+install_rust() {
+	if ! command -v rustup &>/dev/null; then
+		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	fi
+}
+
 main() {
 	create_folders
 	if "$GITCLONE" https://github.com/junegunn/fzf.git "$DOTFZF" 2>&-; then
@@ -441,6 +436,8 @@ main() {
 	install_go
 	install_neovim
 	install_jq
+	install_telegram
+	install_rust
 	configure_nvim
 	configure_node
 	configure_go
