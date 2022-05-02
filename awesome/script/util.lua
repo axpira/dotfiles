@@ -8,7 +8,6 @@ local function parse_file(file, separator, start)
       lines[k:lower():sub(start)] = v
    end
   end
-  file:close()
   if not next(lines) then
     return nil
   end
@@ -20,7 +19,22 @@ local function parse_command(command, separator)
   return parse_file(handle, separator)
 end
 
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
+
 return {
   parse_command = parse_command,
-  parse_file= parse_file,
+  parse_file = parse_file,
+  dump = dump,
 }

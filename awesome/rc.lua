@@ -53,7 +53,7 @@ naughty.config.defaults.screen = 1
 awful.util.spawn("wallpaper")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "st"
+terminal = "tym"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -112,7 +112,95 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+local mytextclock = wibox.widget.textclock('  %a %b %d  %H:%M')
+-- Create a widget and update its content using the output of a shell
+-- command every 10 seconds:
+local battery = require("script.battery")
+local mybatterybar = wibox.widget {
+    -- {
+    --     min_value    = 0,
+    --     max_value    = 100,
+    --     value        = 0,
+    --     paddings     = 1,
+    --     border_width = 1,
+    --     forced_width = 50,
+    --     border_color = "#0000ff",
+    --     id           = "mypb",
+    --     widget       = wibox.widget.progressbar,
+    -- },
+    {
+        id           = "mytb",
+        markup         = "",
+        widget       = wibox.widget.textbox,
+    },
+    layout      = wibox.layout.stack,
+    set_battery = function(self, val)
+        local status = battery.refresh()
+        local background_color = beautiful.bg_normal
+        local foreground_color = beautiful.fg_normal
+        if status.value < 25 then
+          background_color = beautiful.fg_urgent
+          foreground_color = beautiful.bg_urgent
+        end
+        if status.status == '-' then
+          self.mytb.markup  = string.format("<span background='%s' foreground='%s'>%s %s%% %s</span>",
+              background_color,
+              foreground_color,
+              status.icon,
+              status.value,
+              status.time)
+        else
+          self.mytb.markup = status.icon
+        end
+        -- self.mypb.value = tonumber(val)
+    end,
+}
+
+local bluetooth = require("script.bluetooth")
+local mybluetoothbar = wibox.widget {
+    {
+        id           = "mytb",
+        markup         = "",
+        widget       = wibox.widget.textbox,
+    },
+    layout      = wibox.layout.stack,
+    set_update = function(self, val)
+        local status = bluetooth.refresh()
+        self.mytb.text = status.icon .. status.text .. ' '
+    end,
+}
+local wifi = require("script.wifi")
+local mywifibar = wibox.widget {
+    {
+        id           = "mytb",
+        markup         = "",
+        widget       = wibox.widget.textbox,
+    },
+    layout      = wibox.layout.stack,
+    set_update = function(self, val)
+        local status = wifi.refresh()
+        self.mytb.text = status.icon .. status.text .. ' '
+    end,
+}
+
+gears.timer {
+    timeout   = 10,
+    call_now  = true,
+    autostart = true,
+    callback  = function()
+        -- You should read it from `/sys/class/power_supply/` (on Linux)
+        -- instead of spawning a shell. This is only an example.
+        -- awful.spawn.easy_async(
+        --     {"sh", "-c", "acpi | sed -n 's/^.*, \([0-9]*\)%/\1/p'"},
+        --     function(out)
+        --         mybatterybar.battery = out
+        --     end
+        -- )
+        mybatterybar.battery = ''
+        mybluetoothbar.update = ''
+        mywifibar.update = ''
+    end
+}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -218,6 +306,9 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             --mykeyboardlayout,
+            mywifibar,
+            mybluetoothbar,
+            mybatterybar,
             wibox.widget.systray(),
             mytextclock,
         },
@@ -633,6 +724,8 @@ client.connect_signal("mouse::enter", function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("focus", function(c)
+  c.border_color = beautiful.border_focus
+end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
