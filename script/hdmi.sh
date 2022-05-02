@@ -3,8 +3,9 @@ set -e
 
 external="HDMI-1"
 internal="eDP-1"
-internal_resolution="1366x768"
-external_resolution="1920x1080"
+#internal_resolution="1366x768"
+external_resolution="${MONITOR_EXTERNAL_RESOLUTION:-1920x1080}"
+internal_resolution="${MONITOR_INTERNAL_RESOLUTION:-1920x1080}"
 position="${MONITOR_INTERNAL_POSITION:-right}" # primary position
 dpi=${DPI:-96}
 # ##I would like to use Nouveau for offloading the Intel card

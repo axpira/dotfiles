@@ -430,6 +430,11 @@ install_cheat() {
 	chmod +x "$PATH_DIR/cht"
 }
 
+install_kubectl() {
+	curl -Lo "$HOME/.local/bin/kubectl" "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+	chmod +x "$HOME/.local/bin/kubectl"
+}
+
 main() {
 	create_folders
 	if "$GITCLONE" https://github.com/junegunn/fzf.git "$DOTFZF" 2>&-; then
@@ -437,6 +442,7 @@ main() {
 	else
 		git -C "$DOTFZF" pull
 	fi
+  install_kubectl
 	install_cheat
 	install_go
 	install_neovim
