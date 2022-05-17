@@ -117,6 +117,7 @@ alias dua="du -sch .[!.]* * |sort -h"
 # alias g="git"
 alias ymp3dl='youtube-dl --xattrs -x --embed-thumbnail --add-metadata --audio-format mp3'
 alias uuid='cat /proc/sys/kernel/random/uuid'
+alias icat="kitty +kitten icat --align=left"
 
 ## Base16 Shell
 #BASE16_SHELL="$HOME/.config/base16-shell/"

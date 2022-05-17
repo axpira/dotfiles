@@ -27,6 +27,7 @@ RUST_CRATES=(
 	shellharden
 	taplo-cli
 	watchexec-cli
+	mdcat
 )
 
 PY3=(
@@ -114,6 +115,7 @@ GO_REPOS=(
 	github.com/mrtazz/checkmake/cmd/checkmake
 	github.com/client9/misspell/cmd/misspell
 	github.com/golangci/golangci-lint/cmd/golangci-lint
+	github.com/brimdata/zed/cmd/{zed,zq}
 )
 
 ZSHPLUGS=(
@@ -366,23 +368,24 @@ install_telegram() {
 
 configure_fonts() {
 	local fonts_path="$HOME/.local/share/fonts"
-	# if [ ! -f "$fonts_path/Fira Code Retina Nerd Font Complete.otf" ]; then
-	#     local tmp="$(mktemp -d)"
-	#     print_info $tmp
-	#     mkdir -p $fonts_path
+	if [ ! -f "$fonts_path/Fira Code Retina Nerd Font Complete.otf" ]; then
+		local tmp="$(mktemp -d)"
+		print_info "$tmp"
+		mkdir -p "$fonts_path"
 
-	#     curl -fLo "$tmp/firecode.zip" \
-	#         https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
+		curl -fLo "$tmp/firecode.zip" \
+			https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
 
-	#     unzip $tmp/firecode.zip -d "$tmp"
-	#     cp "$tmp/Fira Code Retina Nerd Font Complete.otf" $fonts_path
-	#     cp "$tmp/Fira Code Retina Nerd Font Complete Mono.otf" $fonts_path
-	#     cp "$tmp/Fira Code Regular Nerd Font Complete Mono.otf" $fonts_path
-	#     rm -rf $tmp
-	# fi
-	local tmp="$(mktemp -d)"
-	print_info "$tmp"
-	mkdir -p "$fonts_path"
+		unzip "$tmp"/firecode.zip -d "$tmp"
+		cp "$tmp/Fira Code Retina Nerd Font Complete.otf" "$fonts_path"
+		cp "$tmp/Fira Code Retina Nerd Font Complete Mono.otf" "$fonts_path"
+		cp "$tmp/Fira Code Regular Nerd Font Complete Mono.otf" "$fonts_path"
+		rm -rf "$tmp"
+		fc-cache
+	fi
+	# local tmp="$(mktemp -d)"
+	# print_info "$tmp"
+	# mkdir -p "$fonts_path"
 
 	# curl -fLo "$tmp/SourceCodePro.zip" \
 	#     https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/SourceCodePro.zip
@@ -399,17 +402,17 @@ configure_fonts() {
 	# cp "$tmp/Sauce Code Pro Medium Nerd Font Complete Mono.ttf" $fonts_path
 	# cp "$tmp/Sauce Code Pro Medium Nerd Font Complete.ttf" $fonts_path
 
-	curl -fLo "$fonts_path/MesloLGS NF Regular.ttf" \
-		"https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
-	# curl -fLo "<FONT NAME> Nerd Font Complete.otf" \
-	#     https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/<FONT_PATH>/complete/<FONT_NAME>%20Nerd%20Font%20Complete.otf
-	curl -fLo "$fonts_path/JetBrains Mono ExtraLight Nerd Font Complete.ttf" \
-		https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/ExtraLight/complete/JetBrains%20Mono%20ExtraLight%20Nerd%20Font%20Complete.ttf?raw=true
-	curl -fLo "$fonts_path/JetBrains Mono Light Nerd Font Complete.ttf" \
-		https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Light/complete/JetBrains%20Mono%20Light%20Nerd%20Font%20Complete.ttf?raw=true
-
-	rm -rf "$tmp"
-	fc-cache
+	# curl -fLo "$fonts_path/MesloLGS NF Regular.ttf" \
+	# 	"https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+	# # curl -fLo "<FONT NAME> Nerd Font Complete.otf" \
+	# #     https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/<FONT_PATH>/complete/<FONT_NAME>%20Nerd%20Font%20Complete.otf
+	# curl -fLo "$fonts_path/JetBrains Mono ExtraLight Nerd Font Complete.ttf" \
+	# 	https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/ExtraLight/complete/JetBrains%20Mono%20ExtraLight%20Nerd%20Font%20Complete.ttf?raw=true
+	# curl -fLo "$fonts_path/JetBrains Mono Light Nerd Font Complete.ttf" \
+	# 	https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Light/complete/JetBrains%20Mono%20Light%20Nerd%20Font%20Complete.ttf?raw=true
+	#
+	# rm -rf "$tmp"
+	# fc-cache
 }
 
 install_cheat() {

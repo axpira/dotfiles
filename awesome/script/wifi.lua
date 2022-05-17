@@ -16,7 +16,7 @@ local function refresh()
   local icon = ""
   local text = ""
   if config.ssid then
-    icon = ""
+    icon = " "
     text = config.ssid
   end
 

@@ -18,12 +18,12 @@ local function refresh()
   local text = ""
 
   if config.powered == "yes" then
-    icon = ""
+    icon = " "
   end
 
   local config = run_command("info")
   if config then
-    icon = ""
+    icon = " "
     text = config.name
   end
 

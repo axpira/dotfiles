@@ -53,7 +53,7 @@ naughty.config.defaults.screen = 1
 awful.util.spawn("wallpaper")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "tym"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -256,7 +256,8 @@ local tasklist_buttons = gears.table.join(
 --
 ---- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 --screen.connect_signal("property::geometry", set_wallpaper)
-
+local systray = wibox.widget.systray()
+systray:set_base_size(15)
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     --set_wallpaper(s)
@@ -309,7 +310,7 @@ awful.screen.connect_for_each_screen(function(s)
             mywifibar,
             mybluetoothbar,
             mybatterybar,
-            wibox.widget.systray(),
+            systray,
             mytextclock,
         },
     }

@@ -88,6 +88,9 @@ nvim/.netrwhist
 !i3blocks/
 !i3blocks/*
 
+!kitty/
+!kitty/*
+
 !git/
 !git/**
 *~
