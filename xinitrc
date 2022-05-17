@@ -32,6 +32,6 @@ xrdb -merge ~/.config/Xresources
 #exec bspwm
 #exec wmwm -launcher dmenu_run -term alacritty
 #exec leftwm
-exec dwm
-#exec awesome
+#exec dwm
+exec awesome
 #exec herbstluftwm
