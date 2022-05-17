@@ -1,5 +1,5 @@
 #!/usr/bin/env lua
-package.path = package.path .. ";/home/axpira/.config/script/lua/?.lua"
+package.path = package.path .. ";/home/axpira/.config/awesome/script/?.lua"
 local util = require('util')
 
 local function run_command(cmd)

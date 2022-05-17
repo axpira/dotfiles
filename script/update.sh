@@ -19,13 +19,13 @@ RUST_CRATES=(
 	tokei
 	#procs
 	hyperfine
-	alacritty
+	#alacritty
 	#xplr
 	#gping
 	#neovide
 	#startship
 	shellharden
-	taplo-cli
+	#taplo-cli
 	watchexec-cli
 	mdcat
 )
@@ -188,10 +188,10 @@ configure_go() {
 
 configure_python() {
 	print_info "Configuring python environment.."
-	if ! grep -q debian /etc/os-release; then
-		python -m ensurepip --upgrade || true
-		python -m pip install --upgrade pip
-	fi
+	# if ! grep -q debian /etc/os-release; then
+	python3 -m ensurepip --upgrade || true
+	python3 -m pip install --upgrade pip
+	# fi
 	print_info "Installing python 3 packages"
 	for pkg in "${PY3[@]}"; do
 		echo Installing "$pkg"
@@ -433,6 +433,15 @@ install_rust() {
 	fi
 }
 
+install_kitty() {
+	curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+	ln -fs ~/.local/kitty.app/bin/kitty ~/.local/bin/
+	cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+	cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
+	sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
+	sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+}
+
 main() {
 	create_folders
 	if "$GITCLONE" https://github.com/junegunn/fzf.git "$DOTFZF" 2>&-; then
@@ -440,6 +449,7 @@ main() {
 	else
 		git -C "$DOTFZF" pull
 	fi
+	install_kitty
 	install_kubectl
 	install_cheat
 	install_go
