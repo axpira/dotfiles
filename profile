@@ -45,15 +45,15 @@ export ANDROID_SDK_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/android"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 export GOROOT="$HOME/.local/go/go"
-export NODE_PATH="${XDG_DATA_HOME}/node_modules"
-export NPM_CONFIG_PREFIX="$NODE_PATH"
+#export NODE_PATH="${XDG_DATA_HOME}/node_modules"
+#export NPM_CONFIG_PREFIX="$NODE_PATH"
 export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
 export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
 export KUBECONFIG=~/.kube/config
-
 export CARGO_HOME=~/.local/share/cargo
 export PATH="$HOME/.fzf/bin:$HOME/.local/bin/:$HOME/.config/script:$GOROOT/bin:$GOPATH/bin:$NODE_PATH/bin:$CARGO_HOME/bin:$PATH:."
 #export PATH="$HOME/.local/bin/:$HOME/.config/script:$GOPATH/bin:$NODE_PATH/bin:$PATH"
+export NVM_DIR="$HOME/.config/nvm"
 export PATH="$PATH:$HOME/.config/script/funcs"
 
 #export CDPATH=.:..:~:~/workspaces:~/.config

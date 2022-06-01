@@ -3,6 +3,7 @@ set -e
 DOTFZF=$HOME/.fzf
 GITCLONE="git clone --depth=1"
 NVIM_PLUGIN_DIR="$HOME/.local/share/nvim/site/pack/mini/start"
+NVM_DIR=${NVM_DIR:-$HOME/.config/nvm}
 
 RUST_CRATES=(
 	bat
@@ -61,6 +62,10 @@ PY3=(
 	PyQt5
 	PyQtWebEngine
 	qutebrowser
+	mdformat
+	mdformat-gfm
+	mdformat-frontmatter
+	mdformat-footnote
 )
 
 NODE_PACKAGES=(
@@ -116,6 +121,9 @@ GO_REPOS=(
 	github.com/client9/misspell/cmd/misspell
 	github.com/golangci/golangci-lint/cmd/golangci-lint
 	github.com/brimdata/zed/cmd/{zed,zq}
+	github.com/antonmedv/fx
+	github.com/errata-ai/vale
+	github.com/jandedobbeleer/oh-my-posh
 )
 
 ZSHPLUGS=(
@@ -129,8 +137,8 @@ NVIM_PLUGINS=(
 	"git@github.com:folke/trouble.nvim.git"
 	"git@github.com:ellisonleao/gruvbox.nvim.git"
 	"git@github.com:neovim/nvim-lspconfig.git"
-	"git@github.com:stefanvanburen/rams.vim.git"
-	#"git@github.com:stefanvanburen/rams.git"
+	# "git@github.com:stefanvanburen/rams.vim.git"
+	"git@github.com:stefanvanburen/rams.git"
 	"git@github.com:lewis6991/gitsigns.nvim.git"
 	"git@github.com:nvim-lua/plenary.nvim.git"
 	"git@github.com:norcalli/nvim-colorizer.lua.git"
@@ -146,6 +154,13 @@ NVIM_PLUGINS=(
 	"git@github.com:numToStr/Comment.nvim.git"
 	"git@github.com:feline-nvim/feline.nvim.git"
 	"git@github.com:NTBBloodbath/rest.nvim.git"
+	"git@github.com:cuducos/yaml.nvim.git"
+	"git@github.com:folke/twilight.nvim.git"
+	"git@github.com:ggandor/leap.nvim.git"
+	"git@github.com:ThePrimeagen/refactoring.nvim.git"
+	"git@github.com:rktjmp/lush.nvim.git"
+	"git@github.com:echasnovski/mini.nvim.git"
+	"git@github.com:chriskempson/base16-vim.git"
 )
 
 print_error() {
@@ -172,7 +187,7 @@ set_trap() {
 
 create_folders() {
 	mkdir -p ~/.local/bin
-	mkdir -p "$DOTFZF"
+	# mkdir -p "$DOTFZF"
 	mkdir -p "$ZPLUGINSDIR"
 	mkdir -p "$NVIM_PLUGIN_DIR"
 	# mkdir -p ~/.local/share/applications
@@ -449,6 +464,11 @@ main() {
 	else
 		git -C "$DOTFZF" pull
 	fi
+	#"$GITCLONE" -b v0.39.1 https://github.com/nvm-sh/nvm "$NVM_DIR" 2>&-
+	# git pull "$NVM_DIR"
+	# git checkout v0.39.1 "$NVM_DIR"
+	# exit 1
+
 	install_kitty
 	install_kubectl
 	install_cheat

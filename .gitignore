@@ -45,6 +45,7 @@
 nvim/.netrwhist
 
 !libinput-gestures.conf
+!vale.ini
 
 !npmrc
 

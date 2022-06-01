@@ -19,6 +19,26 @@ require("nvim-dap-virtual-text").setup()
 require("dap-python").setup("/usr/bin/python")
 require'nvim-web-devicons'.setup({})
 require("trouble").setup({})
+require("twilight").setup({
+  dimming = {
+    inactive = true,
+  },
+  context = 10,
+  treesitter = true,
+  expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
+    "function",
+    "method",
+    "table",
+    "if_statement",
+  },
+})
+--require("twilight").enable()
+
+require('refactoring').setup({})
+require('leap').setup({})
+require('leap').set_default_keymaps()
+require("telescope").load_extension("refactoring")
+
 local null_ls = require("null-ls")
 null_ls.setup({
     sources = {
@@ -38,9 +58,10 @@ null_ls.setup({
       null_ls.builtins.formatting.taplo,
       null_ls.builtins.formatting.trim_newlines,
       null_ls.builtins.formatting.trim_whitespace,
+      null_ls.builtins.formatting.mdformat,
 
       null_ls.builtins.diagnostics.mypy,
-      null_ls.builtins.diagnostics.actionlint,
+      -- null_ls.builtins.diagnostics.actionlint,
       null_ls.builtins.diagnostics.checkmake,
       null_ls.builtins.diagnostics.codespell,
       null_ls.builtins.diagnostics.eslint_d,
@@ -61,6 +82,7 @@ null_ls.setup({
       null_ls.builtins.diagnostics.yamllint,
       null_ls.builtins.diagnostics.staticcheck,
       null_ls.builtins.diagnostics.golangci_lint,
+      null_ls.builtins.diagnostics.vale,
 
       null_ls.builtins.code_actions.eslint_d,
       null_ls.builtins.code_actions.gitsigns,
@@ -99,124 +121,171 @@ require("rest-nvim").setup({
   yank_dry_run = true,
 })
 
-local components = {
-    active = {},
-    -- inactive = {}
-}
--- table.insert(components.inactive, {})
--- table.insert(components.inactive, {})
--- table.insert(components.inactive, {})
--- table.insert(components.inactive, {})
--- table.insert(components.inactive[2], {
---   provider = 'file_info',
---   type = 'full-path',
+-- local components = {
+--     active = {},
+--     -- inactive = {}
+-- }
+-- -- table.insert(components.inactive, {})
+-- -- table.insert(components.inactive, {})
+-- -- table.insert(components.inactive, {})
+-- -- table.insert(components.inactive, {})
+-- -- table.insert(components.inactive[2], {
+-- --   provider = 'file_info',
+-- --   type = 'full-path',
+-- --   left_sep = ' ',
+-- -- })
+-- table.insert(components.active, {})
+-- table.insert(components.active, {})
+-- table.insert(components.active, {})
+-- -- table.insert(components.active[1], {
+-- --     -- Component info here
+-- -- })
+-- table.insert(components.active[1], {
+--   provider = 'vi_mode',
+--   hl = function()
+--         return {
+--             name = require('feline.providers.vi_mode').get_mode_highlight_name(),
+--             fg = require('feline.providers.vi_mode').get_mode_color(),
+--         }
+--     end,
+-- })
+-- table.insert(components.active[1], {
+--   provider = 'git_branch',
+-- })
+-- table.insert(components.active[1], {
+--   provider = 'git_diff_added',
+--   left_sep = ' ',
+--   hl = {
+--       fg = 'lightgreen',
+--   }
+-- })
+-- table.insert(components.active[1], {
+--   provider = 'git_diff_removed',
+--   hl = {
+--       fg = 'lightred',
+--   }
+-- })
+-- table.insert(components.active[1], {
+--   provider = 'git_diff_changed',
+--   hl = {
+--       fg = 'orange',
+--   }
+-- })
+-- -- table.insert(components.active[1], {
+-- --   provider = 'lsp_client_names',
+-- --   left_sep = ' ',
+-- -- })
+-- table.insert(components.active[1], {
+--   provider = 'diagnostic_warnings',
+--   left_sep = ' ',
+--   hl = {
+--       fg = 'yellow',
+--   }
+-- })
+-- table.insert(components.active[1], {
+--   provider = 'diagnostic_errors',
+--   hl = {
+--       fg = 'red',
+--   }
+-- })
+-- table.insert(components.active[1], {
+--   provider = 'diagnostic_hints',
+--   left_sep = ' ',
+--   hl = {
+--       fg = 'cyan',
+--   }
+-- })
+-- table.insert(components.active[1], {
+--   provider = 'diagnostic_info',
 --   left_sep = ' ',
 -- })
-table.insert(components.active, {})
-table.insert(components.active, {})
-table.insert(components.active, {})
--- table.insert(components.active[1], {
---     -- Component info here
+-- table.insert(components.active[2], {
+--   provider = {
+--     name = 'file_info',
+--     opts = {
+--       type = 'relative'
+--     },
+--   }
 -- })
-table.insert(components.active[1], {
-  provider = 'vi_mode',
-  hl = function()
-        return {
-            name = require('feline.providers.vi_mode').get_mode_highlight_name(),
-            fg = require('feline.providers.vi_mode').get_mode_color(),
-        }
-    end,
-})
-table.insert(components.active[1], {
-  provider = 'git_branch',
-})
-table.insert(components.active[1], {
-  provider = 'git_diff_added',
-  left_sep = ' ',
-  hl = {
-      fg = 'lightgreen',
-  }
-})
-table.insert(components.active[1], {
-  provider = 'git_diff_removed',
-  hl = {
-      fg = 'lightred',
-  }
-})
-table.insert(components.active[1], {
-  provider = 'git_diff_changed',
-  hl = {
-      fg = 'orange',
-  }
-})
--- table.insert(components.active[1], {
---   provider = 'lsp_client_names',
+-- table.insert(components.active[3], {
+--   provider = 'file_type',
+-- })
+-- table.insert(components.active[3], {
+--   provider = 'file_format',
 --   left_sep = ' ',
 -- })
-table.insert(components.active[1], {
-  provider = 'diagnostic_warnings',
-  left_sep = ' ',
-  hl = {
-      fg = 'yellow',
-  }
-})
-table.insert(components.active[1], {
-  provider = 'diagnostic_errors',
-  hl = {
-      fg = 'red',
-  }
-})
-table.insert(components.active[1], {
-  provider = 'diagnostic_hints',
-  left_sep = ' ',
-  hl = {
-      fg = 'cyan',
-  }
-})
-table.insert(components.active[1], {
-  provider = 'diagnostic_info',
-  left_sep = ' ',
-})
-table.insert(components.active[2], {
-  provider = {
-    name = 'file_info',
-    opts = {
-      type = 'relative'
-    },
-  }
-})
-table.insert(components.active[3], {
-  provider = 'file_type',
-})
-table.insert(components.active[3], {
-  provider = 'file_format',
-  left_sep = ' ',
-})
-table.insert(components.active[3], {
-  provider = 'file_encoding',
-  left_sep = ' ',
-})
-table.insert(components.active[3], {
-  provider = 'position',
-  left_sep = ' ',
-})
-table.insert(components.active[3], {
-  provider = 'line_percentage',
-  left_sep = ' ',
-})
--- components.active[2][1] = {
---     -- Component info here
--- }
--- components.active[3][1] = {
---     -- Component info here
--- }
+-- table.insert(components.active[3], {
+--   provider = 'file_encoding',
+--   left_sep = ' ',
+-- })
+-- table.insert(components.active[3], {
+--   provider = 'position',
+--   left_sep = ' ',
+-- })
+-- table.insert(components.active[3], {
+--   provider = 'line_percentage',
+--   left_sep = ' ',
+-- })
+-- -- components.active[2][1] = {
+-- --     -- Component info here
+-- -- }
+-- -- components.active[3][1] = {
+-- --     -- Component info here
+-- -- }
 vim.opt.laststatus = 3
-require('feline').setup({
-  components = components,
+-- require('feline').setup({
+--   components = components,
+-- })
+
+require('mini.statusline').setup({
+   set_vim_settings = false,
 })
 
 vim.g.maplocalleader = ' '
 vim.g.mapleader = ' '
+
+require('mini.surround').setup({
+  -- Add custom surroundings to be used on top of builtin ones. For more
+  -- information with examples, see `:h MiniSurround.config`.
+  custom_surroundings = nil,
+
+  -- Duration (in ms) of highlight when calling `MiniSurround.highlight()`
+  highlight_duration = 500,
+
+  -- Module mappings. Use `''` (empty string) to disable one.
+  mappings = {
+    add = '<Leader>sa', -- Add surrounding in Normal and Visual modes
+    delete = '<Leader>sd', -- Delete surrounding
+    find = '<leader>sf', -- Find surrounding (to the right)
+    find_left = '<Leader>sF', -- Find surrounding (to the left)
+    highlight = '<Leader>sh', -- Highlight surrounding
+    replace = '<Leader>sr', -- Replace surrounding
+    update_n_lines = '<Leader>sn', -- Update `n_lines`
+  },
+
+  -- Number of lines within which surrounding is searched
+  n_lines = 20,
+
+  -- How to search for surrounding (first inside current line, then inside
+  -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
+  -- 'cover_or_nearest'. For more details, see `:h MiniSurround.config`.
+  search_method = 'cover',
+})
+-- {
+--   -- Content of statusline as functions which return statusline string. See
+--   -- `:h statusline` and code of default contents (used instead of `nil`).
+--   content = {
+--     -- Content for active window
+--     active = nil,
+--     -- Content for inactive window(s)
+--     inactive = nil,
+--   },
+--
+--   -- Whether to set Vim's settings for statusline (make it always shown with
+--   -- 'laststatus' set to 2). To use global statusline in Neovim>=0.7.0, set
+--   -- this to `false` and 'laststatus' to 3.
+--   set_vim_settings = false,
+-- })
 
 vim.opt.pastetoggle = '<F1>'
 vim.opt.number = true
@@ -244,7 +313,7 @@ vim.opt.list = true
 vim.opt.listchars = [[tab:»·,nbsp:+,trail:·,extends:→,precedes:←]]
 
 vim.cmd [[
-colorscheme rams
+colorscheme base16-grayscale-dark
 ]]
 
 
@@ -301,9 +370,37 @@ map("n", "[g", [[<cmd>lua require"gitsigns".prev_hunk()<CR>]], {noremap = true})
 
 map("n", "<Leader>fg", [[<Cmd>lua require("telescope.builtin").live_grep()<CR>]], {noremap = true})
 map("n", "<Leader>fG", [[<Cmd>lua require("telescope.builtin").grep_string()<CR>]], {noremap = true})
-map("n", "<Leader>ff", [[<Cmd>lua require("telescope.builtin").git_files()<CR>]], {noremap = true})
-map("n", "<Leader>fF", [[<Cmd>lua require("telescope.builtin").find_files()<CR>]], {noremap = true})
+map("n", "<Leader>fF", [[<Cmd>lua require("telescope.builtin").git_files()<CR>]], {noremap = true})
+map("n", "<Leader>ff", [[<Cmd>lua require("telescope.builtin").find_files()<CR>]], {noremap = true})
 map("n", "<Leader>fb", [[<Cmd>lua require("telescope.builtin").buffers()<CR>]], {noremap = true})
+map("n", "<Leader>t", [[<Cmd>TroubleToggle<CR>]], {noremap = true})
+map("n", "<Leader>T", [[<Cmd>TroubleToggle workspace_diagnostics<CR>]], {noremap = true})
+
+-- Remaps for the refactoring operations currently offered by the plugin
+vim.api.nvim_set_keymap("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+-- Extract block doesn't need visual mode
+vim.api.nvim_set_keymap("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], {noremap = true, silent = true, expr = false})
+vim.api.nvim_set_keymap("n", "<leader>rbf", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
+-- Inline variable can also pick up the identifier currently under the cursor without visual mode
+vim.api.nvim_set_keymap("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+-- -- prompt for a refactor to apply when the remap is triggered
+-- vim.api.nvim_set_keymap(
+--     "v",
+--     "<leader>rr",
+--     ":lua require('refactoring').select_refactor()<CR>",
+--     { noremap = true, silent = true, expr = false }
+-- )
+--
+-- remap to open the Telescope refactoring menu in visual mode
+vim.api.nvim_set_keymap(
+	"v",
+	"<leader>rr",
+	"<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<CR>",
+	{ noremap = true }
+)
 
 map("n", "<F2>" , [[<cmd>lua require('dapui').toggle()<CR>]], {noremap=true})
 map("n", "<F3>" , [[<cmd>lua require('dapui').eval()<CR>]], {noremap=true})

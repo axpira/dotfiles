@@ -89,6 +89,7 @@ function bash_prompt {
   PS1="\[\033[01;38;240m\]\w\[\033[0;36;240m\]\$(parse_git_branch)\[\033[01;38;240m\]\$\[\033[00m\] "
 }
 PROMPT_COMMAND=bash_prompt
+
 #PS1="\[\033[01;38m\]]\ww\007\]\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$(parse_git_branch) \$\[\033[00m\] "
 #PS1="\[\033[01;38;5;60m\]\u@\h\[\033[01;38;5;240m\] \w \$(parse_git_branch) \$\[\033[00m\] "
 #PS1="\[\033[01;38;5;240m\]\w\[\033[01;30;5;240m\]\$(parse_git_branch)\[\033[01;38;5;60m\]\$\[\033[00m\] "
@@ -175,3 +176,19 @@ function pp {
 function pk {
   pp $1 | xargs kill
 }
+
+# function cdr {
+#  if [ -d .git ]; then
+#   return 0
+#  fi
+#
+#  local A=..
+#  while ! [ -d $A/.git ]; do 
+#   A="$A/.."
+#  done
+#  cd $A
+# }
+
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
