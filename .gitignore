@@ -92,6 +92,9 @@ nvim/.netrwhist
 !kitty/
 !kitty/*
 
+!nix/
+!nix/*
+
 !git/
 !git/**
 *~

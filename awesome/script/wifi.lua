@@ -12,7 +12,7 @@ local function run_command(interface)
 end
 
 local function refresh()
-  local config = run_command("wlp6s0")
+  local config = run_command("wlp2s0")
   local icon = ""
   local text = ""
   if config.ssid then

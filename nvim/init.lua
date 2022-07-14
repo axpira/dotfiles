@@ -79,7 +79,7 @@ null_ls.setup({
       null_ls.builtins.diagnostics.vulture,
       null_ls.builtins.diagnostics.write_good,
       null_ls.builtins.diagnostics.xo,
-      null_ls.builtins.diagnostics.yamllint,
+      --null_ls.builtins.diagnostics.yamllint,
       null_ls.builtins.diagnostics.staticcheck,
       null_ls.builtins.diagnostics.golangci_lint,
       null_ls.builtins.diagnostics.vale,

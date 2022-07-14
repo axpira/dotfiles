@@ -29,6 +29,7 @@ RUST_CRATES=(
 	#taplo-cli
 	watchexec-cli
 	mdcat
+	git-delta
 )
 
 PY3=(
@@ -66,6 +67,7 @@ PY3=(
 	mdformat-gfm
 	mdformat-frontmatter
 	mdformat-footnote
+	howdoi
 )
 
 NODE_PACKAGES=(
@@ -123,7 +125,7 @@ GO_REPOS=(
 	github.com/brimdata/zed/cmd/{zed,zq}
 	github.com/antonmedv/fx
 	github.com/errata-ai/vale
-	github.com/jandedobbeleer/oh-my-posh
+	# github.com/jandedobbeleer/oh-my-posh
 )
 
 ZSHPLUGS=(
